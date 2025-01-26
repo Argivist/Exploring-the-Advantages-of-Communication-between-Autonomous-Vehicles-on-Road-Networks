@@ -44,10 +44,6 @@ public class Vehicle_AI : MonoBehaviour
         if (path == null || path.Count == 0)
         {
             Stop = true;
-            while(currentSegment==null){
-                
-            }
-            SetPath(currentSegment.waypoints);
         }
         else
         {

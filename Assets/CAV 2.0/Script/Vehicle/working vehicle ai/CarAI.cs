@@ -1,22 +1,14 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TrafficSimulation;
 using UnityEngine.Events;
+using UnityEngine.UIElements;
 
-public class Vehicle_AI : MonoBehaviour
+public class CarAI : MonoBehaviour
 {
-    public Segment currentSegment;
-    public List<Waypoint> path;
-    public Navigation navigation;
-
-
-
-
-    ///CAR AI from prototype
-    ///
-        // [SerializeField]
-    // private List<Vector3> path = null;
+    [SerializeField]
+    private List<Vector3> path = null;
     [SerializeField]
     private float arriveDistance = 0.3f, lastPointArriveDistance = 0.1f;// Arrive distance: how close the car should be to the point before moving to the next point, lastPointArriveDistance: how close the car should be to the last point before stopping;
                                                                         // Arrive distance is usually larger than lastPointArriveDistance because when turnning we want a larger margin of eerror than when we are stopping
@@ -44,14 +36,10 @@ public class Vehicle_AI : MonoBehaviour
         if (path == null || path.Count == 0)
         {
             Stop = true;
-            while(currentSegment==null){
-                
-            }
-            SetPath(currentSegment.waypoints);
         }
         else
         {
-            currentTargetPosition = path[index].GetVisualPos();
+            currentTargetPosition = path[index];
 
         }
     }
@@ -59,22 +47,19 @@ public class Vehicle_AI : MonoBehaviour
 
     //set path for car
 
-    public void SetPath(List<Waypoint> path)
+    public void SetPath(List<Vector3> path)
     {
         //if no further path or reached the end of the path
         if (path.Count == 0)
         {
-            //ak nav for next waypoint
-            Stop = true;
-            navigation.OntoNextSegment();
-            path= currentSegment.waypoints;
-
+            Destroy(gameObject);
+            return;
         }
         this.path = path;
         index = 0;
-        currentTargetPosition = this.path[index].GetVisualPos();
+        currentTargetPosition = this.path[index];
 
-        Vector3 relativepoint = transform.InverseTransformPoint(this.path[index + 1].GetVisualPos());//relative position from car to point
+        Vector3 relativepoint = transform.InverseTransformPoint(this.path[index + 1]);//relative position from car to point
 
         float angle = Mathf.Atan2(relativepoint.x, relativepoint.z) * Mathf.Rad2Deg; //angle between car and point in degree
 
@@ -116,12 +101,12 @@ public class Vehicle_AI : MonoBehaviour
         if (index >= path.Count)
         {//outside of bounds of list of positions
             Stop = true;
-            // Destroy(gameObject);
+            Destroy(gameObject);
             return;
         }
         else
         {
-            currentTargetPosition = path[index].GetVisualPos();
+            currentTargetPosition = path[index];
         }
     }
 

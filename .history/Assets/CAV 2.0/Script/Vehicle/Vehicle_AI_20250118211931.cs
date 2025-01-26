@@ -44,10 +44,6 @@ public class Vehicle_AI : MonoBehaviour
         if (path == null || path.Count == 0)
         {
             Stop = true;
-            while(currentSegment==null){
-                
-            }
-            SetPath(currentSegment.waypoints);
         }
         else
         {
@@ -116,7 +112,7 @@ public class Vehicle_AI : MonoBehaviour
         if (index >= path.Count)
         {//outside of bounds of list of positions
             Stop = true;
-            // Destroy(gameObject);
+            Destroy(gameObject);
             return;
         }
         else
