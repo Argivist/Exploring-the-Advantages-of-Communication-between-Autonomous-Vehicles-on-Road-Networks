@@ -209,16 +209,6 @@ public class Navigation : MonoBehaviour
         return newPath;
     }
 
-    public List<Segment> CAVNav(Segment start,Segment end){
-        //called on end of current segment
-        return null;
-    }
-
-    public List<Segment> OneNav(Segment start,Segment end){
-        // called once replace random path
-        return null;
-    }
-
     public Segment nextSegments()
     {
         //get the next segment

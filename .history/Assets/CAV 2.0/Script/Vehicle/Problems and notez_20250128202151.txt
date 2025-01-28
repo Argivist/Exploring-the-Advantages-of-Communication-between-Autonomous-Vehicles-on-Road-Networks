@@ -7,7 +7,6 @@
 
 Navigation:
 - the navigator regenerates the path after reaching final segment
-    -possible source: when managing which pathfinder to use absed on the car type
 
 CarController:
 - heavy oscillation when the vehicle is taking a turn

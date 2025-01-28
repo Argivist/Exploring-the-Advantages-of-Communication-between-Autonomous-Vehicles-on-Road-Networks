@@ -7,7 +7,6 @@
 
 Navigation:
 - the navigator regenerates the path after reaching final segment
-    -possible source: when managing which pathfinder to use absed on the car type
 
 CarController:
 - heavy oscillation when the vehicle is taking a turn
@@ -22,13 +21,12 @@ Navigation:
 - include the actual navigation algorithm
 - get the start segment and end segment from the navigator
 - ensure we have not passed the start segment when spawning the vehicle
-- path segment generation done with start and end segment.
 
 Communication:
-~- ensure the vehicle navigator tracks entry and exit into and out of segments
+- ensure the vehicle navigator tracks entry and exit into and out of segments
 
 Vehicle:
 - add a function to check if the vehicle is stuck and regenerate the path
-~- ensure vehicle stops when it reaches the end of the segment
+- ensure vehicle stops when it reaches the end of the segment
 - the vehicle start and stop at segment should be controlled by the navigator under orders from the communication module
 - distance controller should be able to control the speed of the vehicle and when t slows down and speeds up

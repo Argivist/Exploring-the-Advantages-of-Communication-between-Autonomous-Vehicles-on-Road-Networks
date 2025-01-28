@@ -211,6 +211,7 @@ public class Navigation : MonoBehaviour
 
     public List<Segment> CAVNav(Segment start,Segment end){
         //called on end of current segment
+
         return null;
     }
 

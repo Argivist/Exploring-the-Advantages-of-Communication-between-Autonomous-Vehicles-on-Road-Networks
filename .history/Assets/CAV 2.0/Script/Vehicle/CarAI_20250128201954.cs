@@ -158,6 +158,6 @@ public class CarAI : MonoBehaviour
     public void StopVehicle()
     {
         Stop = true;
-        OnDrive?.Invoke(Vector2.zero);//NOTE - supposed to stop car not sure if it works        
+        
     }
 }
