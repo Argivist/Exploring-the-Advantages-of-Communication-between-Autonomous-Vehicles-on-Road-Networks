@@ -1,0 +1,18 @@
+- i had oscillation issues with vehicle omtion because of a list of issues howefer adding angular drag to the rigid body somehow fixed it. the addition was done inscript.
+
+
+
+
+## Problems yet to be solved
+
+Navigation:
+- the navigator regenerates the path after reaching final segment
+
+
+
+## To do
+Navigation:
+- add a function to check if the vehicle is stuck and regenerate the path
+- include the actual navigation algorithm
+- get the start segment and end segment from the navigator
+- ensure we have not passed the start segment when spawning the vehicle

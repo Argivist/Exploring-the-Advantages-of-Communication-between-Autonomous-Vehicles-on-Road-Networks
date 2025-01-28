@@ -1,0 +1,30 @@
+- i had oscillation issues with vehicle omtion because of a list of issues howefer adding angular drag to the rigid body somehow fixed it. the addition was done inscript.
+
+
+
+
+## Problems yet to be solved
+
+Navigation:
+- the navigator regenerates the path after reaching final segment
+
+CarController:
+- heavy oscillation when the vehicle is taking a turn
+    - possible solution: cause vehicle to slow down when taking a turn and speed up when going straight
+        - may be able to include the lane speed controller for all vehicles
+
+
+
+## To do
+Navigation:
+- add a function to check if the vehicle is stuck and regenerate the path
+- include the actual navigation algorithm
+- get the start segment and end segment from the navigator
+- ensure we have not passed the start segment when spawning the vehicle
+
+Communication:
+- ensure the vehicle navigator tracks entry and exit into and out of segments
+
+Vehicle:
+- add a function to check if the vehicle is stuck and regenerate the path
+- ensure vehicle stops when it reaches the end of the path

@@ -1,0 +1,1 @@
+- i had oscillation issues with vehicle omtion because of a list of issues howefer adding angular drag to the rigid body somehow fixed it. the addition was done inscript.

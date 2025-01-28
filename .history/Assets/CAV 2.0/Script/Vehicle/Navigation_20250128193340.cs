@@ -54,11 +54,10 @@ public class Navigation : MonoBehaviour
         carAI = GetComponent<CarAI>();
         carAI.SetPath(vectorpath(currentSegment));
         Debug.Log("vectorpath: " + vectorpath(currentSegment));
-
+        
     }
 
-    public List<Vector3> vectorpath(Segment s)
-    {
+    public List<Vector3> vectorpath(Segment s){
         List<Vector3> path = new List<Vector3>();
         s.waypoints.ForEach(wp => path.Add(wp.transform.position));
         return path;
@@ -68,7 +67,7 @@ public class Navigation : MonoBehaviour
         if (vehicleType == SimConfig.VehicleType.CAV && path.Count <= 1)
         {
             // Regenerate path for CAV vehicles if near the end of the current path
-            // path = RandomPath(currentSegment);
+            path = RandomPath(currentSegment);
 
             if (path.Count > 1)
             {
@@ -82,107 +81,40 @@ public class Navigation : MonoBehaviour
         }
     }
 
-    // public bool OntoNextSegment()
-    // {
-    //     // Move to the next segment
-    //     if (path == null || path.Count < 1)
-    //     {
-    //         Debug.LogError("Path is empty. Cannot move to the next segment.");
-    //         //TODO - Send some end of journey message
-    //         return true;
-    //     }
-    //     else
-    //     {
-    //         Debug.Log("Path is not empty");
-
-    //     }
-
-    //     comagent.ExitSegment(currentSegment);
-    //     comagent.EnterSegment(nextSegment);
-
-    //     currentSegment = nextSegment;
-
-    //     if (path.Count > 1)
-    //     {
-    //         nextSegment = path[1];
-    //         path.RemoveAt(0);
-    //     }
-    //     else
-    //     {
-    //         Debug.LogWarning("Path is about to be exhausted.");
-    //         // path = RandomPath(currentSegment); // Regenerate path
-    //         if (path.Count > 0)
-    //             nextSegment = path[0];
-    //     }
-
-    //     // thisAI.currentSegment = currentSegment;
-    //     carAI.SetPath(vectorpath(currentSegment));
-    //     return false;
-    // }
-
-    // Random path generator
-    
-    
     public bool OntoNextSegment()
-{
-    // Check if the path is empty or has no further segments
-    if (path == null || path.Count < 1)
     {
-        Debug.Log("End of journey reached. Returning true.");
-        // Handle end-of-journey behavior if necessary
-        carAI.StopVehicle(); // Example: stop the vehicle
-        return true; // Indicate the journey is complete
-    }
-
-    Debug.Log("Path is not empty. Moving to the next segment.");
-
-    // Transition to the next segment
-    comagent.ExitSegment(currentSegment);
-    comagent.EnterSegment(nextSegment);
-
-    currentSegment = nextSegment;
-
-    if (path.Count > 1)
-    {
-        nextSegment = path[1];
-        path.RemoveAt(0);
-    }
-    else
-    {
-        Debug.LogWarning("Path is about to be exhausted.");
-
-        // Check if path exhaustion means end of journey
-        if (vehicleType == SimConfig.VehicleType.CAV)
+        // Move to the next segment
+        if (path == null || path.Count < 1)
         {
-            Debug.Log("Generating new path for CAV.");
-            path = RandomPath(currentSegment);
+            Debug.LogError("Path is empty. Cannot move to the next segment.");
+            //TODO - Send some end of journey message
+            return false;
+        }
 
-            if (path.Count > 0)
-            {
-                nextSegment = path[0];
-                path.RemoveAt(0);
-            }
-            else
-            {
-                Debug.Log("No new path generated. End of journey reached.");
-                carAI.StopVehicle(); // Example stop logic
-                return true; // Indicate the journey is complete
-            }
+        comagent.ExitSegment(currentSegment);
+        comagent.EnterSegment(nextSegment);
+
+        currentSegment = nextSegment;
+
+        if (path.Count > 1)
+        {
+            nextSegment = path[1];
+            path.RemoveAt(0);
         }
         else
         {
-            Debug.Log("End of journey reached for non-CAV vehicle.");
-            carAI.StopVehicle(); // Example stop logic
-            return true; // Indicate the journey is complete
+            Debug.LogWarning("Path is about to be exhausted.");
+            path = RandomPath(currentSegment); // Regenerate path
+            if (path.Count > 0)
+                nextSegment = path[0];
         }
+
+        // thisAI.currentSegment = currentSegment;
+        carAI.SetPath(vectorpath(currentSegment));
+        return true;
     }
 
-    // Update AI with the new segment path
-    carAI.SetPath(vectorpath(currentSegment));
-    return false; // Indicate the journey is not yet complete
-}
-
-    
+    // Random path generator
     public List<Segment> RandomPath(Segment currentSegment)
     {
         if (currentSegment == null || currentSegment.nextSegments == null || currentSegment.nextSegments.Count == 0)
@@ -209,7 +141,7 @@ public class Navigation : MonoBehaviour
         return newPath;
     }
 
-    public Segment nextSegments()
+        public Segment nextSegments()
     {
         //get the next segment
         currentSegment = nextSegment;

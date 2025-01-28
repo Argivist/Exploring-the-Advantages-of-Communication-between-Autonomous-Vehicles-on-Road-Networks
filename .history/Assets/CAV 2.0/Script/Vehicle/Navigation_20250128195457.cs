@@ -130,7 +130,7 @@ public class Navigation : MonoBehaviour
     {
         Debug.Log("End of journey reached. Returning true.");
         // Handle end-of-journey behavior if necessary
-        carAI.StopVehicle(); // Example: stop the vehicle
+        // carAI.StopVehicle(); // Example: stop the vehicle
         return true; // Indicate the journey is complete
     }
 
@@ -165,14 +165,14 @@ public class Navigation : MonoBehaviour
             else
             {
                 Debug.Log("No new path generated. End of journey reached.");
-                carAI.StopVehicle(); // Example stop logic
+                // carAI.StopVehicle(); // Example stop logic
                 return true; // Indicate the journey is complete
             }
         }
         else
         {
             Debug.Log("End of journey reached for non-CAV vehicle.");
-            carAI.StopVehicle(); // Example stop logic
+            // carAI.StopVehicle(); // Example stop logic
             return true; // Indicate the journey is complete
         }
     }

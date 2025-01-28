@@ -1,7 +1,6 @@
 // using System.Collections;
 // using System.Collections.Generic;
 // using UnityEngine;
-// using TrafficSimulation;
 
 // public class WayPointNavigator : MonoBehaviour
 // {
@@ -9,7 +8,7 @@
 
 //     CarController controller;
 //     CarAI carAI;
-//     public Waypoint CurrentWaypoint;
+//     public WayPoint CurrentWaypoint;
 
 //     private void Awake()
 //     {
