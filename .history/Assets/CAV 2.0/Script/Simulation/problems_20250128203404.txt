@@ -1,0 +1,3 @@
+## Problems:
+- timer issue
+- the vehciles should not have the same spawn time,  create a constantt minimum buffer time between spawns in the configuration file

@@ -121,68 +121,68 @@ public class Navigation : MonoBehaviour
     // }
 
     // Random path generator
-
-
+    
+    
     public bool OntoNextSegment()
+{
+    // Check if the path is empty or has no further segments
+    if (path == null || path.Count < 1)
     {
-        // Check if the path is empty or has no further segments
-        if (path == null || path.Count < 1)
+
+    comagent.ExitSegment(currentSegment);
+        Debug.Log("End of journey reached. Returning true.");
+        // Handle end-of-journey behavior if necessary
+        carAI.StopVehicle(); // Example: stop the vehicle
+        return true; // Indicate the journey is complete
+    }
+
+    Debug.Log("Path is not empty. Moving to the next segment.");
+
+    // Transition to the next segment
+    comagent.ExitSegment(currentSegment);
+    comagent.EnterSegment(nextSegment);
+
+    currentSegment = nextSegment;
+
+    if (path.Count > 1)
+    {
+        nextSegment = path[1];
+        path.RemoveAt(0);
+    }
+    else
+    {
+        Debug.LogWarning("Path is about to be exhausted.");
+
+        // Check if path exhaustion means end of journey
+        if (vehicleType == SimConfig.VehicleType.CAV)
         {
+            Debug.Log("Generating new path for CAV.");
+            path = RandomPath(currentSegment);
 
-            comagent.ExitSegment(currentSegment);
-            Debug.Log("End of journey reached. Returning true.");
-            // Handle end-of-journey behavior if necessary
-            carAI.StopVehicle(); // Example: stop the vehicle
-            return true; // Indicate the journey is complete
-        }
-
-        Debug.Log("Path is not empty. Moving to the next segment.");
-
-        // Transition to the next segment
-        comagent.ExitSegment(currentSegment);
-        comagent.EnterSegment(nextSegment);
-
-        currentSegment = nextSegment;
-
-        if (path.Count > 1)
-        {
-            nextSegment = path[1];
-            path.RemoveAt(0);
-        }
-        else
-        {
-            Debug.LogWarning("Path is about to be exhausted.");
-
-            // Check if path exhaustion means end of journey
-            if (vehicleType == SimConfig.VehicleType.CAV)
+            if (path.Count > 0)
             {
-                Debug.Log("Generating new path for CAV.");
-                path = RandomPath(currentSegment);
-
-                if (path.Count > 0)
-                {
-                    nextSegment = path[0];
-                    path.RemoveAt(0);
-                }
-                else
-                {
-                    Debug.Log("No new path generated. End of journey reached.");
-                    carAI.StopVehicle(); // Example stop logic
-                    return true; // Indicate the journey is complete
-                }
+                nextSegment = path[0];
+                path.RemoveAt(0);
             }
             else
             {
-                Debug.Log("End of journey reached for non-CAV vehicle.");
+                Debug.Log("No new path generated. End of journey reached.");
                 carAI.StopVehicle(); // Example stop logic
                 return true; // Indicate the journey is complete
             }
         }
-
-        // Update AI with the new segment path
-        carAI.SetPath(vectorpath(currentSegment));
-        return false; // Indicate the journey is not yet complete
+        else
+        {
+            Debug.Log("End of journey reached for non-CAV vehicle.");
+            carAI.StopVehicle(); // Example stop logic
+            return true; // Indicate the journey is complete
+        }
     }
+
+    // Update AI with the new segment path
+    carAI.SetPath(vectorpath(currentSegment));
+    return false; // Indicate the journey is not yet complete
+}
 
     //!SECTION: Path Finder
     public List<Segment> RandomPath(Segment currentSegment)
@@ -211,14 +211,12 @@ public class Navigation : MonoBehaviour
         return newPath;
     }
 
-    public List<Segment> CAVNav(Segment start, Segment end)
-    {
+    public List<Segment> CAVNav(Segment start,Segment end){
         //called on end of current segment
         return null;
     }
 
-    public List<Segment> OneNav(Segment start, Segment end)
-    {
+    public List<Segment> OneNav(Segment start,Segment end){
         // called once replace random path
         return null;
     }
