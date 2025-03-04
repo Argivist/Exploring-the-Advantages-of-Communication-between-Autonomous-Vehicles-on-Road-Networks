@@ -1,5 +1,3 @@
-
-
 // Traffic Simulation
 // https://github.com/mchrbn/unity-traffic-simulation
 
@@ -16,19 +14,24 @@ namespace TrafficSimulation {
         
     */
 
+    //Pulling from original vehicle AI
     // public struct Target{
     //     public int segment;
     //     public int waypoint;
     // }
 
-    public enum Status_{
-        GO,
-        STOP,
-        SLOW_DOWN,
 
-        END
-    }
+    //dont ober traffic rules because of an existance conflict
+    // public enum Status
+    // {
+    //     GO,
+    //     STOP,
+    //     SLOW_DOWN,
 
+    //     END
+    // }
+
+    // private enum Status={VehicleAI.Status};
     public class Vehicle_AI : MonoBehaviour
     {
         [Header("Traffic System")]
@@ -59,7 +62,7 @@ namespace TrafficSimulation {
         [Tooltip("If detected vehicle is below this distance (and above, above distance), ego vehicle will slow down")]
         public float slowDownThresh = 4f;
 
-        [HideInInspector] public Status_ vehicleStatus = Status_.GO;
+        [HideInInspector] public Status vehicleStatus = Status.GO;
 
         private WheelDrive wheelDrive;
         private float initMaxSpeed = 0;
@@ -67,14 +70,11 @@ namespace TrafficSimulation {
         private Target currentTarget;
         private Target futureTarget;
 
-
-                [Header("Navigation")]
+        [Header("Navigation")]
         public Navigation NavigationComponent;
 
         void Start()
         {
-            // NavigationComponent.UpdateCurrentSegment();
-            // NavigationComponent.UpdatePath();
             wheelDrive = this.GetComponent<WheelDrive>();
 
             if(trafficSystem == null)
@@ -91,10 +91,10 @@ namespace TrafficSimulation {
             WaypointChecker();
             MoveVehicle();
 
-                if (Time.time > Random.Range(100, 300))
-            {
-                DestroyVehicle();
-            }
+            //     if (Time.time > Random.Range(100, 300))
+            // {
+            //     DestroyVehicle();
+            // }
         }
                 public void DestroyVehicle(){
             V_Spawner spawner = GameObject.FindObjectOfType<V_Spawner>();
@@ -143,7 +143,7 @@ namespace TrafficSimulation {
             float futureSteering = Mathf.Clamp(this.transform.InverseTransformDirection(futureVel.normalized).x, -1, 1);
 
             //Check if the car has to stop
-            if(vehicleStatus == Status_.STOP){
+            if(vehicleStatus == Status.STOP){
                 acc = 0;
                 brake = 1;
                 wheelDrive.maxSpeed = Mathf.Min(wheelDrive.maxSpeed / 2f, 5f);
@@ -151,7 +151,7 @@ namespace TrafficSimulation {
             else{
                 
                 //Not full acceleration if have to slow down
-                if(vehicleStatus == Status_.SLOW_DOWN){
+                if(vehicleStatus == Status.SLOW_DOWN){
                     acc = .3f;
                     brake = 0f;
                 }
@@ -293,16 +293,18 @@ namespace TrafficSimulation {
 
         //Next Segment to go from traffic system
         int GetNextSegmentId(){
-            // NavigationComponent.UpdateCurrentSegment();
+
             // if(trafficSystem.segments[currentTarget.segment].nextSegments.Count == 0)
             //     return 0;
             // int c = Random.Range(0, trafficSystem.segments[currentTarget.segment].nextSegments.Count);//segment selection
-            // return trafficSystem.segments[currentTarget.segment].nextSegments[c].id;
-            return NavigationComponent.GetNextSegmentId();
+            int nextSegment=NavigationComponent.GetNextSegmentId();
+            //  return trafficSystem.segments[currentTarget.segment].nextSegments[c].id;
+            return nextSegment;
         }
 
+
+        //can use this as reference point for direction
         void SetWaypointVehicleIsOn(){
-            // NavigationComponent.UpdateCurrentSegment();
             //Find current target
             foreach(Segment segment in trafficSystem.segments){
                 if(segment.IsOnSegment(this.transform.position)){
@@ -331,7 +333,6 @@ namespace TrafficSimulation {
             if(futureTarget.waypoint >= trafficSystem.segments[currentTarget.segment].waypoints.Count){
                 futureTarget.waypoint = 0;
                 futureTarget.segment = GetNextSegmentId();
-                Debug.Log("Future target segment: " + futureTarget.segment);
             }
         }
 
@@ -345,7 +346,8 @@ namespace TrafficSimulation {
             }
             return vehicleSegment;
         }
-                public Target getCurrentTarget(){
+
+        public Target getCurrentTarget(){
             return currentTarget;
         }
 
@@ -354,16 +356,3 @@ namespace TrafficSimulation {
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-

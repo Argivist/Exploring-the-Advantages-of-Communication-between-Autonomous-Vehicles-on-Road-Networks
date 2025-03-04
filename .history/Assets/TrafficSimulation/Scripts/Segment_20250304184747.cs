@@ -1,7 +1,6 @@
 ﻿// Traffic Simulation
 // https://github.com/mchrbn/unity-traffic-simulation
 
-using System;
 using System.Collections.Generic;
 using System.Numerics;
 using UnityEngine;
@@ -11,10 +10,14 @@ namespace TrafficSimulation {
         public List<Segment> nextSegments;
         public int cost;
         // My personal inclusion
-        public int carDensity=UnityEngine.Random.Range(0, 100);//TODO: get actual density overtime
         public int dynamicCost;
+        public int carDensity;
         
-    
+        // dynamic cost
+        public int CalculateDynamicCost()
+        {
+            return dynamicCost = cost + carDensity;// find better car cost calculation
+        }
 
         [HideInInspector] public int id;
         [HideInInspector] public List<Waypoint> waypoints;
@@ -23,11 +26,9 @@ namespace TrafficSimulation {
 
         private void Awake()
         {
-            
             ts = GetComponentInParent<TrafficSystem>();
             if (ts == null)
                 Debug.LogError("TrafficSystem not found in parent.");
-            dynamicCost=cost + carDensity;
         }
 
         public bool IsOnSegment(Vector3 _p)

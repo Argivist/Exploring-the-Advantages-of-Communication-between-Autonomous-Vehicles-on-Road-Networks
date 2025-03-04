@@ -60,7 +60,7 @@ public class Navigation : MonoBehaviour
         // }
         // else{
             path=staticAStar.FindPath(CurrentSegment.id, DestinationSegment.id);
-            path.RemoveAt(0);
+            // path.Remove(0);
         // }
         // pathGenerated=true;
         pathGenerated=true;

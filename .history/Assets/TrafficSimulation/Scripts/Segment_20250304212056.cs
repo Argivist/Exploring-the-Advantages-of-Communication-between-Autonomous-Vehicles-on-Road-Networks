@@ -12,7 +12,7 @@ namespace TrafficSimulation {
         public int cost;
         // My personal inclusion
         public int carDensity=UnityEngine.Random.Range(0, 100);//TODO: get actual density overtime
-        public int dynamicCost;
+        public int dynamicCost=cost + carDensity;
         
     
 

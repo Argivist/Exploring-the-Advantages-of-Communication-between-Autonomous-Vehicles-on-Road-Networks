@@ -331,7 +331,6 @@ namespace TrafficSimulation {
             if(futureTarget.waypoint >= trafficSystem.segments[currentTarget.segment].waypoints.Count){
                 futureTarget.waypoint = 0;
                 futureTarget.segment = GetNextSegmentId();
-                Debug.Log("Future target segment: " + futureTarget.segment);
             }
         }
 

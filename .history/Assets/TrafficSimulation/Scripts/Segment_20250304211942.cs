@@ -11,10 +11,14 @@ namespace TrafficSimulation {
         public List<Segment> nextSegments;
         public int cost;
         // My personal inclusion
-        public int carDensity=UnityEngine.Random.Range(0, 100);//TODO: get actual density overtime
         public int dynamicCost;
+        public int carDensity=UnityEngine.Random.Range(0, 100);//TODO: get actual density overtime
         
-    
+        // dynamic cost
+        public int CalculateDynamicCost()
+        {
+            dynamicCost = cost + carDensity;// find better car cost calculation
+        }
 
         [HideInInspector] public int id;
         [HideInInspector] public List<Waypoint> waypoints;
@@ -23,11 +27,9 @@ namespace TrafficSimulation {
 
         private void Awake()
         {
-            
             ts = GetComponentInParent<TrafficSystem>();
             if (ts == null)
                 Debug.LogError("TrafficSystem not found in parent.");
-            dynamicCost=cost + carDensity;
         }
 
         public bool IsOnSegment(Vector3 _p)

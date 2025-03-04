@@ -1,0 +1,14 @@
+- the path does not generate in time for the first next segment
+    - This may affect the dynamic decision making
+    - posibly wait  for the path to e generated before you move, ie the the status . go should be status. stop until a path is generatd
+
+
+TODO
+- add the destroy
+- add the spwn wait
+- add the spawn direction proper to avoid roundabout
+- add the car internal timer
+- add the wait till no collision before spawn
+- add the dynamic navigation
+- work on the cost for dynamic
+- work on data gathering

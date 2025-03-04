@@ -60,7 +60,7 @@ public class Navigation : MonoBehaviour
         // }
         // else{
             path=staticAStar.FindPath(CurrentSegment.id, DestinationSegment.id);
-            path.RemoveAt(0);
+            // path.Remove(0);
         // }
         // pathGenerated=true;
         pathGenerated=true;
@@ -92,16 +92,13 @@ public class Navigation : MonoBehaviour
 
     }
 
-    public void UpdatePath(){
-        path=staticAStar.FindPath(CurrentSegment.id, DestinationSegment.id);
-    }
 
     public int GetNextSegmentId(){
             UpdateCurrentSegment();
             
-            // Debug.Log("GetNext Called");
+            Debug.Log("GetNext Called");
             path.RemoveAt(0);
-            Debug.Log(path[0]);
+            Debug.Log(path[1]);
             return path[0];
 
 

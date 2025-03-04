@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using TrafficSimulation;
 using UnityEditor.SceneManagement;
-using NUnit.Framework.Constraints;
 // using SimConfig;
 
 public class Navigation : MonoBehaviour
@@ -10,10 +9,9 @@ public class Navigation : MonoBehaviour
 
 
     [Header("Vehicle Configure")]
-    // public GameObject Vehicle;
-    public Vehicle_AI Vehicle_AI;
-    // public Description Description;
     public GameObject Vehicle;
+    public Vehicle_AI Vehicle_AI;
+    public Description Description;
 
     [Header("Traffic System")]
     public TrafficSystem trafficSystem;
@@ -24,13 +22,13 @@ public class Navigation : MonoBehaviour
 
     [Header("Navigation")]
     public List<int> path;
-    // public List<Segment> SegmentPathList;//Temporary remove when navigator proved to work
+    public List<Segment> SegmentPathList;//Temporary remove when navigator proved to work
     public Segment CurrentSegment;
     public int CurrentSegmentCost;
     public Segment DestinationSegment;
 
     StaticAStar staticAStar;
-    // DynamicAStar dynamicAStar;
+    DynamicAStar dynamicAStar;
     bool pathGenerated=false;
 
     // vehicle type
@@ -45,33 +43,29 @@ public class Navigation : MonoBehaviour
     {
         // Vehicle_AI=Vehicle.GetComponent<Vehicle_AI>();
         //At start
-    
+        UpdateCurrentSegment();
         staticAStar = new StaticAStar();
-        // dynamicAStar = new DynamicAStar();
+        dynamicAStar = new DynamicAStar();
         
         staticAStar.AStarPathfinder(trafficSystem.segments);
-        // dynamicAStar.AStarPathfinder(trafficSystem.segments);
-        
-        UpdateCurrentSegment();
+        dynamicAStar.AStarPathfinder(trafficSystem.segments);
 
-        // if(vehicleType==VehicleType.CAV){
-        //     path=dynamicAStar.FindPath(CurrentSegment.id, DestinationSegment.id);
-        //     // path.Remove(0);
-        // }
-        // else{
+        if(vehicleType==VehicleType.CAV){
+            path=dynamicAStar.FindPath(CurrentSegment.id, DestinationSegment.id);
+            path.Remove(0);
+        }
+        else{
             path=staticAStar.FindPath(CurrentSegment.id, DestinationSegment.id);
-            path.RemoveAt(0);
-        // }
-        // pathGenerated=true;
+            path.Remove(0);
+        }
         pathGenerated=true;
+        
 
     }
 
     public void UpdateCurrentSegment(){
         CurrentSegment=trafficSystem.segments[Vehicle_AI.getCurrentTarget().segment];
         CurrentSegmentCost=CurrentSegment.cost;
-        Debug.Log(CurrentSegment.id);
-        // path.Remove(0);
         // if(vehicleType==VehicleType.CAV){
         //     CurrentSegmentCost=CurrentSegment.dynamicCost;
         //     if(dynamicAStar==null){
@@ -92,29 +86,15 @@ public class Navigation : MonoBehaviour
 
     }
 
-    public void UpdatePath(){
-        path=staticAStar.FindPath(CurrentSegment.id, DestinationSegment.id);
-    }
 
     public int GetNextSegmentId(){
-            UpdateCurrentSegment();
-            
-            // Debug.Log("GetNext Called");
-            path.RemoveAt(0);
-            Debug.Log(path[0]);
-            return path[0];
-
-
                 // if(trafficSystem.segments[Vehicle_AI.getCurrentTarget().segment].nextSegments.Count == 0)
                 //     return 0;
                 // int c = Random.Range(0, trafficSystem.segments[Vehicle_AI.getCurrentTarget().segment].nextSegments.Count);//segment selection
                 // return trafficSystem.segments[Vehicle_AI.getCurrentTarget().segment].nextSegments[c].id;
-
-
-
-                // int tbr=path[1];
-                //     path.Remove(0);
-                //     return tbr;
+                int tbr=path[0];
+                    path.Remove(0);
+                    return tbr;
                 // if(path.Count>0){
                     
                 //     // Debug.Log(tbr);

@@ -1242,6 +1242,8 @@ MonoBehaviour:
   nextSegments:
   - {fileID: 961964230}
   cost: 0
+  carDensity: 0
+  dynamicCost: 0
   id: 25
   waypoints:
   - {fileID: 920003784}
@@ -1656,6 +1658,8 @@ MonoBehaviour:
   - {fileID: 1759013214}
   - {fileID: 1800101872}
   cost: 0
+  carDensity: 0
+  dynamicCost: 0
   id: 6
   waypoints:
   - {fileID: 929777384}
@@ -1820,13 +1824,43 @@ MonoBehaviour:
   emergencyBrakeThresh: 1.5
   slowDownThresh: 5
   vehicleStatus: 0
-  NavigationComponent: {fileID: 640060552}
---- !u!4 &162042535 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6020706259940853932, guid: 541aeda582f438c438aaf2fad427ed5c,
-    type: 3}
-  m_PrefabInstance: {fileID: 1987037766}
+  NavigationComponent: {fileID: 162042533}
+--- !u!114 &162042532
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 162042530}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9bab2eebca2cf6a439b16d89fa8999b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ThisCar: {fileID: 162042530}
+  id: 0
+  NotMaster: 1
+--- !u!114 &162042533
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 162042530}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c0bb8921bd62ac41bf41373170a23da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Vehicle_AI: {fileID: 162042531}
+  Vehicle: {fileID: 162042530}
+  trafficSystem: {fileID: 1938862188}
+  ID: 0
+  path: 
+  CurrentSegment: {fileID: 0}
+  CurrentSegmentCost: 0
+  DestinationSegment: {fileID: 1509820994}
+  vehicleType: 0
 --- !u!1001 &162841362
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2998,6 +3032,8 @@ MonoBehaviour:
   - {fileID: 423579629}
   - {fileID: 443007449}
   cost: 0
+  carDensity: 0
+  dynamicCost: 0
   id: 10
   waypoints:
   - {fileID: 1304636943}
@@ -3381,6 +3417,8 @@ MonoBehaviour:
   - {fileID: 1151426496}
   - {fileID: 2114961485}
   cost: 0
+  carDensity: 0
+  dynamicCost: 0
   id: 14
   waypoints:
   - {fileID: 252340022}
@@ -4752,6 +4790,8 @@ MonoBehaviour:
   - {fileID: 495444333}
   - {fileID: 1730168623}
   cost: 0
+  carDensity: 0
+  dynamicCost: 0
   id: 11
   waypoints:
   - {fileID: 1187705423}
@@ -5100,6 +5140,8 @@ MonoBehaviour:
   nextSegments:
   - {fileID: 1902215357}
   cost: 0
+  carDensity: 0
+  dynamicCost: 0
   id: 3
   waypoints:
   - {fileID: 1491189271}
@@ -5391,6 +5433,8 @@ MonoBehaviour:
   - {fileID: 766746091}
   - {fileID: 685921471}
   cost: 0
+  carDensity: 0
+  dynamicCost: 0
   id: 13
   waypoints:
   - {fileID: 959109783}
@@ -5772,6 +5816,8 @@ MonoBehaviour:
   - {fileID: 510115660}
   - {fileID: 325594512}
   cost: 0
+  carDensity: 0
+  dynamicCost: 0
   id: 20
   waypoints:
   - {fileID: 187508898}
@@ -6122,6 +6168,8 @@ MonoBehaviour:
   nextSegments:
   - {fileID: 2072114415}
   cost: 0
+  carDensity: 0
+  dynamicCost: 0
   id: 28
   waypoints:
   - {fileID: 1179627363}
@@ -7956,6 +8004,8 @@ MonoBehaviour:
   - {fileID: 1182472912}
   - {fileID: 1216711119}
   cost: 0
+  carDensity: 0
+  dynamicCost: 0
   id: 2
   waypoints:
   - {fileID: 621840978}
@@ -8124,8 +8174,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Vehicle_AI: {fileID: 0}
+  Vehicle: {fileID: 0}
   trafficSystem: {fileID: 1938862188}
-  thisAI: {fileID: 616570990}
+  ID: 0
+  path: 
+  CurrentSegment: {fileID: 0}
+  CurrentSegmentCost: 0
+  DestinationSegment: {fileID: 0}
+  vehicleType: 0
 --- !u!54 &616570992
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -8439,6 +8495,8 @@ MonoBehaviour:
   nextSegments:
   - {fileID: 458574989}
   cost: 0
+  carDensity: 0
+  dynamicCost: 0
   id: 33
   waypoints:
   - {fileID: 1998035371}
@@ -8657,52 +8715,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.04, y: 0.039999995, z: 0}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!1 &640060551
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 640060553}
-  - component: {fileID: 640060552}
-  m_Layer: 9
-  m_Name: Navigation
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &640060552
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 640060551}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c0bb8921bd62ac41bf41373170a23da, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Vehicle_AI: {fileID: 162042531}
-  trafficSystem: {fileID: 1938862188}
-  thisAI: {fileID: 162042531}
---- !u!4 &640060553
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 640060551}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 162042535}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &648400636
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9069,6 +9081,8 @@ MonoBehaviour:
   - {fileID: 1201046567}
   - {fileID: 1800101872}
   cost: 0
+  carDensity: 0
+  dynamicCost: 0
   id: 22
   waypoints:
   - {fileID: 722440550}
@@ -9767,6 +9781,8 @@ MonoBehaviour:
   - {fileID: 1151426496}
   - {fileID: 423579629}
   cost: 0
+  carDensity: 0
+  dynamicCost: 0
   id: 8
   waypoints:
   - {fileID: 1943247906}
@@ -9839,6 +9855,8 @@ MonoBehaviour:
   - {fileID: 2114961485}
   - {fileID: 443007449}
   cost: 0
+  carDensity: 0
+  dynamicCost: 0
   id: 9
   waypoints:
   - {fileID: 845554237}
@@ -10053,6 +10071,8 @@ MonoBehaviour:
   - {fileID: 1509820994}
   - {fileID: 612858247}
   cost: 0
+  carDensity: 0
+  dynamicCost: 0
   id: 21
   waypoints:
   - {fileID: 2022687502}
@@ -12695,6 +12715,8 @@ MonoBehaviour:
   nextSegments:
   - {fileID: 1767348164}
   cost: 0
+  carDensity: 0
+  dynamicCost: 0
   id: 24
   waypoints:
   - {fileID: 1774563415}
@@ -13158,7 +13180,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!54 &1005397142
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -13329,8 +13351,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Vehicle_AI: {fileID: 0}
+  Vehicle: {fileID: 0}
   trafficSystem: {fileID: 1938862188}
-  thisAI: {fileID: 0}
+  ID: 0
+  path: 
+  CurrentSegment: {fileID: 0}
+  CurrentSegmentCost: 0
+  DestinationSegment: {fileID: 0}
+  vehicleType: 0
 --- !u!114 &1005397151
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14742,12 +14770,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.04, y: 0.039999995, z: 0}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!1 &1140044587 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6020706259940545566, guid: 541aeda582f438c438aaf2fad427ed5c,
-    type: 3}
-  m_PrefabInstance: {fileID: 3833236795332413214}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1141935687
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15123,6 +15145,8 @@ MonoBehaviour:
   nextSegments:
   - {fileID: 1241176745}
   cost: 0
+  carDensity: 0
+  dynamicCost: 0
   id: 18
   waypoints:
   - {fileID: 1291159615}
@@ -15317,6 +15341,8 @@ MonoBehaviour:
   nextSegments:
   - {fileID: 1182472912}
   cost: 0
+  carDensity: 0
+  dynamicCost: 0
   id: 15
   waypoints:
   - {fileID: 1781705011}
@@ -15414,6 +15440,8 @@ MonoBehaviour:
   - {fileID: 1902215357}
   - {fileID: 325594512}
   cost: 0
+  carDensity: 0
+  dynamicCost: 0
   id: 4
   waypoints:
   - {fileID: 814634382}
@@ -15702,6 +15730,8 @@ MonoBehaviour:
   - {fileID: 1177571010}
   - {fileID: 729030104}
   cost: 0
+  carDensity: 0
+  dynamicCost: 0
   id: 27
   waypoints:
   - {fileID: 269290636}
@@ -15868,6 +15898,8 @@ MonoBehaviour:
   - {fileID: 151142524}
   - {fileID: 729030104}
   cost: 0
+  carDensity: 0
+  dynamicCost: 0
   id: 5
   waypoints:
   - {fileID: 935130377}
@@ -15921,6 +15953,8 @@ MonoBehaviour:
   - {fileID: 495444333}
   - {fileID: 754122798}
   cost: 0
+  carDensity: 0
+  dynamicCost: 0
   id: 31
   waypoints:
   - {fileID: 1919582715}
@@ -16073,6 +16107,8 @@ MonoBehaviour:
   - {fileID: 1800101872}
   - {fileID: 1759013214}
   cost: 0
+  carDensity: 0
+  dynamicCost: 0
   id: 19
   waypoints:
   - {fileID: 1654736284}
@@ -18051,6 +18087,8 @@ MonoBehaviour:
   - {fileID: 458574989}
   - {fileID: 1988350075}
   cost: 0
+  carDensity: 0
+  dynamicCost: 0
   id: 12
   waypoints:
   - {fileID: 1659906091}
@@ -19384,6 +19422,8 @@ MonoBehaviour:
   - {fileID: 1759013214}
   - {fileID: 1201046567}
   cost: 0
+  carDensity: 0
+  dynamicCost: 0
   id: 29
   waypoints:
   - {fileID: 796741489}
@@ -21522,8 +21562,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Vehicle_AI: {fileID: 0}
+  Vehicle: {fileID: 0}
   trafficSystem: {fileID: 1938862188}
-  thisAI: {fileID: 0}
+  ID: 0
+  path: 
+  CurrentSegment: {fileID: 0}
+  CurrentSegmentCost: 0
+  DestinationSegment: {fileID: 0}
+  vehicleType: 0
 --- !u!114 &1678212994
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22061,6 +22107,8 @@ MonoBehaviour:
   nextSegments:
   - {fileID: 1402760233}
   cost: 0
+  carDensity: 0
+  dynamicCost: 0
   id: 1
   waypoints:
   - {fileID: 1034599784}
@@ -22246,6 +22294,8 @@ MonoBehaviour:
   nextSegments:
   - {fileID: 766746091}
   cost: 0
+  carDensity: 0
+  dynamicCost: 0
   id: 16
   waypoints:
   - {fileID: 959585392}
@@ -22342,6 +22392,8 @@ MonoBehaviour:
   nextSegments:
   - {fileID: 1233360794}
   cost: 0
+  carDensity: 0
+  dynamicCost: 0
   id: 26
   waypoints:
   - {fileID: 1921169987}
@@ -22868,6 +22920,8 @@ MonoBehaviour:
   - {fileID: 306670944}
   - {fileID: 630497738}
   cost: 0
+  carDensity: 0
+  dynamicCost: 0
   id: 30
   waypoints:
   - {fileID: 1587047712}
@@ -22921,6 +22975,8 @@ MonoBehaviour:
   - {fileID: 123400319}
   - {fileID: 612858247}
   cost: 0
+  carDensity: 0
+  dynamicCost: 0
   id: 17
   waypoints:
   - {fileID: 762143551}
@@ -24156,6 +24212,8 @@ MonoBehaviour:
   - {fileID: 1730168623}
   - {fileID: 754122798}
   cost: 0
+  carDensity: 0
+  dynamicCost: 0
   id: 0
   waypoints:
   - {fileID: 1977612825}
@@ -25709,6 +25767,16 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6020706259940545565, guid: 541aeda582f438c438aaf2fad427ed5c,
         type: 3}
+      propertyPath: maxAngle
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 6020706259940545565, guid: 541aeda582f438c438aaf2fad427ed5c,
+        type: 3}
+      propertyPath: driveType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6020706259940545565, guid: 541aeda582f438c438aaf2fad427ed5c,
+        type: 3}
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
@@ -25730,7 +25798,7 @@ PrefabInstance:
     - target: {fileID: 6020706259940853932, guid: 541aeda582f438c438aaf2fad427ed5c,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -21.92
+      value: -37.2
       objectReference: {fileID: 0}
     - target: {fileID: 6020706259940853932, guid: 541aeda582f438c438aaf2fad427ed5c,
         type: 3}
@@ -25740,7 +25808,7 @@ PrefabInstance:
     - target: {fileID: 6020706259940853932, guid: 541aeda582f438c438aaf2fad427ed5c,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -13.78
+      value: -13.4
       objectReference: {fileID: 0}
     - target: {fileID: 6020706259940853932, guid: 541aeda582f438c438aaf2fad427ed5c,
         type: 3}
@@ -25838,6 +25906,8 @@ MonoBehaviour:
   - {fileID: 306670944}
   - {fileID: 1241176745}
   cost: 0
+  carDensity: 0
+  dynamicCost: 0
   id: 32
   waypoints:
   - {fileID: 1512114422}
@@ -27088,6 +27158,8 @@ MonoBehaviour:
   - {fileID: 123400319}
   - {fileID: 1509820994}
   cost: 0
+  carDensity: 0
+  dynamicCost: 0
   id: 23
   waypoints:
   - {fileID: 1623750873}
@@ -27974,6 +28046,8 @@ MonoBehaviour:
   - {fileID: 1177571010}
   - {fileID: 151142524}
   cost: 0
+  carDensity: 0
+  dynamicCost: 0
   id: 7
   waypoints:
   - {fileID: 132266365}
@@ -34018,11 +34092,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: SimMaster
       objectReference: {fileID: 0}
+    - target: {fileID: 2176754788707491997, guid: bdc851e5710c467408eae52b5f7b4b50,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2176754788707491998, guid: bdc851e5710c467408eae52b5f7b4b50,
         type: 3}
       propertyPath: CAVehicle
       value: 
-      objectReference: {fileID: 1140044587}
+      objectReference: {fileID: 162042530}
     - target: {fileID: 2176754788707491998, guid: bdc851e5710c467408eae52b5f7b4b50,
         type: 3}
       propertyPath: SimConfig
@@ -34032,7 +34111,7 @@ PrefabInstance:
         type: 3}
       propertyPath: NormalVehicle
       value: 
-      objectReference: {fileID: 1140044587}
+      objectReference: {fileID: 162042530}
     - target: {fileID: 2176754788707491999, guid: bdc851e5710c467408eae52b5f7b4b50,
         type: 3}
       propertyPath: m_RootOrder
@@ -45615,6 +45694,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Configurer
+      objectReference: {fileID: 0}
+    - target: {fileID: 9112755985478719806, guid: 5fc93668d32e2cb4f8d7b1a5cf9e3e3d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9112755985478719807, guid: 5fc93668d32e2cb4f8d7b1a5cf9e3e3d,
         type: 3}

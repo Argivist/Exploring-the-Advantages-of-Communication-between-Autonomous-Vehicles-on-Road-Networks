@@ -13,7 +13,6 @@ public class Navigation : MonoBehaviour
     // public GameObject Vehicle;
     public Vehicle_AI Vehicle_AI;
     // public Description Description;
-    public GameObject Vehicle;
 
     [Header("Traffic System")]
     public TrafficSystem trafficSystem;
@@ -60,7 +59,7 @@ public class Navigation : MonoBehaviour
         // }
         // else{
             path=staticAStar.FindPath(CurrentSegment.id, DestinationSegment.id);
-            path.RemoveAt(0);
+            // path.Remove(0);
         // }
         // pathGenerated=true;
         pathGenerated=true;
@@ -92,16 +91,11 @@ public class Navigation : MonoBehaviour
 
     }
 
-    public void UpdatePath(){
-        path=staticAStar.FindPath(CurrentSegment.id, DestinationSegment.id);
-    }
 
     public int GetNextSegmentId(){
-            UpdateCurrentSegment();
-            
-            // Debug.Log("GetNext Called");
+            // UpdateCurrentSegment();
+            Debug.Log("GetNext Called");
             path.RemoveAt(0);
-            Debug.Log(path[0]);
             return path[0];
 
 
