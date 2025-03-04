@@ -48,7 +48,7 @@ public class CarAI : MonoBehaviour
     {
         if (newPath == null || newPath.Count == 0)
         {
-            // complete = navigation.OntoNextSegment();
+            complete = navigation.OntoNextSegment();
             if (complete)
             {
                 Stop = true;
@@ -106,7 +106,7 @@ public class CarAI : MonoBehaviour
         index++;
         if (index >= path.Count)
         {
-            // complete = navigation.OntoNextSegment();
+            complete = navigation.OntoNextSegment();
             if (complete)
             {
                 Stop = true;

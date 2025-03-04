@@ -15,7 +15,7 @@ public class Navigation : MonoBehaviour
     // public Segment currentSegment;
     // public Segment nextSegment;
 
-    // public Vehicle_AI thisAI;
+    public Vehicle_AI thisAI;
 
     // public CarAI carAI;
 
@@ -232,13 +232,13 @@ public class Navigation : MonoBehaviour
     // }
 
     // public Segment nextSegments()
-    // {
-    //     //get the next segment
-    //     currentSegment = nextSegment;
-    //     //get the next segment
-    //     nextSegment = path[path.IndexOf(currentSegment) + 1];
-    //     return currentSegment;
-    // }
+    {
+        //get the next segment
+        currentSegment = nextSegment;
+        //get the next segment
+        nextSegment = path[path.IndexOf(currentSegment) + 1];
+        return currentSegment;
+    }
 
     
 

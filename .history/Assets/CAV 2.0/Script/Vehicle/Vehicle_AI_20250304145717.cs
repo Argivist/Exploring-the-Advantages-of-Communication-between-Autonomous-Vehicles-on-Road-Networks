@@ -31,7 +31,6 @@ namespace TrafficSimulation {
     //     END
     // }
 
-    // private enum Status={VehicleAI.Status};
     public class Vehicle_AI : MonoBehaviour
     {
         [Header("Traffic System")]

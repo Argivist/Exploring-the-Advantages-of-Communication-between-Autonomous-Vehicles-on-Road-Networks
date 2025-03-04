@@ -31,7 +31,6 @@ namespace TrafficSimulation {
     //     END
     // }
 
-    // private enum Status={VehicleAI.Status};
     public class Vehicle_AI : MonoBehaviour
     {
         [Header("Traffic System")]
@@ -69,9 +68,6 @@ namespace TrafficSimulation {
         private int pastTargetSegment = -1;
         private Target currentTarget;
         private Target futureTarget;
-
-        [Header("Navigation")]
-        public Navigation NavigationComponent;
 
         void Start()
         {
@@ -293,13 +289,10 @@ namespace TrafficSimulation {
 
         //Next Segment to go from traffic system
         int GetNextSegmentId(){
-
-            // if(trafficSystem.segments[currentTarget.segment].nextSegments.Count == 0)
-            //     return 0;
-            // int c = Random.Range(0, trafficSystem.segments[currentTarget.segment].nextSegments.Count);//segment selection
-            int nextSegment=NavigationComponent.GetNextSegmentId();
-            //  return trafficSystem.segments[currentTarget.segment].nextSegments[c].id;
-            return nextSegment;
+            if(trafficSystem.segments[currentTarget.segment].nextSegments.Count == 0)
+                return 0;
+            int c = Random.Range(0, trafficSystem.segments[currentTarget.segment].nextSegments.Count);//segment selection
+            return trafficSystem.segments[currentTarget.segment].nextSegments[c].id;
         }
 
         void SetWaypointVehicleIsOn(){
@@ -343,14 +336,6 @@ namespace TrafficSimulation {
                     vehicleSegment = pastTargetSegment;
             }
             return vehicleSegment;
-        }
-
-        public Target getCurrentTarget(){
-            return currentTarget;
-        }
-
-        public Target getNextTarget(){
-            return futureTarget;
         }
     }
 }

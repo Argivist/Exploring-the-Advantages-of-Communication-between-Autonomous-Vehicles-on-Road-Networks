@@ -58,8 +58,6 @@ namespace TrafficSimulation{
         [Tooltip("The vehicle's drive type: rear-wheels drive, front-wheels drive or all-wheels drive.")]
         public DriveType driveType;
 
-        [Tooltip("For debugging the wheel,disables wheel spawn")]
-        public bool WheelSpawn = true;
         private WheelCollider[] wheels;
         private float currentSteering = 0f;
 
@@ -70,10 +68,7 @@ namespace TrafficSimulation{
             {
                 var wheel = wheels [i];
 
-
-                
                 // Create wheel shapes only when needed.
-                if(WheelSpawn){//NOTE - Made to adress spontaneous wheel creation
                 if (leftWheelShape != null && wheel.transform.localPosition.x < 0)
                 {
                     var ws = Instantiate (leftWheelShape);
@@ -82,7 +77,6 @@ namespace TrafficSimulation{
                 else if(rightWheelShape != null && wheel.transform.localPosition.x > 0){
                     var ws = Instantiate(rightWheelShape);
                     ws.transform.parent = wheel.transform;
-                }
                 }
 
                 wheel.ConfigureVehicleSubsteps(10, 1, 1);

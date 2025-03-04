@@ -15,7 +15,7 @@ public class Navigation : MonoBehaviour
     // public Segment currentSegment;
     // public Segment nextSegment;
 
-    // public Vehicle_AI thisAI;
+    public Vehicle_AI thisAI;
 
     // public CarAI carAI;
 

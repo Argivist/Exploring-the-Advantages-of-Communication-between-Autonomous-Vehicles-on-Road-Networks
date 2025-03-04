@@ -31,7 +31,6 @@ namespace TrafficSimulation {
     //     END
     // }
 
-    // private enum Status={VehicleAI.Status};
     public class Vehicle_AI : MonoBehaviour
     {
         [Header("Traffic System")]
@@ -299,7 +298,7 @@ namespace TrafficSimulation {
             // int c = Random.Range(0, trafficSystem.segments[currentTarget.segment].nextSegments.Count);//segment selection
             int nextSegment=NavigationComponent.GetNextSegmentId();
             //  return trafficSystem.segments[currentTarget.segment].nextSegments[c].id;
-            return nextSegment;
+            return nextSegment
         }
 
         void SetWaypointVehicleIsOn(){

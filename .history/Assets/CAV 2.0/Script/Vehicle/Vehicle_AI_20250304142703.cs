@@ -14,16 +14,13 @@ namespace TrafficSimulation {
         
     */
 
-    //Pulling from original vehicle AI
+   //Pulling from original vehicle AI
     // public struct Target{
     //     public int segment;
     //     public int waypoint;
     // }
 
-
-    //dont ober traffic rules because of an existance conflict
-    // public enum Status
-    // {
+    // public enum Status{
     //     GO,
     //     STOP,
     //     SLOW_DOWN,
@@ -31,7 +28,6 @@ namespace TrafficSimulation {
     //     END
     // }
 
-    // private enum Status={VehicleAI.Status};
     public class Vehicle_AI : MonoBehaviour
     {
         [Header("Traffic System")]
@@ -70,9 +66,6 @@ namespace TrafficSimulation {
         private Target currentTarget;
         private Target futureTarget;
 
-        [Header("Navigation")]
-        public Navigation NavigationComponent;
-
         void Start()
         {
             wheelDrive = this.GetComponent<WheelDrive>();
@@ -91,10 +84,10 @@ namespace TrafficSimulation {
             WaypointChecker();
             MoveVehicle();
 
-            //     if (Time.time > Random.Range(100, 300))
-            // {
-            //     DestroyVehicle();
-            // }
+                if (Time.time > Random.Range(100, 300))
+            {
+                DestroyVehicle();
+            }
         }
                 public void DestroyVehicle(){
             V_Spawner spawner = GameObject.FindObjectOfType<V_Spawner>();
@@ -293,13 +286,10 @@ namespace TrafficSimulation {
 
         //Next Segment to go from traffic system
         int GetNextSegmentId(){
-
-            // if(trafficSystem.segments[currentTarget.segment].nextSegments.Count == 0)
-            //     return 0;
-            // int c = Random.Range(0, trafficSystem.segments[currentTarget.segment].nextSegments.Count);//segment selection
-            int nextSegment=NavigationComponent.GetNextSegmentId();
-            //  return trafficSystem.segments[currentTarget.segment].nextSegments[c].id;
-            return nextSegment;
+            if(trafficSystem.segments[currentTarget.segment].nextSegments.Count == 0)
+                return 0;
+            int c = Random.Range(0, trafficSystem.segments[currentTarget.segment].nextSegments.Count);//segment selection
+            return trafficSystem.segments[currentTarget.segment].nextSegments[c].id;
         }
 
         void SetWaypointVehicleIsOn(){
@@ -343,14 +333,6 @@ namespace TrafficSimulation {
                     vehicleSegment = pastTargetSegment;
             }
             return vehicleSegment;
-        }
-
-        public Target getCurrentTarget(){
-            return currentTarget;
-        }
-
-        public Target getNextTarget(){
-            return futureTarget;
         }
     }
 }

@@ -73,7 +73,7 @@ namespace TrafficSimulation{
 
                 
                 // Create wheel shapes only when needed.
-                if(WheelSpawn){//NOTE - Made to adress spontaneous wheel creation
+                if(WheelSpawn){
                 if (leftWheelShape != null && wheel.transform.localPosition.x < 0)
                 {
                     var ws = Instantiate (leftWheelShape);
