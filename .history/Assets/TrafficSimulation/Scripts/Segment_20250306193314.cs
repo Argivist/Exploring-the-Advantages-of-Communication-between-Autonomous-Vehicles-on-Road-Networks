@@ -11,7 +11,7 @@ namespace TrafficSimulation {
         public List<Segment> nextSegments;
         public int cost;
         // My personal inclusion
-        public int carDensity=0;
+        public int carDensity=
         public int dynamicCost;
         
     

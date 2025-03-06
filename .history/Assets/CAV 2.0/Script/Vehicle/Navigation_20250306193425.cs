@@ -72,16 +72,14 @@ public class Navigation : MonoBehaviour
         CurrentSegmentCost=CurrentSegment.cost;
         Debug.Log(CurrentSegment.id);
         // path.Remove(0);
-
-        if(vehicleType==VehicleType.CAV){
-            CurrentSegmentCost=CurrentSegment.dynamicCost;
-
-            // dynamicAStar = new DynamicAStar();
-            // dynamicAStar.AStarPathfinder(trafficSystem.segments);
-            path=dynamicAStar.FindPath(CurrentSegment.id, DestinationSegment.id);
-            Debug.Log("Dynamic A* path generated");
-            path.Remove(0);
-        }
+        // if(vehicleType==VehicleType.CAV){
+        //     CurrentSegmentCost=CurrentSegment.dynamicCost;
+        //     if(dynamicAStar==null){
+        //     dynamicAStar = new DynamicAStar();
+        //     dynamicAStar.AStarPathfinder(trafficSystem.segments);
+        //     path=dynamicAStar.FindPath(CurrentSegment.id, DestinationSegment.id);
+        //     path.Remove(0);
+        // }
 
         // //drop first segment in path
         // // path.RemoveAt(0);
