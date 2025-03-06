@@ -1861,6 +1861,32 @@ MonoBehaviour:
   CurrentSegmentCost: 0
   DestinationSegment: {fileID: 1509820994}
   vehicleType: 0
+--- !u!114 &162042534
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 162042530}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec2c6acf767e44246994685fc6e7d9a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  communicationSystem: {fileID: 1745337696}
+  id: 0
+--- !u!114 &162042535
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 162042530}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc70133da9f57494bac6fed86da1dc85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &162841362
 PrefabInstance:
   m_ObjectHideFlags: 0
