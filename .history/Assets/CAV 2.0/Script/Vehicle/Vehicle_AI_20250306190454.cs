@@ -115,8 +115,7 @@ namespace TrafficSimulation {
                 currentTarget.waypoint++;
                 if(currentTarget.waypoint >= trafficSystem.segments[currentTarget.segment].waypoints.Count){
                     pastTargetSegment = currentTarget.segment;
-                    // currentTarget.segment = futureTarget.segment;
-                    currentTarget.segment = NavigationComponent.GetNextSegmentId();
+                    currentTarget.segment = futureTarget.segment;
                     currentTarget.waypoint = 0;
                 }
 
@@ -124,7 +123,7 @@ namespace TrafficSimulation {
                 futureTarget.waypoint = currentTarget.waypoint + 1;
                 if(futureTarget.waypoint >= trafficSystem.segments[currentTarget.segment].waypoints.Count){
                     futureTarget.waypoint = 0;
-                    futureTarget.segment = NavigationComponent.path[1];//GetNextSegmentId(); Not necessary
+                    futureTarget.segment = GetNextSegmentId();
                 }
             }
         }
@@ -331,7 +330,7 @@ namespace TrafficSimulation {
 
             if(futureTarget.waypoint >= trafficSystem.segments[currentTarget.segment].waypoints.Count){
                 futureTarget.waypoint = 0;
-                futureTarget.segment =NavigationComponent.path[1];// GetNextSegmentId();
+                futureTarget.segment = GetNextSegmentId();
                 Debug.Log("Future target segment: " + futureTarget.segment);
             }
         }

@@ -12,7 +12,6 @@ namespace TrafficSimulation{
 
     public class Intersection : MonoBehaviour
     {   
-        bool _vai=true;
         public IntersectionType intersectionType;
         public int id;  
 
@@ -68,13 +67,14 @@ namespace TrafficSimulation{
         void TriggerStop(GameObject _vehicle){
             VehicleAI vehicleAI = _vehicle.GetComponent<VehicleAI>();
             Vehicle_AI vehicle_AI = _vehicle.GetComponent<Vehicle_AI>();
-            int vehicleSegment;
+            
             //Depending on the waypoint threshold, the car can be either on the target segment or on the past segment
             if(_vai){
-            vehicleSegment = vehicle_AI.GetSegmentVehicleIsIn();
-            }else{
-            vehicleSegment = vehicleAI.GetSegmentVehicleIsIn();
+                
             }
+            
+            int vehicleSegment = vehicleAI.GetSegmentVehicleIsIn();
+
             if(!IsPrioritySegment(vehicleSegment)){
                 if(vehiclesQueue.Count > 0 || vehiclesInIntersection.Count > 0){
                     vehicleAI.vehicleStatus = Status.STOP;
@@ -153,11 +153,10 @@ namespace TrafficSimulation{
             //Move all vehicles in queue
             List<GameObject> nVehiclesQueue = new List<GameObject>(vehiclesQueue);
             foreach(GameObject vehicle in vehiclesQueue){
-                int vehicleSegment;
                 if(_vai){
-                vehicleSegment = vehicle.GetComponent<Vehicle_AI>().GetSegmentVehicleIsIn();
+                int vehicleSegment = vehicle.GetComponent<Vehicle_AI>().GetSegmentVehicleIsIn();
                 }else{
-                vehicleSegment = vehicle.GetComponent<VehicleAI>().GetSegmentVehicleIsIn();
+                int vehicleSegment = vehicle.GetComponent<VehicleAI>().GetSegmentVehicleIsIn();
                 }
                 if(!IsRedLightSegment(vehicleSegment)){
                     vehicle.GetComponent<VehicleAI>().vehicleStatus = Status.GO;

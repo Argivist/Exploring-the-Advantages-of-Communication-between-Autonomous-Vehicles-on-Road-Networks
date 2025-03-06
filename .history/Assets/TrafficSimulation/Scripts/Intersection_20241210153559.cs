@@ -12,7 +12,6 @@ namespace TrafficSimulation{
 
     public class Intersection : MonoBehaviour
     {   
-        bool _vai=true;
         public IntersectionType intersectionType;
         public int id;  
 
@@ -67,29 +66,22 @@ namespace TrafficSimulation{
 
         void TriggerStop(GameObject _vehicle){
             VehicleAI vehicleAI = _vehicle.GetComponent<VehicleAI>();
-            Vehicle_AI vehicle_AI = _vehicle.GetComponent<Vehicle_AI>();
-            int vehicleSegment;
+            
             //Depending on the waypoint threshold, the car can be either on the target segment or on the past segment
-            if(_vai){
-            vehicleSegment = vehicle_AI.GetSegmentVehicleIsIn();
-            }else{
-            vehicleSegment = vehicleAI.GetSegmentVehicleIsIn();
-            }
+            int vehicleSegment = vehicleAI.GetSegmentVehicleIsIn();
+
             if(!IsPrioritySegment(vehicleSegment)){
                 if(vehiclesQueue.Count > 0 || vehiclesInIntersection.Count > 0){
                     vehicleAI.vehicleStatus = Status.STOP;
-                    vehicle_AI.vehicleStatus = Status_.STOP;
                     vehiclesQueue.Add(_vehicle);
                 }
                 else{
                     vehiclesInIntersection.Add(_vehicle);
                     vehicleAI.vehicleStatus = Status.SLOW_DOWN;
-                    vehicle_AI.vehicleStatus = Status_.SLOW_DOWN;
                 }
             }
             else{
                 vehicleAI.vehicleStatus = Status.SLOW_DOWN;
-                vehicle_AI.vehicleStatus = Status_.SLOW_DOWN;
                 vehiclesInIntersection.Add(_vehicle);
             }
         }
@@ -97,40 +89,29 @@ namespace TrafficSimulation{
         void ExitStop(GameObject _vehicle){
 
             _vehicle.GetComponent<VehicleAI>().vehicleStatus = Status.GO;
-            _vehicle.GetComponent<Vehicle_AI>().vehicleStatus = Status_.GO;
             vehiclesInIntersection.Remove(_vehicle);
             vehiclesQueue.Remove(_vehicle);
 
             if(vehiclesQueue.Count > 0 && vehiclesInIntersection.Count == 0){
                 vehiclesQueue[0].GetComponent<VehicleAI>().vehicleStatus = Status.GO;
-                vehiclesQueue[0].GetComponent<Vehicle_AI>().vehicleStatus = Status_.GO;
             }
         }
 
         void TriggerLight(GameObject _vehicle){
             VehicleAI vehicleAI = _vehicle.GetComponent<VehicleAI>();
-            Vehicle_AI vehicle_AI = _vehicle.GetComponent<Vehicle_AI>();
-            int vehicleSegment;
-            if(_vai){
-            vehicleSegment = vehicle_AI.GetSegmentVehicleIsIn();
-            }else{
-            vehicleSegment = vehicleAI.GetSegmentVehicleIsIn();
-            }
+            int vehicleSegment = vehicleAI.GetSegmentVehicleIsIn();
 
             if(IsRedLightSegment(vehicleSegment)){
                 vehicleAI.vehicleStatus = Status.STOP;
-                vehicle_AI.vehicleStatus = Status_.STOP;
                 vehiclesQueue.Add(_vehicle);
             }
             else{
                 vehicleAI.vehicleStatus = Status.GO;
-                vehicle_AI.vehicleStatus = Status_.GO;
             }
         }
 
         void ExitLight(GameObject _vehicle){
             _vehicle.GetComponent<VehicleAI>().vehicleStatus = Status.GO;
-            _vehicle.GetComponent<Vehicle_AI>().vehicleStatus = Status_.GO;
         }
 
         bool IsRedLightSegment(int _vehicleSegment){
@@ -153,15 +134,9 @@ namespace TrafficSimulation{
             //Move all vehicles in queue
             List<GameObject> nVehiclesQueue = new List<GameObject>(vehiclesQueue);
             foreach(GameObject vehicle in vehiclesQueue){
-                int vehicleSegment;
-                if(_vai){
-                vehicleSegment = vehicle.GetComponent<Vehicle_AI>().GetSegmentVehicleIsIn();
-                }else{
-                vehicleSegment = vehicle.GetComponent<VehicleAI>().GetSegmentVehicleIsIn();
-                }
+                int vehicleSegment = vehicle.GetComponent<VehicleAI>().GetSegmentVehicleIsIn();
                 if(!IsRedLightSegment(vehicleSegment)){
                     vehicle.GetComponent<VehicleAI>().vehicleStatus = Status.GO;
-                    vehicle.GetComponent<Vehicle_AI>().vehicleStatus = Status_.GO;
                     nVehiclesQueue.Remove(vehicle);
                 }
             }
@@ -200,7 +175,6 @@ namespace TrafficSimulation{
             foreach(GameObject v in vehiclesInIntersection){
                 foreach(GameObject v2 in memVehiclesInIntersection){
                     if(v.GetInstanceID() == v2.GetInstanceID()){
-                        v.GetComponent<Vehicle_AI>().vehicleStatus = v2.GetComponent<Vehicle_AI>().vehicleStatus;
                         v.GetComponent<VehicleAI>().vehicleStatus = v2.GetComponent<VehicleAI>().vehicleStatus;
                         break;
                     }
@@ -209,7 +183,6 @@ namespace TrafficSimulation{
             foreach(GameObject v in vehiclesQueue){
                 foreach(GameObject v2 in memVehiclesQueue){
                     if(v.GetInstanceID() == v2.GetInstanceID()){
-                        v.GetComponent<Vehicle_AI>().vehicleStatus = v2.GetComponent<Vehicle_AI>().vehicleStatus;
                         v.GetComponent<VehicleAI>().vehicleStatus = v2.GetComponent<VehicleAI>().vehicleStatus;
                         break;
                     }

@@ -12,7 +12,6 @@ namespace TrafficSimulation{
 
     public class Intersection : MonoBehaviour
     {   
-        bool _vai=true;
         public IntersectionType intersectionType;
         public int id;  
 
