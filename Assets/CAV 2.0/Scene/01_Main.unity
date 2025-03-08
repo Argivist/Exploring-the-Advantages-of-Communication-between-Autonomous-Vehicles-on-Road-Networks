@@ -12782,7 +12782,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &971882234
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -25939,7 +25939,7 @@ PrefabInstance:
     - target: {fileID: 6020706259940545566, guid: 541aeda582f438c438aaf2fad427ed5c,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6020706259940853932, guid: 541aeda582f438c438aaf2fad427ed5c,
         type: 3}
@@ -34248,6 +34248,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2176754788707491998, guid: bdc851e5710c467408eae52b5f7b4b50,
+        type: 3}
+      propertyPath: Vehicle
+      value: 
+      objectReference: {fileID: 971882233}
     - target: {fileID: 2176754788707491998, guid: bdc851e5710c467408eae52b5f7b4b50,
         type: 3}
       propertyPath: CAVehicle
@@ -45855,6 +45860,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9112755985478719807, guid: 5fc93668d32e2cb4f8d7b1a5cf9e3e3d,
+        type: 3}
+      propertyPath: num_cars
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 9112755985478719807, guid: 5fc93668d32e2cb4f8d7b1a5cf9e3e3d,
         type: 3}

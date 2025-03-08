@@ -282,11 +282,11 @@ public class SimulationMaster : MonoBehaviour
         vehicle.SetActive(true);
         if(vehicleData.vehicleType == SimConfig.VehicleType.CAV)
         {
-            vehicle.GetComponent<VehicleSpawnerObject>().type = Navigation.VehicleType.CAV;
+            vehicle.GetComponent<Navigation>().vehicleType = Navigation.VehicleType.CAV;
         }
         else
         {
-            vehicle.GetComponent<VehicleSpawnerObject>().type = Navigation.VehicleType.NonCAV;
+            vehicle.GetComponent<Navigation>().vehicleType = Navigation.VehicleType.NonCAV;
         }
         // Uncomment and implement as needed:
         // vehicle.GetComponent<Vehicle>().SetVehicle(vehicleData.Speed, vehicleData.EndPos, vehicleData.StartTime, vehicleData.EndTime);

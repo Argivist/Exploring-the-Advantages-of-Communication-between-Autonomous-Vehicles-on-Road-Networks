@@ -62,9 +62,9 @@ void direction()
 
 void Update()
 {
-    if (canSpawn)//TODO - Check if timer reached
+    if (canSpawn)//TODO: Add a timer to spawn vehicles
     {
-        GameObject vClone = Instantiate(vehicleObject, transform.position, startRotation);//TODO: Add a timer to spawn vehicles
+        GameObject vClone = Instantiate(vehicleObject, transform.position, startRotation);
         vClone.SetActive(true);
         // Debug.Log("Instantiated Rotation: " + vClone.transform.rotation.eulerAngles);
         Description d = vClone.GetComponent<Description>();

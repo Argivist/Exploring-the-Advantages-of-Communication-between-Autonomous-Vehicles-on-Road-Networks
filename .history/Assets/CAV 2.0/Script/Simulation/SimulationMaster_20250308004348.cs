@@ -248,7 +248,7 @@ public class SimulationMaster : MonoBehaviour
             if (tempList[i].startTime <= timer.GetTimer())
             {
 
-                GameObject vehiclePrefab = Vehicle;
+                GameObject vehiclePrefab = CAVehicle;
                 // tempList[i].vehicleType == SimConfig.VehicleType.Normal
                 // ? NormalVehicle
                 // : CAVehicle;
@@ -279,15 +279,15 @@ public class SimulationMaster : MonoBehaviour
     private void InstantiateAndTrackVehicle(GameObject prefab, SimConfig.Vehicle vehicleData)
     {
         GameObject vehicle = Instantiate(prefab, vehicleData.startPos, Quaternion.identity);
-        vehicle.SetActive(true);
         if(vehicleData.vehicleType == SimConfig.VehicleType.CAV)
         {
-            vehicle.GetComponent<VehicleSpawnerObject>().type = Navigation.VehicleType.CAV;
+            vehicle.GetComponent<Navigation>().vehicleType = Navigation.VehicleType.CAV;
         }
         else
         {
-            vehicle.GetComponent<VehicleSpawnerObject>().type = Navigation.VehicleType.NonCAV;
+            vehicle.GetComponent<Navigation>().vehicleType = Navigation.VehicleType.Normal;
         }
+        vehicle.SetActive(true);
         // Uncomment and implement as needed:
         // vehicle.GetComponent<Vehicle>().SetVehicle(vehicleData.Speed, vehicleData.EndPos, vehicleData.StartTime, vehicleData.EndTime);
         // SpawnedVehicles.Add(vehicle);
