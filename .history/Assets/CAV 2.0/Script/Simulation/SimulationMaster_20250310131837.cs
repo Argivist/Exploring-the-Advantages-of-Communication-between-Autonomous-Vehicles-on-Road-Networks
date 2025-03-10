@@ -273,12 +273,11 @@ public class SimulationMaster : MonoBehaviour
     }
 
 
-    private void InstantiateAndTrackVehicle(GameObject prefab, SimConfig.Vehicle vehicleData)
+    private void InstantiateAndTrackVehicle(GameObject prefab, SimConfig.Vehicle vehicleData, Waypoint waydir)
     {
         GameObject vehicle = Instantiate(prefab, vehicleData.startPos, Quaternion.identity);
-        vehicle.name=vehicleData.vehicleName;
         vehicle.SetActive(true);
-        vehicle.GetComponent<VehicleSpawnerObject>().WayDir = vehicleData.wdir;
+        vehicle.GetComponent<VehicleSpawnerObject>().waydir = waydir;
         if(vehicleData.vehicleType == VehicleType.CAV)
         {
             vehicle.GetComponent<VehicleSpawnerObject>().type = Navigation.VehicleType.CAV;

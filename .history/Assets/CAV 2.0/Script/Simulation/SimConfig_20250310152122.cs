@@ -104,11 +104,11 @@ public class SimConfig : MonoBehaviour
             this.previousWaypoint = previous;
             this.position = position;
         }
-        public bool hasNext()
+        bool hasNext()
         {
             return nextWaypoint != null;
         }
-        public bool hasPrevious()
+        bool hasPrevious()
         {
             return previousWaypoint != null;
         }
@@ -142,30 +142,22 @@ public class SimConfig : MonoBehaviour
         // Configure the cars
         for (int i = 0; i < num_cars; i++)
         {
-            // Randomly select a start waypoint
             int startWaypointIndex = Random.Range(0, waypointList.Count);
             Vector3 startPos = Vector3.zero;
             Waypoint dirPoint;
-            Segment startSegment = waypointList[startWaypointIndex].segment;
 
-            // If the start waypoint is not the last waypoint in the segment, set the start position to the start waypoint and the direction to the next waypoint
-            if(waypointList[startWaypointIndex].hasNext())
+            if(startWaypointIndex < waypointList.Count)
             {
                 startPos = waypointList[startWaypointIndex].position;
-                dirPoint = waypointList[startWaypointIndex].nextWaypoint;
-            }else if(waypointList[startWaypointIndex].hasPrevious())
-            {
-                startPos = waypointList[startWaypointIndex].previousWaypoint.transform.position;
+                dirPoint = waypointList[startWaypointIndex+1].currentWaypoint;
+            }else{
                 dirPoint = waypointList[startWaypointIndex].currentWaypoint;
-            }else{//Should not bee needed
-                dirPoint = waypointList[startWaypointIndex].currentWaypoint;
-                startPos = waypointList[startWaypointIndex].position-Vector3.forward;
+                //Random pos btn target and its prev
+                float x=Random.Range(waypointList[startWaypointIndex].position.x,waypointList[startWaypointIndex-1].position.x);
+                float z=Random.Range(waypointList[startWaypointIndex].position.z,waypointList[startWaypointIndex-1].position.z);
+                startPos=new Vector3(x,0,z);
+                
             }
-            
-
-
-
-            
             vehicleList.Add(
                 new Vehicle(
                     i,

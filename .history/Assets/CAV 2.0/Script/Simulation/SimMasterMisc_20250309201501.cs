@@ -408,7 +408,7 @@ private void ResetSimulationState()
         {
             case 0: // All Normal
                 if (NormalSimulationEnabled)
-                    SpawnVehicles(NormalVehicle, VehicleType.NonCAV);
+                    SpawnVehicles(NormalVehicle, VehicleType.Normal);
                 else
                     nextSim = true;
                 break;
@@ -447,7 +447,7 @@ private void ResetSimulationState()
         {
             if (tempList[i].startTime <= timer.GetTimer())
             {
-                GameObject vehiclePrefab = tempList[i].vehicleType == VehicleType.NonCAV
+                GameObject vehiclePrefab = tempList[i].vehicleType == VehicleType.Normal
                     ? NormalVehicle
                     : CAVehicle;
 

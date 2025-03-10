@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using TrafficSimulation;
 using static Navigation;
-using System.Security.Cryptography.X509Certificates;
 
 public class SimConfig : MonoBehaviour
 {
@@ -48,7 +47,6 @@ public class SimConfig : MonoBehaviour
         public int startTime;
         public Vector3 startPos;
         public Vector3 endPos;
-        public Waypoint wdir;
 
         public Vehicle(int vehicle_id, string vehicleName, VehicleType vehicleType, int startTime, Vector3 startPos, Vector3 endPos,Waypoint wdir)
         {
@@ -104,14 +102,6 @@ public class SimConfig : MonoBehaviour
             this.previousWaypoint = previous;
             this.position = position;
         }
-        public bool hasNext()
-        {
-            return nextWaypoint != null;
-        }
-        public bool hasPrevious()
-        {
-            return previousWaypoint != null;
-        }
 
     }
 
@@ -142,39 +132,14 @@ public class SimConfig : MonoBehaviour
         // Configure the cars
         for (int i = 0; i < num_cars; i++)
         {
-            // Randomly select a start waypoint
-            int startWaypointIndex = Random.Range(0, waypointList.Count);
-            Vector3 startPos = Vector3.zero;
-            Waypoint dirPoint;
-            Segment startSegment = waypointList[startWaypointIndex].segment;
-
-            // If the start waypoint is not the last waypoint in the segment, set the start position to the start waypoint and the direction to the next waypoint
-            if(waypointList[startWaypointIndex].hasNext())
-            {
-                startPos = waypointList[startWaypointIndex].position;
-                dirPoint = waypointList[startWaypointIndex].nextWaypoint;
-            }else if(waypointList[startWaypointIndex].hasPrevious())
-            {
-                startPos = waypointList[startWaypointIndex].previousWaypoint.transform.position;
-                dirPoint = waypointList[startWaypointIndex].currentWaypoint;
-            }else{//Should not bee needed
-                dirPoint = waypointList[startWaypointIndex].currentWaypoint;
-                startPos = waypointList[startWaypointIndex].position-Vector3.forward;
-            }
-            
-
-
-
-            
             vehicleList.Add(
                 new Vehicle(
                     i,
                     "car" + i,
                     (VehicleType)Random.Range(0, System.Enum.GetValues(typeof(VehicleType)).Length),
                     Random.Range(1, 100), // Example startTime
-                    startPos,
                     waypointList[Random.Range(0, waypointList.Count)].position,
-                    dirPoint
+                    waypointList[Random.Range(0, waypointList.Count)].position
                 )
             );
 

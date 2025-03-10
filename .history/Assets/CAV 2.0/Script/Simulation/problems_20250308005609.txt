@@ -1,0 +1,9 @@
+## Problems:
+- timer issue
+- the vehciles should not have the same spawn time,  create a constantt minimum buffer time between spawns in the configuration file
+- The cube sometimes still spawns the orientation off
+- vehicle destroy on destination
+- timer per vehicle
+- sharing when enter and exit road
+    - avg speed
+    - 

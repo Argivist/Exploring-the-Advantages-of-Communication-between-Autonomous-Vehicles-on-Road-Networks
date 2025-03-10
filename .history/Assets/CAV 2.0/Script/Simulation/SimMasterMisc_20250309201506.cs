@@ -447,7 +447,7 @@ private void ResetSimulationState()
         {
             if (tempList[i].startTime <= timer.GetTimer())
             {
-                GameObject vehiclePrefab = tempList[i].vehicleType == VehicleType.NonCAV
+                GameObject vehiclePrefab = tempList[i].vehicleType == VehicleType.Normal
                     ? NormalVehicle
                     : CAVehicle;
 

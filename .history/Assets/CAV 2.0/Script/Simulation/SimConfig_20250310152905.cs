@@ -157,7 +157,7 @@ public class SimConfig : MonoBehaviour
             {
                 startPos = waypointList[startWaypointIndex].previousWaypoint.transform.position;
                 dirPoint = waypointList[startWaypointIndex].currentWaypoint;
-            }else{//Should not bee needed
+            }else{
                 dirPoint = waypointList[startWaypointIndex].currentWaypoint;
                 startPos = waypointList[startWaypointIndex].position-Vector3.forward;
             }

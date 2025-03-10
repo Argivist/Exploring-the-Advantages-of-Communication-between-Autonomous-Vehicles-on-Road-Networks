@@ -34,7 +34,6 @@ public class VehicleSpawnerObject : MonoBehaviour
 
         // Start coroutine for spawning vehicles
         StartCoroutine(SpawnVehicles());
-        Destroy(gameObject);
     }
 
     void direction()

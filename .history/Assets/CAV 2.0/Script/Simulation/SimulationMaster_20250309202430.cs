@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using TrafficSimulation;
 using UnityEngine;
 using static Navigation;
 
@@ -276,9 +275,7 @@ public class SimulationMaster : MonoBehaviour
     private void InstantiateAndTrackVehicle(GameObject prefab, SimConfig.Vehicle vehicleData)
     {
         GameObject vehicle = Instantiate(prefab, vehicleData.startPos, Quaternion.identity);
-        vehicle.name=vehicleData.vehicleName;
         vehicle.SetActive(true);
-        vehicle.GetComponent<VehicleSpawnerObject>().WayDir = vehicleData.wdir;
         if(vehicleData.vehicleType == VehicleType.CAV)
         {
             vehicle.GetComponent<VehicleSpawnerObject>().type = Navigation.VehicleType.CAV;

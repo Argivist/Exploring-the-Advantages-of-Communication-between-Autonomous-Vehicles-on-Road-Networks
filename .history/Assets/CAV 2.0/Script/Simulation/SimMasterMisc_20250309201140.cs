@@ -176,7 +176,7 @@
 //                         {
 //                             if (TempList[i].startTime <= timer.GetTimer())
 //                             {
-//                                 if (TempList[i].vehicleType == VehicleType.Normal)
+//                                 if (TempList[i].vehicleType == SimConfig.VehicleType.Normal)
 //                                 {
 //                                     GameObject vehicle = Instantiate(NormalVehicle, TempList[i].startPos, Quaternion.identity);
 //                                     // vehicle.GetComponent<Vehicle>().SetVehicle(TempList[i].Speed, TempList[i].EndPos, TempList[i].StartTime, TempList[i].EndTime);
@@ -184,7 +184,7 @@
 //                                     NumSpawnedVehicles++;
 //                                     TempList.RemoveAt(i);
 //                                 }
-//                                 else if (TempList[i].vehicleType == VehicleType.CAV)
+//                                 else if (TempList[i].vehicleType == SimConfig.VehicleType.CAV)
 //                                 {
 //                                     GameObject vehicle = Instantiate(CAVehicle, TempList[i].startPos, Quaternion.identity);
 //                                     // vehicle.GetComponent<Vehicle>().SetVehicle(TempList[i].Speed, TempList[i].EndPos, TempList[i].StartTime, TempList[i].EndTime);
@@ -239,7 +239,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static Navigation;
 
 public class SimulationMasterMisc : MonoBehaviour
 {
@@ -408,14 +407,14 @@ private void ResetSimulationState()
         {
             case 0: // All Normal
                 if (NormalSimulationEnabled)
-                    SpawnVehicles(NormalVehicle, VehicleType.NonCAV);
+                    SpawnVehicles(NormalVehicle, SimConfig.VehicleType.Normal);
                 else
                     nextSim = true;
                 break;
 
             case 1: // All CAV
                 if (CAVSimulationEnabled)
-                    SpawnVehicles(CAVehicle, VehicleType.CAV);
+                    SpawnVehicles(CAVehicle, SimConfig.VehicleType.CAV);
                 else
                     nextSim = true;
                 break;
@@ -447,7 +446,7 @@ private void ResetSimulationState()
         {
             if (tempList[i].startTime <= timer.GetTimer())
             {
-                GameObject vehiclePrefab = tempList[i].vehicleType == VehicleType.NonCAV
+                GameObject vehiclePrefab = tempList[i].vehicleType == SimConfig.VehicleType.Normal
                     ? NormalVehicle
                     : CAVehicle;
 
