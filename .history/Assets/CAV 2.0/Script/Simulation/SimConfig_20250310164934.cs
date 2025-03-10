@@ -178,7 +178,7 @@ public class SimConfig : MonoBehaviour
                     startPos,
                     waypointList[destSegment].position,
                     dirPoint,
-                    waypointList[destSegment].segment
+
                 )
             );
 

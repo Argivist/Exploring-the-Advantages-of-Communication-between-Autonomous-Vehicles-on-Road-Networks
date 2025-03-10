@@ -7,7 +7,7 @@ using static Navigation;
 public class SimulationMaster : MonoBehaviour
 {
 
-
+    VConfig vehicleConfig;
     public SimConfig SimConfig;
     public bool NormalSimulationEnabled;
     public bool CAVSimulationEnabled;
@@ -166,8 +166,7 @@ public void UpdateConfig(string carname)
         int time = (int)Time.time;
         // vehicleConfig.UpdateTTD(carname,"CAV",time);
 
-        // if (NumDestroyedVehicles == vehicleConfig.num_cars)
-        if (NumDestroyedVehicles == SimConfig.vehicleList.Count)
+        if (NumDestroyedVehicles == vehicleConfig.num_cars)
         {
             Debug.Log("All vehicles destroyed. Experiment complete.");
             // Time.timeScale = 0; // Stop timer

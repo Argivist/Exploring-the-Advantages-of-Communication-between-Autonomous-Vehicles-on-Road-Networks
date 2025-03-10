@@ -24,8 +24,6 @@ public class Navigation : MonoBehaviour
     public int ID;
 
     [Header("Navigation")]
-    public float DistanceToDestination;
-    public float destinationThreshold=1;
     public List<int> path;
     // public List<Segment> SegmentPathList;//Temporary remove when navigator proved to work
     public Segment CurrentSegment;
@@ -43,8 +41,6 @@ public class Navigation : MonoBehaviour
         NonCAV
     }
     public VehicleType vehicleType;
-
-    
 
     private void Start()
     {
@@ -70,10 +66,6 @@ public class Navigation : MonoBehaviour
         // pathGenerated=true;
         pathGenerated=true;
 
-    }
-
-    void Update(){
-        DistanceToDestination=Vector3.Distance(Vehicle.transform.position, dest);
     }
 
     public void UpdateCurrentSegment(){
@@ -110,7 +102,7 @@ public class Navigation : MonoBehaviour
     }
 
     public bool destinationReached(Vector3 pos){
-        if(Vector3.Distance(pos, dest)<destinationThreshold){
+        if(Vector3.Distance(pos, dest)<0.1){
             return true;
         }else{
             return false;
@@ -151,6 +143,6 @@ public class Navigation : MonoBehaviour
     }
 
 
-
+    
 
 }

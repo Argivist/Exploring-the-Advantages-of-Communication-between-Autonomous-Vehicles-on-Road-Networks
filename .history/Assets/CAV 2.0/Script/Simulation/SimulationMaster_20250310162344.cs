@@ -159,23 +159,7 @@ public class SimulationMaster : MonoBehaviour
 
 
     }
-public void UpdateConfig(string carname)
-    {
-        NumDestroyedVehicles++;
-        //convert time to seconds and int
-        int time = (int)Time.time;
-        // vehicleConfig.UpdateTTD(carname,"CAV",time);
 
-        // if (NumDestroyedVehicles == vehicleConfig.num_cars)
-        if (NumDestroyedVehicles == SimConfig.vehicleList.Count)
-        {
-            Debug.Log("All vehicles destroyed. Experiment complete.");
-            // Time.timeScale = 0; // Stop timer
-            //find and destroy this spawner
-            // Destroy(GameObject.Find(this.name));
-        }
-
-    }
 
     private void RunCurrentSimulation()
     {
@@ -293,7 +277,7 @@ public void UpdateConfig(string carname)
     {
         GameObject vehicle = Instantiate(prefab, vehicleData.startPos, Quaternion.identity);
         vehicle.name=vehicleData.vehicleName;
-        vehicle.GetComponent<VehicleSpawnerObject>().dest=vehicleData.endPos;
+        vehicle.dest=vehicleData.endPos;
         vehicle.SetActive(true);
         vehicle.GetComponent<VehicleSpawnerObject>().WayDir = vehicleData.wdir;
         if(vehicleData.vehicleType == VehicleType.CAV)
@@ -304,7 +288,6 @@ public void UpdateConfig(string carname)
         {
             vehicle.GetComponent<VehicleSpawnerObject>().type = Navigation.VehicleType.NonCAV;
         }
-        vehicle.GetComponent<VehicleSpawnerObject>().destSegment = vehicleData.destSegment;
         // Uncomment and implement as needed:
         // vehicle.GetComponent<Vehicle>().SetVehicle(vehicleData.Speed, vehicleData.EndPos, vehicleData.StartTime, vehicleData.EndTime);
         // SpawnedVehicles.Add(vehicle);

@@ -25,7 +25,6 @@ public class Navigation : MonoBehaviour
 
     [Header("Navigation")]
     public float DistanceToDestination;
-    public float destinationThreshold=1;
     public List<int> path;
     // public List<Segment> SegmentPathList;//Temporary remove when navigator proved to work
     public Segment CurrentSegment;
@@ -44,7 +43,7 @@ public class Navigation : MonoBehaviour
     }
     public VehicleType vehicleType;
 
-    
+    public float destinationThreshold { get; private set; }
 
     private void Start()
     {

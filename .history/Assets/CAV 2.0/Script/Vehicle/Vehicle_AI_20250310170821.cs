@@ -125,9 +125,7 @@ namespace TrafficSimulation {
                 futureTarget.waypoint = currentTarget.waypoint + 1;
                 if(futureTarget.waypoint >= trafficSystem.segments[currentTarget.segment].waypoints.Count){
                     futureTarget.waypoint = 0;
-                    if(NavigationComponent.path.Count>1){
                     futureTarget.segment = NavigationComponent.path[1];//GetNextSegmentId(); Not necessary
-                    }
                 }
             }
         }

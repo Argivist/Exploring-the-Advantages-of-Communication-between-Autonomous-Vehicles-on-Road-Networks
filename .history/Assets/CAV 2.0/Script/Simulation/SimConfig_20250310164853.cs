@@ -49,9 +49,9 @@ public class SimConfig : MonoBehaviour
         public Vector3 startPos;
         public Vector3 endPos;
         public Waypoint wdir;
-        public Segment destSegment;
+        public int destSegment;
 
-        public Vehicle(int vehicle_id, string vehicleName, VehicleType vehicleType, int startTime, Vector3 startPos, Vector3 endPos,Waypoint wdir, Segment destSegment)
+        public Vehicle(int vehicle_id, string vehicleName, VehicleType vehicleType, int startTime, Vector3 startPos, Vector3 endPos,Waypoint wdir, int destSegment = 0)
         {
             this.vehicleId = vehicle_id;
             this.vehicleName = vehicleName;
@@ -176,9 +176,9 @@ public class SimConfig : MonoBehaviour
                     (VehicleType)Random.Range(0, System.Enum.GetValues(typeof(VehicleType)).Length),
                     Random.Range(1, 100), // Example startTime
                     startPos,
-                    waypointList[destSegment].position,
+                    waypointList[].position,
                     dirPoint,
-                    waypointList[destSegment].segment
+
                 )
             );
 

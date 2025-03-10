@@ -89,9 +89,9 @@ public class V_Spawner : MonoBehaviour
         if (destroyedvehilcestotal == vehicleConfig.num_cars)
         {
             Debug.Log("All vehicles destroyed. Experiment complete.");
-            // Time.timeScale = 0; // Stop timer
+            Time.timeScale = 0; // Stop timer
             //find and destroy this spawner
-            // Destroy(GameObject.Find(this.name));
+            Destroy(GameObject.Find(this.name));
         }
 
     }

@@ -91,15 +91,14 @@ namespace TrafficSimulation {
             WaypointChecker();
             MoveVehicle();
             
-            // if (Time.time > Random.Range(100, 300))
-            if(NavigationComponent.destinationReached(this.transform.position)){
+            if (Time.time > Random.Range(100, 300))
+            {
                 DestroyVehicle();
             }
-            
         }
         public void DestroyVehicle(){
-            SimulationMaster sm = GameObject.FindObjectOfType<SimulationMaster>();
-            sm.UpdateConfig(this.gameObject.name);
+            V_Spawner spawner = GameObject.FindObjectOfType<V_Spawner>();
+            spawner.UpdateConfig(this.gameObject.name);
             Destroy(this.gameObject);
         }
 
@@ -125,9 +124,7 @@ namespace TrafficSimulation {
                 futureTarget.waypoint = currentTarget.waypoint + 1;
                 if(futureTarget.waypoint >= trafficSystem.segments[currentTarget.segment].waypoints.Count){
                     futureTarget.waypoint = 0;
-                    if(NavigationComponent.path.Count>1){
                     futureTarget.segment = NavigationComponent.path[1];//GetNextSegmentId(); Not necessary
-                    }
                 }
             }
         }
@@ -356,11 +353,7 @@ namespace TrafficSimulation {
         public Target getNextTarget(){
             return futureTarget;
         }
-
-
     }
-
-
 }
 
 

@@ -24,8 +24,8 @@ public class Navigation : MonoBehaviour
     public int ID;
 
     [Header("Navigation")]
-    public float DistanceToDestination;
-    public float destinationThreshold=1;
+    public readonly float DistanceToDestination;
+    public float destinationThreshold;
     public List<int> path;
     // public List<Segment> SegmentPathList;//Temporary remove when navigator proved to work
     public Segment CurrentSegment;

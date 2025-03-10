@@ -10,7 +10,6 @@ public class VehicleSpawnerObject : MonoBehaviour
     [Header("Vehicle Object")]
     public GameObject vehicleObject;
     public Vector3 dest;
-    public Segment destSegment;
 
     [Header("SpawnInfo")]
     public Timer t;
@@ -66,8 +65,6 @@ public class VehicleSpawnerObject : MonoBehaviour
                 d.id = id;
                 n.vehicleType = type;
                 n.DestinationSegment = endSegment;
-                n.dest = dest;
-                n.DestinationSegment = destSegment;
                 cm.id = id;
             }
 

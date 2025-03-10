@@ -159,23 +159,7 @@ public class SimulationMaster : MonoBehaviour
 
 
     }
-public void UpdateConfig(string carname)
-    {
-        NumDestroyedVehicles++;
-        //convert time to seconds and int
-        int time = (int)Time.time;
-        // vehicleConfig.UpdateTTD(carname,"CAV",time);
 
-        // if (NumDestroyedVehicles == vehicleConfig.num_cars)
-        if (NumDestroyedVehicles == SimConfig.vehicleList.Count)
-        {
-            Debug.Log("All vehicles destroyed. Experiment complete.");
-            // Time.timeScale = 0; // Stop timer
-            //find and destroy this spawner
-            // Destroy(GameObject.Find(this.name));
-        }
-
-    }
 
     private void RunCurrentSimulation()
     {

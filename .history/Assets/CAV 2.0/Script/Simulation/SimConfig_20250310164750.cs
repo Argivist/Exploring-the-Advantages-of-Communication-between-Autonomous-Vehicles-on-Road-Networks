@@ -49,9 +49,9 @@ public class SimConfig : MonoBehaviour
         public Vector3 startPos;
         public Vector3 endPos;
         public Waypoint wdir;
-        public Segment destSegment;
+        public int destSegment;
 
-        public Vehicle(int vehicle_id, string vehicleName, VehicleType vehicleType, int startTime, Vector3 startPos, Vector3 endPos,Waypoint wdir, Segment destSegment)
+        public Vehicle(int vehicle_id, string vehicleName, VehicleType vehicleType, int startTime, Vector3 startPos, Vector3 endPos,Waypoint wdir, int destSegment = 0)
         {
             this.vehicleId = vehicle_id;
             this.vehicleName = vehicleName;
@@ -149,7 +149,6 @@ public class SimConfig : MonoBehaviour
             Vector3 startPos = Vector3.zero;
             Waypoint dirPoint;
             Segment startSegment = waypointList[startWaypointIndex].segment;
-            int destSegment = Random.Range(0, trafficSystem.segments.Count);
 
             // If the start waypoint is not the last waypoint in the segment, set the start position to the start waypoint and the direction to the next waypoint
             if(waypointList[startWaypointIndex].hasNext())
@@ -176,9 +175,8 @@ public class SimConfig : MonoBehaviour
                     (VehicleType)Random.Range(0, System.Enum.GetValues(typeof(VehicleType)).Length),
                     Random.Range(1, 100), // Example startTime
                     startPos,
-                    waypointList[destSegment].position,
-                    dirPoint,
-                    waypointList[destSegment].segment
+                    waypointList[Random.Range(0, waypointList.Count)].position,
+                    dirPoint
                 )
             );
 

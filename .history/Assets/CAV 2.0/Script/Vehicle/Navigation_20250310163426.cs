@@ -24,8 +24,6 @@ public class Navigation : MonoBehaviour
     public int ID;
 
     [Header("Navigation")]
-    public float DistanceToDestination;
-    public float destinationThreshold=1;
     public List<int> path;
     // public List<Segment> SegmentPathList;//Temporary remove when navigator proved to work
     public Segment CurrentSegment;
@@ -43,8 +41,6 @@ public class Navigation : MonoBehaviour
         NonCAV
     }
     public VehicleType vehicleType;
-
-    
 
     private void Start()
     {
@@ -72,10 +68,6 @@ public class Navigation : MonoBehaviour
 
     }
 
-    void Update(){
-        DistanceToDestination=Vector3.Distance(Vehicle.transform.position, dest);
-    }
-
     public void UpdateCurrentSegment(){
         CurrentSegment=trafficSystem.segments[Vehicle_AI.getCurrentTarget().segment];
         CurrentSegmentCost=CurrentSegment.cost;
@@ -90,7 +82,7 @@ public class Navigation : MonoBehaviour
             path=dynamicAStar.FindPath(CurrentSegment.id, DestinationSegment.id);
             Debug.Log("Dynamic A* path generated");
             // path.Remove(0);
-            // if (path.Count > 0) path.RemoveAt(0);
+            if (path.Count > 0) path.RemoveAt(0);
 
         }
 
@@ -110,7 +102,7 @@ public class Navigation : MonoBehaviour
     }
 
     public bool destinationReached(Vector3 pos){
-        if(Vector3.Distance(pos, dest)<destinationThreshold){
+        if(Vector3.Distance(pos, dest)<0.1){
             return true;
         }else{
             return false;
@@ -151,6 +143,6 @@ public class Navigation : MonoBehaviour
     }
 
 
-
+    
 
 }

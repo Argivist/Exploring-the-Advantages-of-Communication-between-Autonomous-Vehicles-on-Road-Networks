@@ -67,7 +67,7 @@ public class VehicleSpawnerObject : MonoBehaviour
                 n.vehicleType = type;
                 n.DestinationSegment = endSegment;
                 n.dest = dest;
-                n.DestinationSegment = destSegment;
+                n.
                 cm.id = id;
             }
 
