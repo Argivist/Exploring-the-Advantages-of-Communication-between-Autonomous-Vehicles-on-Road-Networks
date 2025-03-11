@@ -1,0 +1,43 @@
+using System.Collections;
+using System.Collections.Generic;
+using TrafficSimulation;
+using UnityEngine;
+using static SimConfig;
+
+public class DataGatherer : MonoBehaviour
+{
+    struct VehicleObject{
+        Vehicle vehicle;
+        int time;
+    }
+
+    [System.Serializable]
+    public class VehicleLog
+    {
+        public string vehicleName;
+        public int simulation;
+        public int logTime;
+        public Vector3 logPosition;
+        public Segment logSegment;
+        public LogAction logAction;
+        public float logSpeed;
+        public float logAcceleration;
+
+        public VehicleLog(string vehicleName, int simulation, int logTime, Vector3 logPosition, Segment logSegment, LogAction logAction, float logSpeed, float logAcceleration)
+        {
+            this.vehicleName = vehicleName;
+            this.simulation = simulation;
+            this.logTime = logTime;
+            this.logPosition = logPosition;
+            this.logSegment = logSegment;
+            this.logAction = logAction;
+            this.logSpeed = logSpeed;
+            this.logAcceleration = logAcceleration;
+        }
+    }
+    public List<VehicleObject> Vlist;
+    public List<VehicleLog> vehicleLogList = new List<VehicleLog>();
+    void Awake(){
+        
+    }
+}

@@ -1825,6 +1825,7 @@ MonoBehaviour:
   slowDownThresh: 5
   vehicleStatus: 0
   NavigationComponent: {fileID: 162042533}
+  StopWatch: {fileID: 0}
 --- !u!114 &162042532
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1854,8 +1855,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Vehicle_AI: {fileID: 162042531}
   Vehicle: {fileID: 162042530}
+  dest: {x: 0, y: 0, z: 0}
   trafficSystem: {fileID: 1938862188}
   ID: -1
+  DistanceToDestination: 0
+  destinationThreshold: 1
   path: 
   CurrentSegment: {fileID: 0}
   CurrentSegmentCost: 0
@@ -1887,6 +1891,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc70133da9f57494bac6fed86da1dc85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &162042536
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 162042530}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d69d594ac1fa10842a60b158611f6158, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  time: 0
 --- !u!1001 &162841362
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8282,6 +8299,7 @@ MonoBehaviour:
   slowDownThresh: 4
   vehicleStatus: 0
   NavigationComponent: {fileID: 0}
+  StopWatch: {fileID: 0}
 --- !u!114 &616570991
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8296,8 +8314,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Vehicle_AI: {fileID: 0}
   Vehicle: {fileID: 0}
+  dest: {x: 0, y: 0, z: 0}
   trafficSystem: {fileID: 1938862188}
   ID: 0
+  DistanceToDestination: 0
+  destinationThreshold: 1
   path: 
   CurrentSegment: {fileID: 0}
   CurrentSegmentCost: 0
@@ -11943,6 +11964,55 @@ Transform:
   m_Father: {fileID: 458574990}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &895577968
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 895577969}
+  - component: {fileID: 895577970}
+  m_Layer: 0
+  m_Name: Simulator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &895577969
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 895577968}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -11.736944, y: 8.429601, z: -24.624428}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 20
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &895577970
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 895577968}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf77e397b194e784e9c32de8b0818858, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Location: default
+  SimGroups: 0a000000140000001e000000
+  sc: {fileID: 0}
+  sm: {fileID: 0}
+  dh: {fileID: 0}
+  group_index: 0
 --- !u!1 &900557059
 GameObject:
   m_ObjectHideFlags: 0
@@ -12787,7 +12857,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &961653604
 Transform:
   m_ObjectHideFlags: 0
@@ -12877,7 +12947,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &971882234
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -12968,6 +13038,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   vehicleObject: {fileID: 162042530}
+  dest: {x: 0, y: 0, z: 0}
+  destSegment: {fileID: 0}
   t: {fileID: 0}
   id: -1
   type: 0
@@ -13590,8 +13662,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Vehicle_AI: {fileID: 0}
   Vehicle: {fileID: 0}
+  dest: {x: 0, y: 0, z: 0}
   trafficSystem: {fileID: 1938862188}
   ID: 0
+  DistanceToDestination: 0
+  destinationThreshold: 1
   path: 
   CurrentSegment: {fileID: 0}
   CurrentSegmentCost: 0
@@ -13611,6 +13686,50 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   communicationSystem: {fileID: 1745337696}
   id: 0
+--- !u!1 &1006601716
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1006601718}
+  - component: {fileID: 1006601717}
+  m_Layer: 0
+  m_Name: StopWatch
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!114 &1006601717
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1006601716}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d69d594ac1fa10842a60b158611f6158, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  time: 0
+--- !u!4 &1006601718
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1006601716}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 33.093727, y: -4.0093174, z: -17.534729}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 19
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1010298804
 GameObject:
   m_ObjectHideFlags: 0
@@ -21801,8 +21920,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Vehicle_AI: {fileID: 0}
   Vehicle: {fileID: 0}
+  dest: {x: 0, y: 0, z: 0}
   trafficSystem: {fileID: 1938862188}
   ID: 0
+  DistanceToDestination: 0
+  destinationThreshold: 1
   path: 
   CurrentSegment: {fileID: 0}
   CurrentSegmentCost: 0
@@ -22404,7 +22526,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1745337696
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -34343,7 +34465,7 @@ PrefabInstance:
     - target: {fileID: 2176754788707491997, guid: bdc851e5710c467408eae52b5f7b4b50,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2176754788707491998, guid: bdc851e5710c467408eae52b5f7b4b50,
         type: 3}
@@ -45956,7 +46078,7 @@ PrefabInstance:
     - target: {fileID: 9112755985478719806, guid: 5fc93668d32e2cb4f8d7b1a5cf9e3e3d,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9112755985478719807, guid: 5fc93668d32e2cb4f8d7b1a5cf9e3e3d,
         type: 3}
