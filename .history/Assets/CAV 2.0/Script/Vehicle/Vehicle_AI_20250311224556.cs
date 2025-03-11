@@ -98,18 +98,8 @@ namespace TrafficSimulation {
             
             // if (Time.time > Random.Range(100, 300))
             if(NavigationComponent.destinationReached(this.transform.position)){
-                try
-                {
-                    DestroyVehicle();
-                }
-                catch (System.Exception)
-                {
-                    DestroyVehicle_();
-                    
-                    throw;
-                }
-                
-                
+
+                DestroyVehicle();
             }
             
         }
@@ -124,7 +114,7 @@ namespace TrafficSimulation {
             int time=StopWatch.getTime();
             StopWatch.stopTimer();
             SimulationMaster_ sm = GameObject.FindObjectOfType<SimulationMaster_>();
-            sm.VehicleDestroyed(GetComponent<Description>().id,time);
+            sm.VehicleDestroyed(this.gameObject.name,time);
             Destroy(this.gameObject);
     
         }

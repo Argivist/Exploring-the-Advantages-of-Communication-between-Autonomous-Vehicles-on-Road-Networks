@@ -12007,12 +12007,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf77e397b194e784e9c32de8b0818858, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Location: default
-  SimGroups: 0a000000140000001e000000
+  Location: defd
+  SimGroups: 050000000600000007000000
   sc: {fileID: 0}
   sm: {fileID: 0}
   dh: {fileID: 0}
+  sw: {fileID: 0}
   group_index: 0
+  Vehicle: {fileID: 971882233}
 --- !u!1 &900557059
 GameObject:
   m_ObjectHideFlags: 0

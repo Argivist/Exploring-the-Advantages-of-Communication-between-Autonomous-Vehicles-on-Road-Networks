@@ -27,7 +27,6 @@ public class SimGroupAutomate : MonoBehaviour
     public GameObject Vehicle;
 
     void Start(){
-        
         StartSim(group_index);
     }
 
@@ -54,7 +53,7 @@ public class SimGroupAutomate : MonoBehaviour
 
     public void EndOfSimulation(){
         //TODO - Get data processor to process data and wait for complete
-        dh.ProcessData();
+
         //delay until data is processed
         // while(!dh.isDataProcessed){
         //     //delay function for a second
@@ -62,7 +61,9 @@ public class SimGroupAutomate : MonoBehaviour
         StartCoroutine(WaitForDataProcessing());
         // End of simulation
         // Destroy all the clones
-        Destroy(SimObject);
+        Destroy(dh.gameObject);
+        Destroy(sc.gameObject);
+        Destroy(sm.gameObject);
 
         // if there are more simulations to run
         if(group_index<SimGroups.Count-1){

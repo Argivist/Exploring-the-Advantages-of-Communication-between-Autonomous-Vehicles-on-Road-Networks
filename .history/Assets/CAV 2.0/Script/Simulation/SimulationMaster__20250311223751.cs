@@ -50,14 +50,12 @@ public class SimulationMaster_ : MonoBehaviour
     {
         if (sc == null)
         {
-            // Debug.Log("SimulationConfigurer is missing. Trying to find it in the scene...");
-            // sc = FindObjectOfType<SimulationConfigurer>();
-            // return false;
-            sc=FindObjectOfType<SimulationConfigurer>();
+            sc = FindObjectOfType<SimulationConfigurer>();
+            return false;
         }
         // gameObject.AddComponent<StopWatch>();
         sw = GetComponent<StopWatch>();
-        if (sw == null)
+                if (sw == null)
         {
             Debug.LogError("Timer component is missing. Please add it to the GameObject.");
             return false;
@@ -164,11 +162,10 @@ public class SimulationMaster_ : MonoBehaviour
     }
 
 
-    public void VehicleDestroyed( int id, int time)
+    public void VehicleDestroyed(string carname, int id, int time)
     {
         NumDestroyedVehicles++;
         dh.recordTime(id, time, currSim);
-        Debug.Log("Vehicle " + id + " destroyed at time " + time + " in simulation " + currSim);
 
         if (NumDestroyedVehicles == sc.vehicleList.Count)
         {
@@ -266,7 +263,6 @@ private void SpawnMixedVehicles()
         vehicle.GetComponent<VehicleSpawnerObject>().dest=vehicleData.endPos;
         vehicle.SetActive(true);
         vehicle.GetComponent<VehicleSpawnerObject>().WayDir = vehicleData.wdir;
-        vehicle.GetComponent<VehicleSpawnerObject>().id = vehicleData.vehicleId;
         if(vehicleData.vehicleType == VehicleType.CAV)
         {
             vehicle.GetComponent<VehicleSpawnerObject>().type = VehicleType.CAV;

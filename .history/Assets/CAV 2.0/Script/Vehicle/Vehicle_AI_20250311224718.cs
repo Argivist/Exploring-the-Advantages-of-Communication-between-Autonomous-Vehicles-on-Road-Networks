@@ -98,18 +98,8 @@ namespace TrafficSimulation {
             
             // if (Time.time > Random.Range(100, 300))
             if(NavigationComponent.destinationReached(this.transform.position)){
-                try
-                {
-                    DestroyVehicle();
-                }
-                catch (System.Exception)
-                {
-                    DestroyVehicle_();
-                    
-                    throw;
-                }
-                
-                
+
+                DestroyVehicle();
             }
             
         }

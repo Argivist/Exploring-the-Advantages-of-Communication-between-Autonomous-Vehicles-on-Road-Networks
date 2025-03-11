@@ -64,7 +64,7 @@ public class VehicleSpawnerObject : MonoBehaviour
                 CommunicationAgent cm = vClone.GetComponent<CommunicationAgent>();
 
                 d.id = id;
-                n.ID = id;
+                n.id = id;
                 n.vehicleType = type;
                 n.DestinationSegment = endSegment;
                 n.dest = dest;

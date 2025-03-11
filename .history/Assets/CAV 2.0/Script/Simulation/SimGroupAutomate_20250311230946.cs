@@ -27,7 +27,6 @@ public class SimGroupAutomate : MonoBehaviour
     public GameObject Vehicle;
 
     void Start(){
-        
         StartSim(group_index);
     }
 
@@ -54,7 +53,7 @@ public class SimGroupAutomate : MonoBehaviour
 
     public void EndOfSimulation(){
         //TODO - Get data processor to process data and wait for complete
-        dh.ProcessData();
+        dh
         //delay until data is processed
         // while(!dh.isDataProcessed){
         //     //delay function for a second

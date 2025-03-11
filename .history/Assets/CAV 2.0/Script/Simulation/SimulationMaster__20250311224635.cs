@@ -168,7 +168,6 @@ public class SimulationMaster_ : MonoBehaviour
     {
         NumDestroyedVehicles++;
         dh.recordTime(id, time, currSim);
-        Debug.Log("Vehicle " + id + " destroyed at time " + time + " in simulation " + currSim);
 
         if (NumDestroyedVehicles == sc.vehicleList.Count)
         {
@@ -266,7 +265,6 @@ private void SpawnMixedVehicles()
         vehicle.GetComponent<VehicleSpawnerObject>().dest=vehicleData.endPos;
         vehicle.SetActive(true);
         vehicle.GetComponent<VehicleSpawnerObject>().WayDir = vehicleData.wdir;
-        vehicle.GetComponent<VehicleSpawnerObject>().id = vehicleData.vehicleId;
         if(vehicleData.vehicleType == VehicleType.CAV)
         {
             vehicle.GetComponent<VehicleSpawnerObject>().type = VehicleType.CAV;

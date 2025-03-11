@@ -266,7 +266,6 @@ private void SpawnMixedVehicles()
         vehicle.GetComponent<VehicleSpawnerObject>().dest=vehicleData.endPos;
         vehicle.SetActive(true);
         vehicle.GetComponent<VehicleSpawnerObject>().WayDir = vehicleData.wdir;
-        vehicle.GetComponent<VehicleSpawnerObject>().id = vehicleData.vehicleId;
         if(vehicleData.vehicleType == VehicleType.CAV)
         {
             vehicle.GetComponent<VehicleSpawnerObject>().type = VehicleType.CAV;

@@ -27,7 +27,6 @@ public class SimGroupAutomate : MonoBehaviour
     public GameObject Vehicle;
 
     void Start(){
-        
         StartSim(group_index);
     }
 

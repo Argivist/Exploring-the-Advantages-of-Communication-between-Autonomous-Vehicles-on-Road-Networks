@@ -40,6 +40,7 @@ public class SimulationMaster_ : MonoBehaviour
 
     private void Start()
     {
+        
         if (!ValidateComponents()) return;
 
         StartCoroutine(CheckConfigComplete());
@@ -50,14 +51,12 @@ public class SimulationMaster_ : MonoBehaviour
     {
         if (sc == null)
         {
-            // Debug.Log("SimulationConfigurer is missing. Trying to find it in the scene...");
-            // sc = FindObjectOfType<SimulationConfigurer>();
-            // return false;
-            sc=FindObjectOfType<SimulationConfigurer>();
+            sc = FindObjectOfType<SimulationConfigurer>();
+            return false;
         }
-        // gameObject.AddComponent<StopWatch>();
-        sw = GetComponent<StopWatch>();
-        if (sw == null)
+        gameObject.AddComponent<StopWatch>();
+        sw = gameObject.GetComponent<StopWatch>();
+                if (sw == null)
         {
             Debug.LogError("Timer component is missing. Please add it to the GameObject.");
             return false;
@@ -67,7 +66,6 @@ public class SimulationMaster_ : MonoBehaviour
     }
     private IEnumerator CheckConfigComplete()
     {
-        Debug.Log("Checking if config is ready...");    
         float timeout = 10f; // Maximum wait time in seconds
         float elapsedTime = 0f;
 
@@ -98,7 +96,7 @@ public class SimulationMaster_ : MonoBehaviour
         Debug.Log("Vehicle list initialized with " + vehicleList.Count + " vehicles.");
 
         // Start timer and mark readiness
-        sw.startTimer();
+        // timer.StartTimer();
         isReady = true;
     }
 
@@ -132,7 +130,7 @@ public class SimulationMaster_ : MonoBehaviour
             nextSim = false;
             Debug.Log("End of all simulations.");
             sga.EndOfSimulation();
-            
+            //perform any post simulation logic here
 
         }
         else
@@ -151,11 +149,8 @@ public class SimulationMaster_ : MonoBehaviour
 
         NumSpawnedVehicles = 0;
         NumDestroyedVehicles = 0;
-        sw.stopTimer();
         sw.resetTimer();
         sw.startTimer();
-        // sw.resetTimer();
-        // sw.startTimer();
 
         // Reinitialize tempList for the current simulation
         tempList = new List<Vehicle>(sc.vehicleList);
@@ -164,11 +159,10 @@ public class SimulationMaster_ : MonoBehaviour
     }
 
 
-    public void VehicleDestroyed( int id, int time)
+    public void VehicleDestroyed(string carname, int id, int time)
     {
         NumDestroyedVehicles++;
         dh.recordTime(id, time, currSim);
-        Debug.Log("Vehicle " + id + " destroyed at time " + time + " in simulation " + currSim);
 
         if (NumDestroyedVehicles == sc.vehicleList.Count)
         {
@@ -210,7 +204,7 @@ public class SimulationMaster_ : MonoBehaviour
                 }
                 else
                 {
-                    // sw.resetTimer();
+                    sw.resetTimer();
                     nextSim = true; // Skip if not enabled
                 }
                 break;
@@ -266,14 +260,13 @@ private void SpawnMixedVehicles()
         vehicle.GetComponent<VehicleSpawnerObject>().dest=vehicleData.endPos;
         vehicle.SetActive(true);
         vehicle.GetComponent<VehicleSpawnerObject>().WayDir = vehicleData.wdir;
-        vehicle.GetComponent<VehicleSpawnerObject>().id = vehicleData.vehicleId;
         if(vehicleData.vehicleType == VehicleType.CAV)
         {
-            vehicle.GetComponent<VehicleSpawnerObject>().type = VehicleType.CAV;
+            vehicle.GetComponent<VehicleSpawnerObject>().type = Navigation.VehicleType.CAV;
         }
         else
         {
-            vehicle.GetComponent<VehicleSpawnerObject>().type = VehicleType.NonCAV;
+            vehicle.GetComponent<VehicleSpawnerObject>().type = Navigation.VehicleType.NonCAV;
         }
         vehicle.GetComponent<VehicleSpawnerObject>().destSegment = vehicleData.destSegment;
         // Uncomment and implement as needed:

@@ -19,6 +19,7 @@ public class SimGroupAutomate : MonoBehaviour
 
 
     GameObject SimObject;//Object for handling simulation
+    GameObject sc_;//Object for handling simulation configuration
 
 
     public int group_index=0;
@@ -27,6 +28,7 @@ public class SimGroupAutomate : MonoBehaviour
     public GameObject Vehicle;
 
     void Start(){
+        sc_=new GameObject("SimulationConfigurer").AddComponent<SimulationConfigurer>();
         
         StartSim(group_index);
     }

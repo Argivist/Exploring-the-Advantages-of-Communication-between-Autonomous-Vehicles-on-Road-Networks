@@ -19,6 +19,7 @@ public class SimGroupAutomate : MonoBehaviour
 
 
     GameObject SimObject;//Object for handling simulation
+    GameObject sc_;//Object for handling simulation configuration
 
 
     public int group_index=0;
@@ -27,7 +28,9 @@ public class SimGroupAutomate : MonoBehaviour
     public GameObject Vehicle;
 
     void Start(){
-        
+        sc_=new GameObject("SimulationConfigurer");
+        sc_.AddComponent<SimulationConfigurer>();
+        sc=sc_.GetComponent<SimulationConfigurer>();
         StartSim(group_index);
     }
 
@@ -37,7 +40,7 @@ public class SimGroupAutomate : MonoBehaviour
         SimObject=new GameObject("Simulation");
         //add the script to the gameobject
         sw=SimObject.AddComponent<StopWatch>();
-        sc=SimObject.AddComponent<SimulationConfigurer>();
+        // sc=SimObject.AddComponent<SimulationConfigurer>();
         sc.VehicleDensity=SimGroups[density];
         sc.trafficSystem=FindObjectOfType<TrafficSystem>();
         sm=SimObject.AddComponent<SimulationMaster_>();

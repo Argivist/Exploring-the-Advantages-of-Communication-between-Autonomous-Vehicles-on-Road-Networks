@@ -15,7 +15,6 @@ public class SimGroupAutomate : MonoBehaviour
     public SimulationMaster_ sm;
 
     public DataHandler dh;
-    public StopWatch sw;
 
 
     GameObject SimObject;//Object for handling simulation
@@ -27,7 +26,6 @@ public class SimGroupAutomate : MonoBehaviour
     public GameObject Vehicle;
 
     void Start(){
-        
         StartSim(group_index);
     }
 
@@ -42,7 +40,6 @@ public class SimGroupAutomate : MonoBehaviour
         sc.trafficSystem=FindObjectOfType<TrafficSystem>();
         sm=SimObject.AddComponent<SimulationMaster_>();
         sm.Vehicle=Vehicle;
-        sm.sw=sw;
         sm.sga=this;
         dh=SimObject.AddComponent<DataHandler>();
         dh.location=Location;
@@ -54,15 +51,17 @@ public class SimGroupAutomate : MonoBehaviour
 
     public void EndOfSimulation(){
         //TODO - Get data processor to process data and wait for complete
-        dh.ProcessData();
+
         //delay until data is processed
         // while(!dh.isDataProcessed){
         //     //delay function for a second
         // }
-        StartCoroutine(WaitForDataProcessing());
+
         // End of simulation
         // Destroy all the clones
-        Destroy(SimObject);
+        Destroy(dh.gameObject);
+        Destroy(sc.gameObject);
+        Destroy(sm.gameObject);
 
         // if there are more simulations to run
         if(group_index<SimGroups.Count-1){
@@ -70,14 +69,6 @@ public class SimGroupAutomate : MonoBehaviour
             StartSim(group_index);
         }
     }
-    IEnumerator WaitForDataProcessing()
-{
-    while (!dh.isDataProcessed)
-    {
-        yield return new WaitForSeconds(1f);
-    }
-}
-
 
 
 
