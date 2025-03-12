@@ -36,21 +36,12 @@ public class VehicleData
         List<string[]> data = new List<string[]>();
         if (time_spent.Count == 0)
         {
-            data.Add(new string[] { id.ToString(), StartPosition.ToString(), EndPosition.ToString(), type.ToString(), "0", "0","0","0","0" });	
+            data.Add(new string[] { id.ToString(), StartPosition.ToString(), EndPosition.ToString(), type.ToString(), "0", "0" });
         }else{
-            
-            string[] v=new string[] { id.ToString(), StartPosition.ToString(), EndPosition.ToString(), type.ToString(), simulation[0].ToString() };
-            string[] times=new string[3];
-            for(int x=0;x<3;x++){
-                if(x<time_spent.Count){
-                    times[x]=time_spent[x].ToString();
-                }else{
-                    times[x]="0";
-                }
-            }
-            string[] joined = new string[] { id.ToString(), StartPosition.ToString(), EndPosition.ToString(), type.ToString(), simulation[0].ToString(), times[0], times[1], times[2] };
-            data.Add(joined);
-    
+        for (int i = 0; i < time_spent.Count; i++)
+        {
+            data.Add(new string[] { id.ToString(), StartPosition.ToString(), EndPosition.ToString(), type.ToString(), time_spent[i].ToString(), simulation[i].ToString() });
+        }
         }
         return data;
 

@@ -1,0 +1,44 @@
+Address
+-------
+- Cost function
+           Track vehicle entry and exit
+- Spawn direction bug--> has to do with when next doesn't have a next waypoint|ome vehicles go back to waypoint 0 when spawned at waypoint 1, look into the waypoint checker where we get path[1]
+- spawn direction is still an issue
+- sot function
+	record data using the com agent
+	calculate cost function in com central
+- update segment density
+- vehicles sometimes don't destroy check destroy function|some vehicles don't destroy::--> fixed
+- intersection bug error
+
+
+
+
+
+
+
+
+
+
+COST FUNCTION
+-------------
+
+-time spent on road
+-road density
+-road length
+-speed
+
+
+
+cost=congestion time cost-freeflow cost
+
+congetion time cost=dist/avg speed(on road)
+avg speed on road=dist/avg time
+
+ctc=avg time
+
+ffcost=dist/max speed(on road)[1/position change per frame]
+
+cost=avgtime-(dist*pos change per frame(highest))
+
+speed=dist_trav/swtime,calc rate based on pos change to sw time

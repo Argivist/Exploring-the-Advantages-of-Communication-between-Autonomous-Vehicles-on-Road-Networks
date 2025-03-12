@@ -39,7 +39,7 @@ public class VehicleData
             data.Add(new string[] { id.ToString(), StartPosition.ToString(), EndPosition.ToString(), type.ToString(), "0", "0","0","0","0" });	
         }else{
             
-            string[] v=new string[] { id.ToString(), StartPosition.ToString(), EndPosition.ToString(), type.ToString(), simulation[0].ToString() };
+            string[] v=new string[] { id.ToString(), StartPosition.ToString(), EndPosition.ToString(), type.ToString(), time_spent[i].ToString(), simulation[i].ToString() };
             string[] times=new string[3];
             for(int x=0;x<3;x++){
                 if(x<time_spent.Count){

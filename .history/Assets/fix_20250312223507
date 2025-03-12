@@ -1,0 +1,1 @@
+ome vehicles go back to waypoint 0 when spawned at waypoint 1, look into the waypoint checker where we get path[1]
