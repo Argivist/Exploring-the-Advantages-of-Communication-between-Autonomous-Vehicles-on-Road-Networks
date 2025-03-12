@@ -77,8 +77,7 @@ public class Navigation : MonoBehaviour
         
         UpdateCurrentSegment();
 
-            positionOfPrevFrame=positionOfCurrentFrame;
-    if(vehicleType==VehicleType.CAV){
+        if(vehicleType==VehicleType.CAV){
             path=dynamicAStar.FindPath(CurrentSegment.id, DestinationSegment.id);
             // path.Remove(0);
         }
@@ -91,32 +90,14 @@ public class Navigation : MonoBehaviour
 
     }
 
-    // void Update(){
-    //     DistanceToDestination=Vector3.Distance(Vehicle.transform.position, dest);
-    //     positionOfCurrentFrame=Vehicle.transform.position;
-    //     prevTime=currentTime;
-    //     currentTime=sw.getTime();
-    //     speed=getSpeed();
-    // }
-
-    void Update() {
-    DistanceToDestination = Vector3.Distance(Vehicle.transform.position, dest);
-    positionOfPrevFrame = positionOfCurrentFrame;
-    positionOfCurrentFrame = Vehicle.transform.position;
-    prevTime = currentTime;
-    currentTime = sw.getTime();
-    speed = getSpeed();
-
-    // Detect if the segment has changed
-    int newSegmentID = Vehicle_AI.getCurrentTarget().segment;
-    if (newSegmentID != CurrentSegment.id) {
-        // TODO:- leave old segment and destroy related information
-        UpdateCurrentSegment();
-        //TODO - Join new segment and update information
-        
+    void Update(){
+        DistanceToDestination=Vector3.Distance(Vehicle.transform.position, dest);
+        positionOfPrevFrame=positionOfCurrentFrame;
+        positionOfCurrentFrame=Vehicle.transform.position;
+        prevTime=currentTime;
+        currentTime=sw.getTime();
+        speed=getSpeed();
     }
-}
-
 
     public void UpdateCurrentSegment(){
         segmentsw.stopTimer();
@@ -140,7 +121,14 @@ public class Navigation : MonoBehaviour
 
         }
 
-
+        // //drop first segment in path
+        // // path.RemoveAt(0);
+        // Debug.Log("path regenerated");
+        // }
+        
+        //Log update
+        
+        //Get new path if CAV
 
     }
 

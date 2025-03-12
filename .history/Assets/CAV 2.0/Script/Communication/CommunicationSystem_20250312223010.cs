@@ -88,7 +88,7 @@ public class CommunicationSystem : MonoBehaviour
     // Send information to a vehicle
     public void SendInformationToVehicle(int sender, int receiver, string message)
     {
-        GameObject vehicle = GameObject.Find($"car{receiver}");
+        GameObject vehicle = GameObject.Find($"Vehicle {receiver}");
         if (vehicle != null && vehicle.TryGetComponent(out CommunicationAgent agent))
         {
             agent.ReceiveInformation(message, sender, receiver);
