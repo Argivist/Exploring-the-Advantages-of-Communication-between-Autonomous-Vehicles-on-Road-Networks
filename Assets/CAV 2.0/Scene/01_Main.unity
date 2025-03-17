@@ -1859,6 +1859,7 @@ MonoBehaviour:
   Vehicle: {fileID: 162042530}
   dest: {x: 0, y: 0, z: 0}
   speed: 0
+  communicationAgent: {fileID: 0}
   trafficSystem: {fileID: 1938862188}
   ID: -1
   DistanceToDestination: 0
@@ -8321,6 +8322,7 @@ MonoBehaviour:
   Vehicle: {fileID: 0}
   dest: {x: 0, y: 0, z: 0}
   speed: 0
+  communicationAgent: {fileID: 0}
   trafficSystem: {fileID: 1938862188}
   ID: 0
   DistanceToDestination: 0
@@ -12014,7 +12016,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Location: defd
-  SimGroups: 020000000300000004000000
+  SimGroups: 320000000300000004000000
   sc: {fileID: 0}
   sm: {fileID: 0}
   dh: {fileID: 0}
@@ -13674,6 +13676,7 @@ MonoBehaviour:
   Vehicle: {fileID: 0}
   dest: {x: 0, y: 0, z: 0}
   speed: 0
+  communicationAgent: {fileID: 0}
   trafficSystem: {fileID: 1938862188}
   ID: 0
   DistanceToDestination: 0
@@ -21935,6 +21938,7 @@ MonoBehaviour:
   Vehicle: {fileID: 0}
   dest: {x: 0, y: 0, z: 0}
   speed: 0
+  communicationAgent: {fileID: 0}
   trafficSystem: {fileID: 1938862188}
   ID: 0
   DistanceToDestination: 0
@@ -22540,7 +22544,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1745337696
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22555,6 +22559,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   trafficSystem: {fileID: 1938862188}
   roadCount: 0
+  totallength: 0
 --- !u!4 &1745337697
 Transform:
   m_ObjectHideFlags: 0

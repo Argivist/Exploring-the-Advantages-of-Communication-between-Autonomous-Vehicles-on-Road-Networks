@@ -1,0 +1,133 @@
+using System.Collections.Generic;
+using UnityEngine;
+using TrafficSimulation;
+using UnityEditor.SceneManagement;
+using NUnit.Framework.Constraints;
+using System.Xml.Serialization;
+
+public class Navigation : MonoBehaviour
+{
+
+    [Header("Vehicle Configure")]
+    public Vehicle_AI Vehicle_AI;
+    public StopWatch sw;
+    public StopWatch segmentsw;
+    public GameObject Vehicle;
+    public Vector3 dest;
+    public float speed;
+    public CommunicationAgent communicationAgent;
+
+
+    [Header("Traffic System")]
+    public TrafficSystem trafficSystem;
+
+
+    [Header("Communication")]
+    public int ID;
+
+    [Header("Navigation")]
+    public float DistanceToDestination;
+    public float destinationThreshold = 1;
+    public List<int> path;
+    // public List<Segment> SegmentPathList;//Temporary remove when navigator proved to work
+    public Segment CurrentSegment;
+    public float CurrentSegmentCost;
+    public Segment DestinationSegment;
+
+
+    StaticAStar staticAStar;
+    DynamicAStar dynamicAStar;
+
+    // Vehicle share info
+    Vector3 positionOfPrevFrame;
+    Vector3 positionOfCurrentFrame;
+
+    int prevTime;
+    int currentTime;
+    // vehicle type
+    public enum VehicleType
+    {
+        CAV,
+        NonCAV
+    }
+    public VehicleType vehicleType;
+    
+    void Start()
+    {
+        // Component initialization
+        communicationAgent = Vehicle.GetComponent<CommunicationAgent>();
+        positionOfPrevFrame = Vehicle.transform.position;
+        positionOfCurrentFrame = Vehicle.transform.position;
+        Vehicle_AI = Vehicle.GetComponent<Vehicle_AI>();
+        sw = Vehicle.GetComponent<StopWatch>();
+        segmentsw = Vehicle.AddComponent<StopWatch>();
+
+
+
+        // Navigation initialization
+        staticAStar = new StaticAStar();
+        dynamicAStar = new DynamicAStar();
+
+
+        sw.startTimer();
+        segmentsw.startTimer();
+        prevTime = sw.getTime();
+        currentTime = sw.getTime();
+        
+
+        staticAStar.AStarPathfinder(trafficSystem.segments);
+        dynamicAStar.AStarPathfinder(trafficSystem.segments);   
+    }
+
+    
+    void Update()
+    {
+        DistanceToDestination = Vector3.Distance(Vehicle.transform.position, dest);
+        positionOfPrevFrame = positionOfCurrentFrame;
+        positionOfCurrentFrame = Vehicle.transform.position;
+        prevTime = currentTime;
+        currentTime = sw.getTime();
+        speed = getSpeed();
+        communicationAgent.SendMessageToUpdateRoad(ID, CurrentSegment.id, speed, segmentsw.getTime());
+    }
+
+    public void ExitSegment(){
+        if(communicationAgent==null){
+            communicationAgent = Vehicle.GetComponent<CommunicationAgent>();
+        }
+        if(segmentsw==null){
+            segmentsw = Vehicle.AddComponent<StopWatch>();
+        }
+        if(CurrentSegment==null){
+            CurrentSegment = trafficSystem.segments[Vehicle_AI.getCurrentTarget().segment];
+        }
+        segmentsw.stopTimer();
+        communicationAgent.SendMessageToRoad("exit", ID, CurrentSegment.id);
+        segmentsw.resetTimer();
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}
