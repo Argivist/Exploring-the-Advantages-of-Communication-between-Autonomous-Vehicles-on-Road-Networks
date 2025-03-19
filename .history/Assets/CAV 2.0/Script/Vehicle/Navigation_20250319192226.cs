@@ -101,7 +101,7 @@ public class Navigation : MonoBehaviour
             last_road=true;
         }
         //if last road is true and the last segment has changed, call neat destroy_
-        if(last_road && Vehicle_AI.VIsOnSegment(gameObject.transform.position,LastSegment)){
+        if(last_road && LastSegment!=Vehicle_AI.segment
             Vehicle_AI.DestroyVehicle_();
         }
     }

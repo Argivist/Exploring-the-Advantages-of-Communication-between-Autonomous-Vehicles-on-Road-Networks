@@ -328,7 +328,6 @@ namespace TrafficSimulation
             if(futureTarget.segment>=0 && futureTarget.segment < trafficSystem.segments.Count && futureTarget.waypoint >= 0 && futureTarget.waypoint < trafficSystem.segments[futureTarget.segment].waypoints.Count){
             futureTargetTransform = trafficSystem.segments[futureTarget.segment].waypoints[futureTarget.waypoint].transform;
             }else{
-                DestroyVehicle_();//TODO - temp
                 futureTargetTransform=trafficSystem.segments[currentTarget.segment].nextSegments[0].waypoints[0].transform;
                 Debug.LogWarning("Future segment or waypoint is invalid at turn");
             }
@@ -554,14 +553,6 @@ namespace TrafficSimulation
         public Target getNextTarget()
         {
             return futureTarget;
-        }
-        public bool VIsOnSegment(Vector3 pos,int segment)	
-        {
-            if (trafficSystem.segments[segment].IsOnSegment(pos))
-            {
-                return true;
-            }
-            return false;
         }
 
 

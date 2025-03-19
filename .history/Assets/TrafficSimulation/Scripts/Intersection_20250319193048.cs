@@ -89,8 +89,8 @@ namespace TrafficSimulation{
 
         void Update(){
             //if the vehicle inn the current segment is missing a gameobjet, reomove from the list by calling the exit functio
-            if(intersectionType == IntersectionType.STOP){
-                foreach(GameObject vehicle in vehiclesInIntersection){
+            
+            foreach(GameObject vehicle in vehiclesInIntersection){
                 if(vehicle == null){
                     ExitStop(vehicle);
                 vehiclesInIntersection.Remove(vehicle);
@@ -110,28 +110,6 @@ namespace TrafficSimulation{
                 // }
                 vehiclesQueue[0].GetComponent<Vehicle_AI>().vehicleStatus = Status_.GO;
             }
-                // foreach(GameObject vehicle in vehiclesInIntersection){
-                //     if(vehicle == null){
-                //         ExitStop(vehicle);
-                //     vehiclesInIntersection.Remove(vehicle);
-                //         //
-                //     }
-                // }
-                // foreach(GameObject vehicle in vehiclesQueue){
-                //     if(vehicle == null){
-                //         // ExitStop(vehicle);
-                //     vehiclesQueue.Remove(vehicle);
-                //         //
-                //     }
-                // }
-                // if(vehiclesQueue.Count > 0 && vehiclesInIntersection.Count == 0){
-                //     // while(vehiclesQueue[0]==null){
-                //     //     vehiclesQueue.RemoveAt(0);
-                //     // }
-                //     vehiclesQueue[0].GetComponent<Vehicle_AI>().vehicleStatus = Status_.GO;
-                // }
-            }
-            // 
         }
         void SwitchLights(){
 

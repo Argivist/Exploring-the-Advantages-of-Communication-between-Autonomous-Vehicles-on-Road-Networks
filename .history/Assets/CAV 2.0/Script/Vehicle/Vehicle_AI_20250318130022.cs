@@ -232,20 +232,19 @@ namespace TrafficSimulation
         }
         void WaypointChecker()
         {
-            
             // Validate segment index
-            if (currentTarget.segment < 0 || currentTarget.segment >= trafficSystem.segments.Count)
-            {
-                Debug.LogWarning($"Invalid segment index: {currentTarget.segment}. Segment count: {trafficSystem.segments.Count}");
-                return;
-            }
+            // if (currentTarget.segment < 0 || currentTarget.segment >= trafficSystem.segments.Count)
+            // {
+            //     Debug.LogError($"Invalid segment index: {currentTarget.segment}. Segment count: {trafficSystem.segments.Count}");
+            //     return;
+            // }
 
-            // Validate waypoint index
-            if (currentTarget.waypoint < 0 || currentTarget.waypoint >= trafficSystem.segments[currentTarget.segment].waypoints.Count)
-            {
-                Debug.LogWarning($"Invalid waypoint index: {currentTarget.waypoint}. Waypoint count: {trafficSystem.segments[currentTarget.segment].waypoints.Count}");
-                return;
-            }
+            // // Validate waypoint index
+            // if (currentTarget.waypoint < 0 || currentTarget.waypoint >= trafficSystem.segments[currentTarget.segment].waypoints.Count)
+            // {
+            //     Debug.LogError($"Invalid waypoint index: {currentTarget.waypoint}. Waypoint count: {trafficSystem.segments[currentTarget.segment].waypoints.Count}");
+            //     return;
+            // }
 
             GameObject waypoint = trafficSystem.segments[currentTarget.segment].waypoints[currentTarget.waypoint].gameObject;
 
@@ -258,10 +257,6 @@ namespace TrafficSimulation
                 currentTarget.waypoint++;
 
                 // if at the end of the segment waypoint reached set next segment
-                if (currentTarget.segment == -1)
-                    {
-                        DestroyVehicle_();
-                    }
                 if (currentTarget.waypoint >= trafficSystem.segments[currentTarget.segment].waypoints.Count)
                 {
                     NavigationComponent.ExitSegment();// indicate exit for comsys
@@ -271,6 +266,10 @@ namespace TrafficSimulation
                     // }
                     pastTargetSegment = currentTarget.segment;
                     currentTarget.segment = futureTarget.segment;//NavigationComponent.GetNextSegmentId();
+                    if (currentTarget.segment == -1)
+                    {
+                        DestroyVehicle_();
+                    }
                     currentTarget.waypoint = 0;
                     NavigationComponent.EnterSegment();// indicate entry for comsys
                 }
@@ -324,16 +323,13 @@ namespace TrafficSimulation
 
             //Calculate if there is a planned turn
             Transform targetTransform = trafficSystem.segments[currentTarget.segment].waypoints[currentTarget.waypoint].transform;
-            Transform futureTargetTransform;
             if(futureTarget.segment>=0 && futureTarget.segment < trafficSystem.segments.Count && futureTarget.waypoint >= 0 && futureTarget.waypoint < trafficSystem.segments[futureTarget.segment].waypoints.Count){
-            futureTargetTransform = trafficSystem.segments[futureTarget.segment].waypoints[futureTarget.waypoint].transform;
-            }else{
-                DestroyVehicle_();//TODO - temp
-                futureTargetTransform=trafficSystem.segments[currentTarget.segment].nextSegments[0].waypoints[0].transform;
-                Debug.LogWarning("Future segment or waypoint is invalid at turn");
-            }
+            Transform futureTargetTransform = trafficSystem.segments[futureTarget.segment].waypoints[futureTarget.waypoint].transform;
             Vector3 futureVel = futureTargetTransform.position - targetTransform.position;
             float futureSteering = Mathf.Clamp(this.transform.InverseTransformDirection(futureVel.normalized).x, -1, 1);
+            }else{
+                
+            }
 
             //Check if the car has to stop
             if (vehicleStatus == Status_.STOP)
@@ -542,8 +538,7 @@ namespace TrafficSimulation
 
             Debug.LogWarning("get segment return -1");
             // Fallback: Vehicle is not in the expected or past segment.
-            // return -1; // Indicates an invalid segment (or handle differently)
-            return currentTarget.segment;
+            return -1; // Indicates an invalid segment (or handle differently)
         }
 
         public Target getCurrentTarget()
@@ -554,14 +549,6 @@ namespace TrafficSimulation
         public Target getNextTarget()
         {
             return futureTarget;
-        }
-        public bool VIsOnSegment(Vector3 pos,int segment)	
-        {
-            if (trafficSystem.segments[segment].IsOnSegment(pos))
-            {
-                return true;
-            }
-            return false;
         }
 
 

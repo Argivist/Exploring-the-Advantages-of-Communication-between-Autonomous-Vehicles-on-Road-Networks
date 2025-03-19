@@ -1824,6 +1824,10 @@ MonoBehaviour:
   emergencyBrakeThresh: 1.5
   slowDownThresh: 5
   vehicleStatus: 0
+  currentSegment: 0
+  currentWaypoint: 0
+  futureSegment: 0
+  futureWaypoint: 0
   NavigationComponent: {fileID: 162042533}
   StopWatch: {fileID: 0}
 --- !u!114 &162042532
@@ -1869,6 +1873,7 @@ MonoBehaviour:
   CurrentSegmentCost: 0
   DestinationSegment: {fileID: 1509820994}
   vehicleType: 0
+  isReady: 0
 --- !u!114 &162042534
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8302,6 +8307,10 @@ MonoBehaviour:
   emergencyBrakeThresh: 2
   slowDownThresh: 4
   vehicleStatus: 0
+  currentSegment: 0
+  currentWaypoint: 0
+  futureSegment: 0
+  futureWaypoint: 0
   NavigationComponent: {fileID: 0}
   StopWatch: {fileID: 0}
 --- !u!114 &616570991
@@ -8332,6 +8341,7 @@ MonoBehaviour:
   CurrentSegmentCost: 0
   DestinationSegment: {fileID: 0}
   vehicleType: 0
+  isReady: 0
 --- !u!54 &616570992
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -13686,6 +13696,7 @@ MonoBehaviour:
   CurrentSegmentCost: 0
   DestinationSegment: {fileID: 0}
   vehicleType: 0
+  isReady: 0
 --- !u!114 &1005397151
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21948,6 +21959,7 @@ MonoBehaviour:
   CurrentSegmentCost: 0
   DestinationSegment: {fileID: 0}
   vehicleType: 0
+  isReady: 0
 --- !u!114 &1678212994
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -34509,6 +34521,11 @@ PrefabInstance:
     - target: {fileID: 2176754788707491998, guid: bdc851e5710c467408eae52b5f7b4b50,
         type: 3}
       propertyPath: CAVSimulationEnabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2176754788707491998, guid: bdc851e5710c467408eae52b5f7b4b50,
+        type: 3}
+      propertyPath: NormalSimulationEnabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2176754788707491999, guid: bdc851e5710c467408eae52b5f7b4b50,

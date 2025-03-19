@@ -109,9 +109,8 @@ public class SimulationConfigurer : MonoBehaviour
             Segment startSegment = waypointList[startWaypointIndex].segment;
             int destSegment = Random.Range(0, trafficSystem.segments.Count);
             Segment endSegment = trafficSystem.segments[destSegment];
-            float x=Random.Range(endSegment.waypoints[0].transform.position.x, endSegment.waypoints[endSegment.waypoints.Count-1].transform.position.x);
-            float z=Random.Range(endSegment.waypoints[0].transform.position.z, endSegment.waypoints[endSegment.waypoints.Count-1].transform.position.z);
-            Vector3 endPos = new Vector3(x, endSegment.waypoints[0].transform.position.y, z);
+            x=Random.Range(endSegment.waypoints[0].transform.position.x, endSegment.waypoints[endSegment.waypoints.Count-1].transform.position.x);
+            z=R
 
 
             // If the start waypoint is not the last waypoint in the segment, set the start position to the start waypoint and the direction to the next waypoint
@@ -122,18 +121,18 @@ public class SimulationConfigurer : MonoBehaviour
                 startPoint = waypointList[startWaypointIndex].currentWaypoint;
                 dirPoint = waypointList[startWaypointIndex].nextWaypoint;
                 // random positionbtn start and end
-                float x_=Random.Range(startPoint.transform.position.x, dirPoint.transform.position.x);
-                float z_=Random.Range(startPoint.transform.position.z, dirPoint.transform.position.z);
-                startPos = new Vector3(x_, startPoint.transform.position.y, z_);
+                float x=Random.Range(startPoint.transform.position.x, dirPoint.transform.position.x);
+                float z=Random.Range(startPoint.transform.position.z, dirPoint.transform.position.z);
+                startPos = new Vector3(x, startPoint.transform.position.y, z);
             }
             else if (waypointList[startWaypointIndex].hasPrevious())
             {
                 startPos = waypointList[startWaypointIndex].previousWaypoint.transform.position;
                 Waypoint startPoint = waypointList[startWaypointIndex].previousWaypoint;
                 dirPoint = waypointList[startWaypointIndex].currentWaypoint;
-                float _x=Random.Range(startPoint.transform.position.x, dirPoint.transform.position.x);
-                float _z=Random.Range(startPoint.transform.position.z, dirPoint.transform.position.z);
-                startPos = new Vector3(_x, startPoint.transform.position.y, _z);
+                float x=Random.Range(startPoint.transform.position.x, dirPoint.transform.position.x);
+                float z=Random.Range(startPoint.transform.position.z, dirPoint.transform.position.z);
+                startPos = new Vector3(x, startPoint.transform.position.y, z);
             }
             else
             {
@@ -148,8 +147,7 @@ public class SimulationConfigurer : MonoBehaviour
                     (VehicleType)Random.Range(0, System.Enum.GetValues(typeof(VehicleType)).Length),
                     Random.Range(1, 100), // Example startTime
                     startPos,
-                    endPos,
-                    // waypointList[destSegment].position
+                    waypointList[destSegment].position,
                     dirPoint,
                     waypointList[destSegment].segment
                 );

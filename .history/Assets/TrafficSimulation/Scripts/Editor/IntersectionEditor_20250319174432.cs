@@ -16,7 +16,7 @@ namespace TrafficSimulation {
 
         public override void OnInspectorGUI(){
             intersection.intersectionType = (IntersectionType) EditorGUILayout.EnumPopup("Intersection type", intersection.intersectionType);
-            SerializedProperty vehicleList = serializedObject.FindProperty("vehiclesList");
+
             EditorGUI.BeginDisabledGroup(intersection.intersectionType != IntersectionType.STOP);
 
             EditorGUILayout.LabelField("Stop", EditorStyles.boldLabel);
@@ -33,6 +33,7 @@ namespace TrafficSimulation {
             intersection.orangeLightDuration = EditorGUILayout.FloatField("Orange Light Duration (in s.)", intersection.orangeLightDuration);
             SerializedProperty sLightsNbr1 = serializedObject.FindProperty("lightsNbr1");
             SerializedProperty sLightsNbr2 = serializedObject.FindProperty("lightsNbr2");
+            SerializedProperty vehicleList = serializedObject.FindProperty("vehiclesList");
             EditorGUILayout.PropertyField(sLightsNbr1, new GUIContent("Lights #1 (first to be red)"), true);
             EditorGUILayout.PropertyField(sLightsNbr2, new GUIContent("Lights #2"), true);
             serializedObject.ApplyModifiedProperties();

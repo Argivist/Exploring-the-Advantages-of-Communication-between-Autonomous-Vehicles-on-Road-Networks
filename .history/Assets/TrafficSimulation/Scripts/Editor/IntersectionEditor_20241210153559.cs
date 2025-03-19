@@ -16,7 +16,7 @@ namespace TrafficSimulation {
 
         public override void OnInspectorGUI(){
             intersection.intersectionType = (IntersectionType) EditorGUILayout.EnumPopup("Intersection type", intersection.intersectionType);
-            SerializedProperty vehicleList = serializedObject.FindProperty("vehiclesList");
+
             EditorGUI.BeginDisabledGroup(intersection.intersectionType != IntersectionType.STOP);
 
             EditorGUILayout.LabelField("Stop", EditorStyles.boldLabel);

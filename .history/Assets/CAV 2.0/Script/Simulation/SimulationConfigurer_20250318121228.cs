@@ -122,18 +122,18 @@ public class SimulationConfigurer : MonoBehaviour
                 startPoint = waypointList[startWaypointIndex].currentWaypoint;
                 dirPoint = waypointList[startWaypointIndex].nextWaypoint;
                 // random positionbtn start and end
-                float x_=Random.Range(startPoint.transform.position.x, dirPoint.transform.position.x);
-                float z_=Random.Range(startPoint.transform.position.z, dirPoint.transform.position.z);
-                startPos = new Vector3(x_, startPoint.transform.position.y, z_);
+                float x=Random.Range(startPoint.transform.position.x, dirPoint.transform.position.x);
+                float z=Random.Range(startPoint.transform.position.z, dirPoint.transform.position.z);
+                startPos = new Vector3(x, startPoint.transform.position.y, z);
             }
             else if (waypointList[startWaypointIndex].hasPrevious())
             {
                 startPos = waypointList[startWaypointIndex].previousWaypoint.transform.position;
                 Waypoint startPoint = waypointList[startWaypointIndex].previousWaypoint;
                 dirPoint = waypointList[startWaypointIndex].currentWaypoint;
-                float _x=Random.Range(startPoint.transform.position.x, dirPoint.transform.position.x);
-                float _z=Random.Range(startPoint.transform.position.z, dirPoint.transform.position.z);
-                startPos = new Vector3(_x, startPoint.transform.position.y, _z);
+                float x=Random.Range(startPoint.transform.position.x, dirPoint.transform.position.x);
+                float z=Random.Range(startPoint.transform.position.z, dirPoint.transform.position.z);
+                startPos = new Vector3(x, startPoint.transform.position.y, z);
             }
             else
             {

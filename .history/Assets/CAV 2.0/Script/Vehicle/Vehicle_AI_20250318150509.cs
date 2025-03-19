@@ -555,14 +555,6 @@ namespace TrafficSimulation
         {
             return futureTarget;
         }
-        public bool VIsOnSegment(Vector3 pos,int segment)	
-        {
-            if (trafficSystem.segments[segment].IsOnSegment(pos))
-            {
-                return true;
-            }
-            return false;
-        }
 
 
     }

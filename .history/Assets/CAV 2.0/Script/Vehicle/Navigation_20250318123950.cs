@@ -44,9 +44,6 @@ public class Navigation : MonoBehaviour
 
     int prevTime;
     int currentTime;
-
-    int LastSegment;
-    bool last_road;
     // vehicle type
     public enum VehicleType
     {
@@ -95,15 +92,6 @@ public class Navigation : MonoBehaviour
         currentTime = sw.getTime();
         speed = getSpeed();
         communicationAgent.SendMessageToUpdateRoad(ID, CurrentSegment.id, speed, segmentsw.getTime());
-
-        //if path is empty, destination is behind the vehicle destroy
-        if(path.Count==0){
-            last_road=true;
-        }
-        //if last road is true and the last segment has changed, call neat destroy_
-        if(last_road && Vehicle_AI.VIsOnSegment(gameObject.transform.position,LastSegment)){
-            Vehicle_AI.DestroyVehicle_();
-        }
     }
 
     public void ExitSegment(){
@@ -172,7 +160,6 @@ public class Navigation : MonoBehaviour
     public int dynamicGenCall(){
         if(dynamicAStar==null){
             dynamicAStar = new DynamicAStar();
-            dynamicAStar.AStarPathfinder(trafficSystem.segments);
         }
         if(CurrentSegment==null){
             CurrentSegment = trafficSystem.segments[Vehicle_AI.getCurrentTarget().segment];

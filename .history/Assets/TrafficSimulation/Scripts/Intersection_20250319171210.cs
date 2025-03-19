@@ -2,36 +2,7 @@
 // https://github.com/mchrbn/unity-traffic-simulation
 
 using System.Collections.Generic;
-using TrafficSimulation;
 using UnityEngine;
-[System.Serializable]
-
-public class VehicleDebug{
-
-            public string vehicleId;
-            public GameObject vehicle;
-            public Status_ status;
-            public bool isInQueue;
-            public bool isAlreadyInIntersection;
-
-            public bool isPriority;
-            public int segmentVehicleIsIn;
-
-
-            public int nextSegment;
-
-            public VehicleDebug(GameObject _vehicle, Status_ _status, bool _isAlreadyInIntersection,bool isInQueue,bool priority, int _segmentVehicleIsIn, int _nextSegment){
-                vehicle = _vehicle;
-                status = _status;
-                isAlreadyInIntersection = _isAlreadyInIntersection;
-                segmentVehicleIsIn = _segmentVehicleIsIn;
-                nextSegment = _nextSegment;
-                this.isInQueue = isInQueue;
-                isPriority = priority;
-                vehicleId = _vehicle.name;
-            }
-
-        }
 
 namespace TrafficSimulation{
     public enum IntersectionType{
@@ -52,13 +23,6 @@ namespace TrafficSimulation{
         public float orangeLightDuration = 2;
         public List<Segment> lightsNbr1;
         public List<Segment> lightsNbr2;
-        public List<VehicleDebug> vehiclesList= new List<VehicleDebug>(); 
-    
-
-
-        
-
-
 
         private List<GameObject> vehiclesQueue;
         private List<GameObject> vehiclesInIntersection;
@@ -66,13 +30,34 @@ namespace TrafficSimulation{
         
         [HideInInspector] public int currentRedLightsGroup = 1;
 
-        // [Header("Debug")]
-        // [SerializeReference]
-        // public List<VehicleDebug> vehiclesList= new List<VehicleDebug>(); 
+        public struct VehicleDebug{
+            public GameObject vehicle;
+            public Status_ status;
+            public bool isInQueue;
+            public bool isAlreadyInIntersection;
+
+            public bool isPriority;
+            public int segmentVehicleIsIn;
+
+
+            public int nextSegment;
+
+            public VehicleDebug(GameObject _vehicle, Status_ _status, bool _isAlreadyInIntersection,bool isInQueue,bool priority, int _segmentVehicleIsIn, int _nextSegment){
+                vehicle = _vehicle;
+                status = _status;
+                isAlreadyInIntersection = _isAlreadyInIntersection;
+                segmentVehicleIsIn = _segmentVehicleIsIn;
+                nextSegment = _nextSegment;
+                this.isInQueue = isInQueue;
+                isPriority = priority;
+            }
+
+        }
+        [Header("Debug")]
+        public List<VehicleDebug> vehiclesList; 
 
 
         void Start(){
-            gameObject.AddComponent<IntersectionDebug>();
             vehiclesList = new List<VehicleDebug>();
             vehiclesQueue = new List<GameObject>();
             vehiclesInIntersection = new List<GameObject>();
@@ -80,59 +65,6 @@ namespace TrafficSimulation{
                 InvokeRepeating("SwitchLights", lightsDuration, lightsDuration);
         }
 
-        public List<GameObject> GetVehiclesInIntersection(){
-            return vehiclesInIntersection;
-        }
-        public List<GameObject> GetVehiclesQueue(){
-            return vehiclesQueue;
-        }
-
-        void Update(){
-            //if the vehicle inn the current segment is missing a gameobjet, reomove from the list by calling the exit functio
-            if(intersectionType == IntersectionType.STOP){
-                foreach(GameObject vehicle in vehiclesInIntersection){
-                if(vehicle == null){
-                    ExitStop(vehicle);
-                vehiclesInIntersection.Remove(vehicle);
-                    //
-                }
-            }
-            foreach(GameObject vehicle in vehiclesQueue){
-                if(vehicle == null){
-                    // ExitStop(vehicle);
-                vehiclesQueue.Remove(vehicle);
-                    //
-                }
-            }
-            if(vehiclesQueue.Count > 0 && vehiclesInIntersection.Count == 0){
-                // while(vehiclesQueue[0]==null){
-                //     vehiclesQueue.RemoveAt(0);
-                // }
-                vehiclesQueue[0].GetComponent<Vehicle_AI>().vehicleStatus = Status_.GO;
-            }
-                // foreach(GameObject vehicle in vehiclesInIntersection){
-                //     if(vehicle == null){
-                //         ExitStop(vehicle);
-                //     vehiclesInIntersection.Remove(vehicle);
-                //         //
-                //     }
-                // }
-                // foreach(GameObject vehicle in vehiclesQueue){
-                //     if(vehicle == null){
-                //         // ExitStop(vehicle);
-                //     vehiclesQueue.Remove(vehicle);
-                //         //
-                //     }
-                // }
-                // if(vehiclesQueue.Count > 0 && vehiclesInIntersection.Count == 0){
-                //     // while(vehiclesQueue[0]==null){
-                //     //     vehiclesQueue.RemoveAt(0);
-                //     // }
-                //     vehiclesQueue[0].GetComponent<Vehicle_AI>().vehicleStatus = Status_.GO;
-                // }
-            }
-            // 
-        }
         void SwitchLights(){
 
             if(currentRedLightsGroup == 1) currentRedLightsGroup = 2;
@@ -193,37 +125,28 @@ namespace TrafficSimulation{
         void ExitStop(GameObject _vehicle){
             try{
             _vehicle.GetComponent<Vehicle_AI>().vehicleStatus = Status_.GO;
-            vehiclesInIntersection.Remove(_vehicle);
             }catch{
                 // _vehicle.GetComponent<Vehicle_AI>().vehicleStatus = Status_.GO;
-                Debug.LogError("Vehicle  destroyed before being able to set status to GO");
-                Debug.LogWarning("Vehicle destroyed before being able to set status to GO");
-            }
-            try{
-            
-            }catch{
-                Debug.LogError("Vehicle  destroyed before being able to remove from intersection");
-                Debug.LogWarning("Vehicle destroyed before being able to remove from intersection");
+                Debug.LogError("Vehicle "+_vehicle.name+" destroyed before being able to set status to GO");
+                Debug.LogWarning("Vehicle"+_vehicle.name+" destroyed before being able to set status to GO");
         
             }
             try{
+            vehiclesInIntersection.Remove(_vehicle);
+            }catch{
+                Debug.LogError("Vehicle "+_vehicle.name+" destroyed before being able to remove from intersection");
+                Debug.LogWarning("Vehicle"+_vehicle.name+" destroyed before being able to remove from intersection");
+        
+            }
             vehiclesQueue.Remove(_vehicle);
-            }catch{
-                Debug.LogError("Vehicle  destroyed before being able to remove from queue");
-                Debug.LogWarning("Vehicle destroyed before being able to remove from queue");
-            }
-            try{
             vehiclesList.Remove(vehiclesList.Find(x => x.vehicle == _vehicle));
-            }catch{
-                Debug.LogError("Vehicle  destroyed before being able to remove from list");
-                Debug.LogWarning("Vehicle destroyed before being able to remove from list");
-            }
-
             if(vehiclesQueue.Count > 0 && vehiclesInIntersection.Count == 0){
-                // while(vehiclesQueue[0]==null){
-                //     vehiclesQueue.RemoveAt(0);
-                // }
+                try{
                 vehiclesQueue[0].GetComponent<Vehicle_AI>().vehicleStatus = Status_.GO;
+                }catch{
+                    Debug.LogError("Vehicle "+vehiclesQueue[0].name+" destroyed before being able to set status to GO 2");
+                    Debug.LogWarning("Vehicle"+vehiclesQueue[0].name+" destroyed before being able to set status to GO 2");
+                }
             }
         }
 

@@ -155,7 +155,7 @@ public class SimulationMaster : MonoBehaviour
 
     public void VehicleDestroyed(string carname,int time){
         NumDestroyedVehicles++;
-        Debug.LogError("Vehicle Destroyed: "+carname+" at time: ");
+        debug.LogError("Vehicle Destroyed: "+carname+" at time: ");
         //Log time
 
         if (NumDestroyedVehicles == SimConfig.vehicleList.Count)
