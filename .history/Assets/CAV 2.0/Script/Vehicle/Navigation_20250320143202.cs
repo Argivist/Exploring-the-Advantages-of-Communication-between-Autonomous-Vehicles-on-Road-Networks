@@ -54,8 +54,8 @@ public class Navigation : MonoBehaviour
         NonCAV
     }
     public VehicleType vehicleType;
-
-    public bool isReady = false;
+    
+    public bool isReady=false;
     void Start()
     {
         // Component initialization
@@ -77,15 +77,15 @@ public class Navigation : MonoBehaviour
         segmentsw.startTimer();
         prevTime = sw.getTime();
         currentTime = sw.getTime();
-
+        
 
         staticAStar.AStarPathfinder(trafficSystem.segments);
-        dynamicAStar.AStarPathfinder(trafficSystem.segments);
+        dynamicAStar.AStarPathfinder(trafficSystem.segments);   
 
-        isReady = true;
+        isReady=true;
     }
 
-
+    
     void Update()
     {
         DistanceToDestination = Vector3.Distance(Vehicle.transform.position, dest);
@@ -97,29 +97,23 @@ public class Navigation : MonoBehaviour
         communicationAgent.SendMessageToUpdateRoad(ID, CurrentSegment.id, speed, segmentsw.getTime());
 
         //if path is empty, destination is behind the vehicle destroy
-        if (path.Count == 0)
-        {
-            last_road = true;
+        if(path.Count==0){
+            last_road=true;
         }
         //if last road is true and the last segment has changed, call neat destroy_
-        if (last_road && Vehicle_AI.VIsOnSegment(gameObject.transform.position, LastSegment))
-        {
+        if(last_road && Vehicle_AI.VIsOnSegment(gameObject.transform.position,LastSegment)){
             Vehicle_AI.DestroyVehicle_();
         }
     }
 
-    public void ExitSegment()
-    {
-        if (communicationAgent == null)
-        {
+    public void ExitSegment(){
+        if(communicationAgent==null){
             communicationAgent = Vehicle.GetComponent<CommunicationAgent>();
         }
-        if (segmentsw == null)
-        {
+        if(segmentsw==null){
             segmentsw = Vehicle.AddComponent<StopWatch>();
         }
-        if (CurrentSegment == null)
-        {
+        if(CurrentSegment==null){
             CurrentSegment = trafficSystem.segments[Vehicle_AI.getCurrentTarget().segment];
         }
         segmentsw.stopTimer();
@@ -127,25 +121,20 @@ public class Navigation : MonoBehaviour
         segmentsw.resetTimer();
     }
 
-    public void EnterSegment()
-    {
-        if (communicationAgent == null)
-        {
+    public void EnterSegment(){
+        if(communicationAgent==null){
             communicationAgent = Vehicle.GetComponent<CommunicationAgent>();
         }
-        if (segmentsw == null)
-        {
+        if(segmentsw==null){
             segmentsw = Vehicle.AddComponent<StopWatch>();
         }
-        if (CurrentSegment == null)
-        {
+        if(CurrentSegment==null){
             CurrentSegment = trafficSystem.segments[Vehicle_AI.getCurrentTarget().segment];
         }
         communicationAgent.SendMessageToRoad("enter", ID, CurrentSegment.id);
         segmentsw.startTimer();
     }
-    public void CurSegSet()
-    {
+    public void CurSegSet(){
         staticAStar = new StaticAStar();
         dynamicAStar = new DynamicAStar();
         staticAStar.AStarPathfinder(trafficSystem.segments);
@@ -162,7 +151,7 @@ public class Navigation : MonoBehaviour
         else
         {
             path = staticAStar.FindPath(CurrentSegment.id, DestinationSegment.id);
-
+    
         }
     }
     public bool destinationReached(Vector3 pos)
@@ -180,61 +169,32 @@ public class Navigation : MonoBehaviour
             return false;
         }
     }
-    public int dynamicGenCall()
-    {
-        if (dynamicAStar == null)
-        {
+    public int dynamicGenCall(){
+        if(dynamicAStar==null){
             dynamicAStar = new DynamicAStar();
             dynamicAStar.AStarPathfinder(trafficSystem.segments);
         }
-        if (CurrentSegment == null)
-        {
+        if(CurrentSegment==null){
             CurrentSegment = trafficSystem.segments[Vehicle_AI.getCurrentTarget().segment];
-            // CurrentSegment = trafficSystem.segments[Vehicle_AI.getNextTarget().segment];
         }
-        // path = dynamicAStar.FindPath(CurrentSegment.id, DestinationSegment.id);
-        path = dynamicAStar.FindPath(path[0], DestinationSegment.id);
+        path = dynamicAStar.FindPath(CurrentSegment.id, DestinationSegment.id);
 
-        if (path == null || path.Count == 0)
-        {
-            Debug.LogWarning("Dynamic A* failed: No path found!");
-            return -1;
-        }
-        return 0;
-    }
-
-    public int GetNextSegmentId()
-    {
-        if (vehicleType == VehicleType.CAV)
-        {
-            // string s = "";
-            // foreach (int i in path)
-            // {
-            //     s += i + " ";
-            // }
-            // Debug.LogWarning("1-Vehicle " + ID + " path: " + s +"current segment: "+CurrentSegment.id+" destination segment: "+DestinationSegment.id);
-            // Debug.LogWarning("Vehicle " + ID + " path: " + path.Count);	
-
-            int c = dynamicGenCall();
-            // path.RemoveAt(0);  sometimes it adds past to the  path for cav
-
-            // s = "";
-            // foreach (int i in path)
-            // {
-            //     s += i + " ";
-            // }
-            // Debug.LogWarning("2-Vehicle " + ID + " path: " + s+"current segment: "+CurrentSegment.id+" destination segment: "+DestinationSegment.id);
-            if (c == -1)
+            if (path == null || path.Count == 0)
             {
                 Debug.LogWarning("Dynamic A* failed: No path found!");
                 return -1;
             }
-            // s = "";
-            // foreach (int i in path)
-            // {
-            //     s += i + " ";
-            // }
-            // Debug.LogWarning("3-Vehicle " + ID + " path: " + s+"current segment: "+CurrentSegment.id+" destination segment: "+DestinationSegment.id);
+            return 0;
+}
+
+public int GetNextSegmentId()
+    {
+        if(vehicleType == VehicleType.CAV){
+            int c=dynamicGenCall();
+            if(c==-1){
+                Debug.LogWarning("Dynamic A* failed: No path found!");
+                return -1;
+            }
         }
 
         path.RemoveAt(0);

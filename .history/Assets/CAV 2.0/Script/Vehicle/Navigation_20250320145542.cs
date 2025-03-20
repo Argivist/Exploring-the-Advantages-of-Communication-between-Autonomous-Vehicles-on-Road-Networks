@@ -189,11 +189,10 @@ public class Navigation : MonoBehaviour
         }
         if (CurrentSegment == null)
         {
-            CurrentSegment = trafficSystem.segments[Vehicle_AI.getCurrentTarget().segment];
-            // CurrentSegment = trafficSystem.segments[Vehicle_AI.getNextTarget().segment];
+            // CurrentSegment = trafficSystem.segments[Vehicle_AI.getCurrentTarget().segment];
+            CurrentSegment = trafficSystem.segments[Vehicle_AI.getNextTarget().segment];
         }
-        // path = dynamicAStar.FindPath(CurrentSegment.id, DestinationSegment.id);
-        path = dynamicAStar.FindPath(path[0], DestinationSegment.id);
+        path = dynamicAStar.FindPath(CurrentSegment.id, DestinationSegment.id);
 
         if (path == null || path.Count == 0)
         {
@@ -207,34 +206,34 @@ public class Navigation : MonoBehaviour
     {
         if (vehicleType == VehicleType.CAV)
         {
-            // string s = "";
-            // foreach (int i in path)
-            // {
-            //     s += i + " ";
-            // }
-            // Debug.LogWarning("1-Vehicle " + ID + " path: " + s +"current segment: "+CurrentSegment.id+" destination segment: "+DestinationSegment.id);
+            string s = "";
+            foreach (int i in path)
+            {
+                s += i + " ";
+            }
+            Debug.LogWarning("1-Vehicle " + ID + " path: " + s +"current segment: "+CurrentSegment.id+" destination segment: "+DestinationSegment.id);
             // Debug.LogWarning("Vehicle " + ID + " path: " + path.Count);	
 
             int c = dynamicGenCall();
             // path.RemoveAt(0);  sometimes it adds past to the  path for cav
 
-            // s = "";
-            // foreach (int i in path)
-            // {
-            //     s += i + " ";
-            // }
-            // Debug.LogWarning("2-Vehicle " + ID + " path: " + s+"current segment: "+CurrentSegment.id+" destination segment: "+DestinationSegment.id);
+            s = "";
+            foreach (int i in path)
+            {
+                s += i + " ";
+            }
+            Debug.LogWarning("2-Vehicle " + ID + " path: " + s+"current segment: "+CurrentSegment.id+" destination segment: "+DestinationSegment.id);
             if (c == -1)
             {
                 Debug.LogWarning("Dynamic A* failed: No path found!");
                 return -1;
             }
-            // s = "";
-            // foreach (int i in path)
-            // {
-            //     s += i + " ";
-            // }
-            // Debug.LogWarning("3-Vehicle " + ID + " path: " + s+"current segment: "+CurrentSegment.id+" destination segment: "+DestinationSegment.id);
+            s = "";
+            foreach (int i in path)
+            {
+                s += i + " ";
+            }
+            Debug.LogWarning("3-Vehicle " + ID + " path: " + s+"current segment: "+CurrentSegment.id+" destination segment: "+DestinationSegment.id);
         }
 
         path.RemoveAt(0);
