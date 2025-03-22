@@ -285,7 +285,6 @@ private void SpawnMixedVehicles()
         if(vehicle!=null){
         NumSpawnedVehicles++;
         }
-        SpawnedVehicles.Add(vehicle);
     }
     // Start is called before the first frame update
     // void Start()

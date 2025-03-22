@@ -7,11 +7,6 @@ namespace TrafficSimulation {
     public class Waypoint : MonoBehaviour {
         [HideInInspector] public Segment segment;
 
-        public void Start(){
-            gameObject.AddComponent<SphereCollider>();
-            gameObject.GetComponent<SphereCollider>().isTrigger = true;
-        }
-
         public void Refresh(int _newId, Segment _newSegment) {
             segment = _newSegment;
             name = "Waypoint-" + _newId;

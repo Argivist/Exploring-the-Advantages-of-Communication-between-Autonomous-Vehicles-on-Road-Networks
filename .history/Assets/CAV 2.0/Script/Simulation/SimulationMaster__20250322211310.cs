@@ -20,8 +20,6 @@ public class SimulationMaster_ : MonoBehaviour
     public bool CAVSimulationEnabled = true;
     public bool MixedSimulationEnabled = true;
 
-    public List<GameObject> SpawnedVehicles = new List<GameObject>();
-
 
     [Header("Data Handler")]
     public DataHandler dh;
@@ -285,7 +283,6 @@ private void SpawnMixedVehicles()
         if(vehicle!=null){
         NumSpawnedVehicles++;
         }
-        SpawnedVehicles.Add(vehicle);
     }
     // Start is called before the first frame update
     // void Start()

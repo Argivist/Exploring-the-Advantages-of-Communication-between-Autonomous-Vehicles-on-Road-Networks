@@ -141,8 +141,8 @@ namespace TrafficSimulation
                 //         }
                 //     }
                 // }
-                for(int b=0;b<vehiclesQueue.Count;b++){
-                GameObject vehicle=vehiclesQueue[b];
+                foreach (GameObject vehicle in vehiclesQueue)
+                {
                     if (vehicle == null)
                     {
                         // ExitStop(vehicle);
@@ -159,25 +159,6 @@ namespace TrafficSimulation
                         //
                     }
                 }
-
-                // foreach (GameObject vehicle in vehiclesQueue)
-                // {
-                //     if (vehicle == null)
-                //     {
-                //         // ExitStop(vehicle);
-                //         if (vehiclesInIntersection.Count == 0)
-                //         {
-                //             ExitStop(vehicle);
-                //         }
-                //         else
-                //         {
-                //             vehicle.GetComponent<Vehicle_AI>().vehicleStatus = Status_.GO;
-                //         }
-
-                //         vehiclesQueue.Remove(vehicle);
-                //         //
-                //     }
-                // }
                 if (vehiclesQueue.Count > 0 && vehiclesInIntersection.Count == 0)
                 {
                     // while(vehiclesQueue[0]==null){
