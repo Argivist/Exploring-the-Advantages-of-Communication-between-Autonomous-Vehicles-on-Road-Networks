@@ -83,7 +83,7 @@ namespace TrafficSimulation
         {
             gameObject.AddComponent<Rigidbody>().isKinematic = true;
             IntersectionDebug i__d=gameObject.AddComponent<IntersectionDebug>();
-            i__d.ts=FindObjectOfType<TrafficSystem>();
+            i__d
             vehiclesList = new List<VehicleDebug>();
             vehiclesQueue = new List<GameObject>();
             vehiclesInIntersection = new List<GameObject>();

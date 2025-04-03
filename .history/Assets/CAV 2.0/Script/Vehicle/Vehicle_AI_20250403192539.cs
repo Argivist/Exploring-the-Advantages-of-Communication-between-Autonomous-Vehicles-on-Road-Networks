@@ -328,12 +328,12 @@ namespace TrafficSimulation
 
             //Calculate if there is a planned turn
             Transform targetTransform = trafficSystem.segments[currentTarget.segment].waypoints[currentTarget.waypoint].transform;
-            Transform futureTargetTransform= null;
+            Transform futureTargetTransform;
             if(futureTarget.segment>=0 && futureTarget.segment < trafficSystem.segments.Count && futureTarget.waypoint >= 0 && futureTarget.waypoint < trafficSystem.segments[futureTarget.segment].waypoints.Count){
             futureTargetTransform = trafficSystem.segments[futureTarget.segment].waypoints[futureTarget.waypoint].transform;
             }else{
+                // futureTargetTransform=trafficSystem.segments[currentTarget.segment].nextSegments[0].waypoints[0].transform;
                 DestroyVehicle_();//TODO - temp
-                futureTargetTransform=trafficSystem.segments[currentTarget.segment].nextSegments[0].waypoints[0].transform;
                 Debug.LogWarning("Future segment or waypoint is invalid at turn");
             }
             Vector3 futureVel = futureTargetTransform.position - targetTransform.position;

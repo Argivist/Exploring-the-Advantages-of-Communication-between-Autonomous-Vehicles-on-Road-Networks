@@ -42,7 +42,6 @@ public class SimGroupAutomate : MonoBehaviour
         sc.VehicleDensity=SimGroups[density];
         sc.trafficSystem=FindObjectOfType<TrafficSystem>();
         sm=SimObject.AddComponent<SimulationMaster_>();
-        sc.default_=defaultSim;
         sm.Vehicle=Vehicle;
         sm.sw=sw;
         sm.sga=this;

@@ -86,21 +86,9 @@ public class SimulationConfigurer : MonoBehaviour
 
         for (int i = 0; i < VehicleDensity; i++)
         {
-            List<WaypointObject> validWaypoints = waypointList.FindAll(wp => wp.HasNext());
-            if (validWaypoints.Count == 0)
-            {
-                Debug.LogError("No valid spawn waypoints with a next waypoint found.");
-                yield break;
-            }
-            int startWaypointIndex = Random.Range(0, validWaypoints.Count);
-            WaypointObject startWaypointObj = validWaypoints[startWaypointIndex];
-
-
-            // int startWaypointIndex = Random.Range(0, waypointList.Count);
-            // WaypointObject startWaypointObj = waypointList[startWaypointIndex];
-
-            
+            int startWaypointIndex = Random.Range(0, waypointList.Count);
             // int startWaypointIndex = Random.Range(1, waypointList.Count);
+            WaypointObject startWaypointObj = waypointList[startWaypointIndex];
 
             Waypoint startWaypoint = startWaypointObj.currentWaypoint;
             Waypoint dirPoint;

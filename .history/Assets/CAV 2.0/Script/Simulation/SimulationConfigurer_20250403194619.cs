@@ -97,10 +97,8 @@ public class SimulationConfigurer : MonoBehaviour
 
 
             // int startWaypointIndex = Random.Range(0, waypointList.Count);
-            // WaypointObject startWaypointObj = waypointList[startWaypointIndex];
-
-            
             // int startWaypointIndex = Random.Range(1, waypointList.Count);
+            WaypointObject startWaypointObj = waypointList[startWaypointIndex];
 
             Waypoint startWaypoint = startWaypointObj.currentWaypoint;
             Waypoint dirPoint;

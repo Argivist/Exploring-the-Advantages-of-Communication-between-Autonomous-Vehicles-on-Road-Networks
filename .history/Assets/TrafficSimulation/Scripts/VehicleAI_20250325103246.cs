@@ -297,20 +297,7 @@ namespace TrafficSimulation {
                 if(segment.IsOnSegment(this.transform.position)){
                     currentTarget.segment = segment.id;
 
-                    // Find nearest waypoint to start within the segment
-                    float minDist = float.MaxValue;
-                    for(int j=0; j<trafficSystem.segments[currentTarget.segment].waypoints.Count; j++){
-                        float d = Vector3.Distance(this.transform.position, trafficSystem.segments[currentTarget.segment].waypoints[j].transform.position);
-
-                        //Only take in front points
-                        Vector3 lSpace = this.transform.InverseTransformPoint(trafficSystem.segments[currentTarget.segment].waypoints[j].transform.position);
-                        if(d < minDist && lSpace.z > 0){
-                            minDist = d;
-                            currentTarget.waypoint = j;
-                        }
-                    }
-
-                    // find the nearest if it is 0 then use its nex
+                    //Find nearest waypoint to start within the segment
                     // float minDist = float.MaxValue;
                     // for(int j=0; j<trafficSystem.segments[currentTarget.segment].waypoints.Count; j++){
                     //     float d = Vector3.Distance(this.transform.position, trafficSystem.segments[currentTarget.segment].waypoints[j].transform.position);
@@ -318,15 +305,28 @@ namespace TrafficSimulation {
                     //     //Only take in front points
                     //     Vector3 lSpace = this.transform.InverseTransformPoint(trafficSystem.segments[currentTarget.segment].waypoints[j].transform.position);
                     //     if(d < minDist && lSpace.z > 0){
-                    //         if(j==0){
-                    //             minDist = d;
-                    //             currentTarget.waypoint = j+1;
-                    //         }else{
                     //         minDist = d;
                     //         currentTarget.waypoint = j;
-                    //         }
                     //     }
                     // }
+
+                    // find the nearest if it is 0 then use its nex
+                    float minDist = float.MaxValue;
+                    for(int j=0; j<trafficSystem.segments[currentTarget.segment].waypoints.Count; j++){
+                        float d = Vector3.Distance(this.transform.position, trafficSystem.segments[currentTarget.segment].waypoints[j].transform.position);
+
+                        //Only take in front points
+                        Vector3 lSpace = this.transform.InverseTransformPoint(trafficSystem.segments[currentTarget.segment].waypoints[j].transform.position);
+                        if(d < minDist && lSpace.z > 0){
+                            if(j==0){
+                                minDist = d;
+                                currentTarget.waypoint = j+1;
+                            }else{
+                            minDist = d;
+                            currentTarget.waypoint = j;
+                            }
+                        }
+                    }
                     break;
                 }
             }

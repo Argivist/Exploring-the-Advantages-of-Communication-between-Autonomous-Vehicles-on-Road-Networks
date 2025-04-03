@@ -96,7 +96,7 @@ public class Navigation : MonoBehaviour
         speed = getSpeed();
         communicationAgent.SendMessageToUpdateRoad(ID, CurrentSegment.id, speed, segmentsw.getTime());
         if(path==null){
-            Debug.LogWarning("Path is null");
+            Deb
         }
         //if path is empty, destination is behind the vehicle destroy
         if (path.Count == 0)
