@@ -3928,6 +3928,11 @@ PrefabInstance:
       propertyPath: defaultSim
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 916680778969701538, guid: eb79cb7194e2f53468438a9954e4b994,
+        type: 3}
+      propertyPath: SimGroups.Array.data[0]
+      value: 300
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eb79cb7194e2f53468438a9954e4b994, type: 3}
 --- !u!1 &992672841 stripped

@@ -1,5 +1,0 @@
-ID,Start Position X,Start Position Y,Start Position Z,End Position X,End Position Y,End Position Z,Type,Simulation,Time Spent_Norm,Time Spent_CAV,Time Spent_Mixed
-0,(66.1, 7.3, 82.3),(-13.6, 7.3, -163.7),CAV,0,0,0,0,0
-1,(-24.8, 7.3, 98.7),(94.3, 7.3, 27.1),NonCAV,0,0,0,0,0
-2,(53.3, 7.3, -23.4),(-23.0, 7.3, 204.9),CAV,0,1834,1834,16595
-3,(-14.9, 7.3, -160.8),(-176.6, 7.3, 81.5),CAV,2,18251,0,0

@@ -82,8 +82,8 @@ namespace TrafficSimulation
         void Start()
         {
             gameObject.AddComponent<Rigidbody>().isKinematic = true;
-            IntersectionDebug i__d=gameObject.AddComponent<IntersectionDebug>();
-            i__d.ts=FindObjectOfType<TrafficSystem>();
+            IntersectionDebug i__d = gameObject.AddComponent<IntersectionDebug>();
+            i__d.ts = FindObjectOfType<TrafficSystem>();
             vehiclesList = new List<VehicleDebug>();
             vehiclesQueue = new List<GameObject>();
             vehiclesInIntersection = new List<GameObject>();
@@ -106,9 +106,10 @@ namespace TrafficSimulation
             //if the vehicle inn the current segment is missing a gameobjet, reomove from the list by calling the exit functio
             if (intersectionType == IntersectionType.STOP)
             {
-                for( int a=0;a<vehiclesInIntersection.Count;a++){
-                GameObject vehicle=vehiclesInIntersection[a];
-    if (vehicle == null)
+                for (int a = 0; a < vehiclesInIntersection.Count; a++)
+                {
+                    GameObject vehicle = vehiclesInIntersection[a];
+                    if (vehicle == null)
                     {
                         ExitStop(vehicle);
                         vehiclesInIntersection.Remove(vehicle);
@@ -142,8 +143,9 @@ namespace TrafficSimulation
                 //         }
                 //     }
                 // }
-                for(int b=0;b<vehiclesQueue.Count;b++){
-                GameObject vehicle=vehiclesQueue[b];
+                for (int b = 0; b < vehiclesQueue.Count; b++)
+                {
+                    GameObject vehicle = vehiclesQueue[b];
                     if (vehicle == null)
                     {
                         // ExitStop(vehicle);
