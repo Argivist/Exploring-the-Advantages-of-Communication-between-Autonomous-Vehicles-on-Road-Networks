@@ -46,7 +46,7 @@ public class StopWatch : MonoBehaviour
         start=false;
     }
 
-    public float getTime(){
+    public int getTime(){
         return time;
     }
 

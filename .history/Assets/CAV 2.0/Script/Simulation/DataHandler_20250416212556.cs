@@ -70,7 +70,9 @@ public class VehicleData
 
 }
 
-
+public Segment segment{
+    
+}
 public class DataHandler : MonoBehaviour
 {
     [Header("Data Handler")]

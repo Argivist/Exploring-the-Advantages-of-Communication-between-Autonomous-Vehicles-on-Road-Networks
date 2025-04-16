@@ -70,7 +70,6 @@ public class VehicleData
 
 }
 
-
 public class DataHandler : MonoBehaviour
 {
     [Header("Data Handler")]

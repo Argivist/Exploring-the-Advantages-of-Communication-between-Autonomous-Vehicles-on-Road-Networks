@@ -71,6 +71,27 @@ public class VehicleData
 }
 
 
+public class network{
+    public int id;
+    public List<segment_json> segments=new List<segment_json>();
+    public List<waypoint_json> waypoints=new List<waypoint_json>();
+    public network(int id)
+    {
+        this.id = id;
+    }
+}
+public class segment_json{
+
+}
+public class waypoint_json{
+    public int id;
+    public Vector3 position;
+    public waypoint(int id, Vector3 position)
+    {
+        this.id = id;
+        this.position = position;
+    }
+}
 public class DataHandler : MonoBehaviour
 {
     [Header("Data Handler")]

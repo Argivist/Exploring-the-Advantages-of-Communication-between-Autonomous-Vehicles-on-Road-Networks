@@ -130,7 +130,7 @@ namespace TrafficSimulation
         }
         public void DestroyVehicle_()
         {
-            float time = StopWatch.getTime();
+            int time = StopWatch.getTime();
             StopWatch.stopTimer();
             SimulationMaster_ sm = GameObject.FindObjectOfType<SimulationMaster_>();
             sm.VehicleDestroyed(GetComponent<Description>().id, time);

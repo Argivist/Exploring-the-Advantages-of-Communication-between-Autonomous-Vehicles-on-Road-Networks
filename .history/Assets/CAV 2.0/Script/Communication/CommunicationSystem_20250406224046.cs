@@ -166,7 +166,7 @@ public Segment GetCurrentSegment(Vector3 position)
             }
         }
 
-    public void UpdateData(int vehicleId, float speed, float time)
+    public void UpdateData(int vehicleId, float speed, int time)
 {
     VehicleData data = vehicleData.Find(v => v.vehicleId == vehicleId);
     if (data == null)
@@ -282,9 +282,9 @@ public void ReceiveInformation(string message, int senderId)
     {
         public int vehicleId;
         public float speed;
-        public float time;
+        public int time;
 
-        public VehicleData(int vehicleId, float speed,float time)
+        public VehicleData(int vehicleId, float speed, int time)
         {
             this.vehicleId = vehicleId;
             this.speed = speed;

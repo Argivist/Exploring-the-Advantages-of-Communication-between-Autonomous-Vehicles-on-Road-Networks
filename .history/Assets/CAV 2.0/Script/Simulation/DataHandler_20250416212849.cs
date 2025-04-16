@@ -70,7 +70,12 @@ public class VehicleData
 
 }
 
-
+public Segment segment{
+    public int id;
+    public List<float> Waypoint_x=new List<float>();
+    public List<float> Waypoint_y=new List<float>();
+}
+public 
 public class DataHandler : MonoBehaviour
 {
     [Header("Data Handler")]

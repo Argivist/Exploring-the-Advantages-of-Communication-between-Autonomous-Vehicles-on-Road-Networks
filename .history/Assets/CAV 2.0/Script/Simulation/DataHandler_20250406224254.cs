@@ -7,7 +7,7 @@ using System.IO;
 public class VehicleData
 {
     int id;
-    List<float> time_spent=new List<float>();
+    List<int> time_spent=new List<int>();
     List<int> simulation=new List<int>();
 
     Vector3 StartPosition;
@@ -69,7 +69,6 @@ public class VehicleData
     }
 
 }
-
 
 public class DataHandler : MonoBehaviour
 {

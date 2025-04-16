@@ -6,7 +6,7 @@ using UnityEditor;
 public class StopWatch : MonoBehaviour
 {
     [Header("StopWatch")]
-    public float time;
+    public int time;
 
     bool start;
     [ContextMenu("Start")]
@@ -33,7 +33,7 @@ public class StopWatch : MonoBehaviour
     void Update()
     {
         if(start){
-            time+=Time.deltaTime;
+            time+=time.deltaTime;
         }else{
             time=0;
         }
@@ -46,7 +46,7 @@ public class StopWatch : MonoBehaviour
         start=false;
     }
 
-    public float getTime(){
+    public int getTime(){
         return time;
     }
 

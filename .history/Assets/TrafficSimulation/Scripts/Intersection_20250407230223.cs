@@ -111,13 +111,14 @@ namespace TrafficSimulation
                     GameObject vehicle = vehiclesInIntersection[a];
                     if (vehicle == null)
                     {
+                        // ExitStop(vehicle);
                         vehiclesInIntersection.Remove(vehicle);
                     }else{
                         foreach (GameObject exitSegment in ExitSegments)
                         {
                             if (vehicle.GetComponent<Vehicle_AI>().GetSegmentVehicleIsIn() == exitSegment.GetComponent<Segment>().id)
                             {
-                                vehicle.GetComponent<Vehicle_AI>().vehicleStatus = Status_.GO;
+                                ExitStop(vehicle);
                                 vehiclesInIntersection.Remove(vehicle);
                             }
                         }
@@ -131,14 +132,23 @@ namespace TrafficSimulation
                     {
                         vehiclesQueue.Remove(vehicle);
                     }
+                    else
+                    {
+                        // if (vehiclesInIntersection.Count == 0)
+                        // {
+                        //     ExitStop(vehicle);
+                        // }
+                        // else
+                        // {
+                        //     vehicle.GetComponent<Vehicle_AI>().vehicleStatus = Status_.GO;
+                        // }
+                    }
                 }
 
                 
                 if (vehiclesQueue.Count > 0 && vehiclesInIntersection.Count == 0)
                 {
                     vehiclesQueue[0].GetComponent<Vehicle_AI>().vehicleStatus = Status_.GO;
-                    vehiclesInIntersection.Add(vehiclesQueue[0]);
-                    vehiclesQueue.RemoveAt(0);
                 }
                 
             }
@@ -260,9 +270,10 @@ namespace TrafficSimulation
 
             if (vehiclesQueue.Count > 0 && vehiclesInIntersection.Count == 0)
             {
+                // while(vehiclesQueue[0]==null){
+                //     vehiclesQueue.RemoveAt(0);
+                // }
                 vehiclesQueue[0].GetComponent<Vehicle_AI>().vehicleStatus = Status_.GO;
-                vehiclesInIntersection.Add(vehiclesQueue[0]);
-                vehiclesQueue.RemoveAt(0);
             }
         }
 

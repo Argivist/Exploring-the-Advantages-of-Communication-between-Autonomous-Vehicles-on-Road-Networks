@@ -260,9 +260,10 @@ namespace TrafficSimulation
 
             if (vehiclesQueue.Count > 0 && vehiclesInIntersection.Count == 0)
             {
+                // while(vehiclesQueue[0]==null){
+                //     vehiclesQueue.RemoveAt(0);
+                // }
                 vehiclesQueue[0].GetComponent<Vehicle_AI>().vehicleStatus = Status_.GO;
-                vehiclesInIntersection.Add(vehiclesQueue[0]);
-                vehiclesQueue.RemoveAt(0);
             }
         }
 
