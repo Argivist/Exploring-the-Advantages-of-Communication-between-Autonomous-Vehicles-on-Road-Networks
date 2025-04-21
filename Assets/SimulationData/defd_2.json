@@ -1,0 +1,203 @@
+{
+    "id": 0,
+    "path_norm": {
+        "path": [
+            {
+                "id": 31,
+                "init_cost": 32.0,
+                "end_cost": 0.0,
+                "init_density": 0.0,
+                "end_density": 0.0
+            },
+            {
+                "id": 9,
+                "init_cost": 32.0,
+                "end_cost": 0.0,
+                "init_density": 0.0,
+                "end_density": 0.0
+            },
+            {
+                "id": 3,
+                "init_cost": 23.0,
+                "end_cost": 0.0,
+                "init_density": 0.0,
+                "end_density": 0.0
+            }
+        ],
+        "path_alt": []
+    },
+    "path_cav_init": {
+        "path": [
+            {
+                "id": 31,
+                "init_cost": 32.0,
+                "end_cost": 0.0,
+                "init_density": 1.0,
+                "end_density": 0.0
+            },
+            {
+                "id": 9,
+                "init_cost": 23.0,
+                "end_cost": 0.0,
+                "init_density": 0.0,
+                "end_density": 0.0
+            },
+            {
+                "id": 3,
+                "init_cost": 22.0,
+                "end_cost": 0.0,
+                "init_density": 0.0,
+                "end_density": 0.0
+            }
+        ],
+        "path_alt": []
+    },
+    "path_cav_end": {
+        "path": [
+            {
+                "id": 31,
+                "init_cost": 32.0,
+                "end_cost": 0.0,
+                "init_density": 1.0,
+                "end_density": 0.0
+            }
+        ],
+        "path_alt": []
+    },
+    "path_norm_segments": [],
+    "path_cav_init_segments": [],
+    "path_cav_end_segments": []
+}
+{
+    "id": 1,
+    "path_norm": {
+        "path": [
+            {
+                "id": 7,
+                "init_cost": 31.0,
+                "end_cost": 0.0,
+                "init_density": 0.0,
+                "end_density": 0.0
+            },
+            {
+                "id": 6,
+                "init_cost": 31.0,
+                "end_cost": 0.0,
+                "init_density": 0.0,
+                "end_density": 0.0
+            },
+            {
+                "id": 16,
+                "init_cost": 23.0,
+                "end_cost": 0.0,
+                "init_density": 0.0,
+                "end_density": 0.0
+            },
+            {
+                "id": 21,
+                "init_cost": 19.0,
+                "end_cost": 0.0,
+                "init_density": 0.0,
+                "end_density": 0.0
+            },
+            {
+                "id": 29,
+                "init_cost": 26.0,
+                "end_cost": 0.0,
+                "init_density": 0.0,
+                "end_density": 0.0
+            },
+            {
+                "id": 30,
+                "init_cost": 15.0,
+                "end_cost": 0.0,
+                "init_density": 0.0,
+                "end_density": 0.0
+            },
+            {
+                "id": 33,
+                "init_cost": 31.0,
+                "end_cost": 0.0,
+                "init_density": 0.0,
+                "end_density": 0.0
+            },
+            {
+                "id": 13,
+                "init_cost": 19.0,
+                "end_cost": 0.0,
+                "init_density": 0.0,
+                "end_density": 0.0
+            }
+        ],
+        "path_alt": []
+    },
+    "path_cav_init": {
+        "path": [
+            {
+                "id": 7,
+                "init_cost": 31.0,
+                "end_cost": 0.0,
+                "init_density": 1.0,
+                "end_density": 0.0
+            },
+            {
+                "id": 15,
+                "init_cost": 23.0,
+                "end_cost": 0.0,
+                "init_density": 0.0,
+                "end_density": 0.0
+            },
+            {
+                "id": 4,
+                "init_cost": 32.0,
+                "end_cost": 0.0,
+                "init_density": 0.0,
+                "end_density": 0.0
+            },
+            {
+                "id": 0,
+                "init_cost": 35.0,
+                "end_cost": 0.0,
+                "init_density": 0.0,
+                "end_density": 0.0
+            },
+            {
+                "id": 1,
+                "init_cost": 32.0,
+                "end_cost": 0.0,
+                "init_density": 0.0,
+                "end_density": 0.0
+            },
+            {
+                "id": 12,
+                "init_cost": 28.0,
+                "end_cost": 0.0,
+                "init_density": 0.0,
+                "end_density": 0.0
+            },
+            {
+                "id": 13,
+                "init_cost": 32.0,
+                "end_cost": 0.0,
+                "init_density": 0.0,
+                "end_density": 0.0
+            }
+        ],
+        "path_alt": []
+    },
+    "path_cav_end": {
+        "path": [
+            {
+                "id": 7,
+                "init_cost": 31.0,
+                "end_cost": 0.0,
+                "init_density": 0.0,
+                "end_density": 0.0
+            }
+        ],
+        "path_alt": []
+    },
+    "path_norm_segments": [],
+    "path_cav_init_segments": [],
+    "path_cav_end_segments": []
+}

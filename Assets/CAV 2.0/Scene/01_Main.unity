@@ -7949,7 +7949,26 @@ MonoBehaviour:
   CurrentSegment: {fileID: 0}
   CurrentSegmentCost: 0
   DestinationSegment: {fileID: 0}
+  dataHandler: {fileID: 0}
   vehicleType: 0
+  segcycle: 0
+  vjs:
+    id: 0
+    path_norm:
+      path: []
+      path_alt: []
+    path_cav_init:
+      path: []
+      path_alt: []
+    path_cav_end:
+      path: []
+      path_alt: []
+    path_norm_segments: []
+    path_cav_init_segments: []
+    path_cav_end_segments: []
+  pjs_END:
+    path: []
+    path_alt: []
   isReady: 0
 --- !u!54 &616570992
 Rigidbody:
@@ -13140,7 +13159,26 @@ MonoBehaviour:
   CurrentSegment: {fileID: 0}
   CurrentSegmentCost: 0
   DestinationSegment: {fileID: 0}
+  dataHandler: {fileID: 0}
   vehicleType: 0
+  segcycle: 0
+  vjs:
+    id: 0
+    path_norm:
+      path: []
+      path_alt: []
+    path_cav_init:
+      path: []
+      path_alt: []
+    path_cav_end:
+      path: []
+      path_alt: []
+    path_norm_segments: []
+    path_cav_init_segments: []
+    path_cav_end_segments: []
+  pjs_END:
+    path: []
+    path_alt: []
   isReady: 0
 --- !u!114 &1005397151
 MonoBehaviour:
@@ -21321,7 +21359,26 @@ MonoBehaviour:
   CurrentSegment: {fileID: 0}
   CurrentSegmentCost: 0
   DestinationSegment: {fileID: 0}
+  dataHandler: {fileID: 0}
   vehicleType: 0
+  segcycle: 0
+  vjs:
+    id: 0
+    path_norm:
+      path: []
+      path_alt: []
+    path_cav_init:
+      path: []
+      path_alt: []
+    path_cav_end:
+      path: []
+      path_alt: []
+    path_norm_segments: []
+    path_cav_init_segments: []
+    path_cav_end_segments: []
+  pjs_END:
+    path: []
+    path_alt: []
   isReady: 0
 --- !u!114 &1678212994
 MonoBehaviour:
@@ -28014,7 +28071,7 @@ PrefabInstance:
     - target: {fileID: 916680778969701538, guid: eb79cb7194e2f53468438a9954e4b994,
         type: 3}
       propertyPath: SimGroups.Array.data[0]
-      value: 60
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 916680778969701538, guid: eb79cb7194e2f53468438a9954e4b994,
         type: 3}
