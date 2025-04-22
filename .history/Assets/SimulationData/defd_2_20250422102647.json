@@ -7,22 +7,8 @@
     "path_cav_init": {
         "path": [
             {
-                "id": 25,
-                "init_cost": 40.0,
-                "end_cost": 0.0,
-                "init_density": 0.0,
-                "end_density": 0.0
-            },
-            {
-                "id": 24,
-                "init_cost": 31.0,
-                "end_cost": 0.0,
-                "init_density": 0.0,
-                "end_density": 0.0
-            },
-            {
                 "id": 26,
-                "init_cost": 40.0,
+                "init_cost": 30.0,
                 "end_cost": 0.0,
                 "init_density": 0.0,
                 "end_density": 0.0
@@ -42,22 +28,15 @@
                 "end_density": 0.0
             },
             {
-                "id": 3,
-                "init_cost": 22.0,
+                "id": 7,
+                "init_cost": 31.0,
                 "end_cost": 0.0,
                 "init_density": 0.0,
                 "end_density": 0.0
             },
             {
-                "id": 0,
-                "init_cost": 35.0,
-                "end_cost": 0.0,
-                "init_density": 0.0,
-                "end_density": 0.0
-            },
-            {
-                "id": 1,
-                "init_cost": 32.0,
+                "id": 6,
+                "init_cost": 23.0,
                 "end_cost": 0.0,
                 "init_density": 0.0,
                 "end_density": 0.0
@@ -68,18 +47,11 @@
     "path_cav_end": {
         "path": [
             {
-                "id": 25,
-                "init_cost": 31.0,
-                "end_cost": 0.0,
-                "init_density": 0.0,
-                "end_density": 0.0
-            },
-            {
                 "id": 26,
-                "init_cost": 40.0,
+                "init_cost": 30.0,
                 "end_cost": 0.0,
                 "init_density": 0.0,
-                "end_density": 0.0
+                "end_density": 1.0
             },
             {
                 "id": 31,
@@ -96,22 +68,15 @@
                 "end_density": 0.0
             },
             {
-                "id": 3,
-                "init_cost": 22.0,
+                "id": 7,
+                "init_cost": 31.0,
                 "end_cost": 0.0,
                 "init_density": 0.0,
                 "end_density": 0.0
             },
             {
-                "id": 0,
-                "init_cost": 35.0,
-                "end_cost": 0.0,
-                "init_density": 0.0,
-                "end_density": 0.0
-            },
-            {
-                "id": 1,
-                "init_cost": 32.0,
+                "id": 6,
+                "init_cost": 23.0,
                 "end_cost": 0.0,
                 "init_density": 0.0,
                 "end_density": 0.0
@@ -132,15 +97,29 @@
     "path_cav_init": {
         "path": [
             {
-                "id": 5,
-                "init_cost": 22.0,
+                "id": 30,
+                "init_cost": 31.0,
                 "end_cost": 0.0,
                 "init_density": 0.0,
                 "end_density": 0.0
             },
             {
-                "id": 6,
-                "init_cost": 23.0,
+                "id": 33,
+                "init_cost": 19.0,
+                "end_cost": 0.0,
+                "init_density": 0.0,
+                "end_density": 0.0
+            },
+            {
+                "id": 13,
+                "init_cost": 32.0,
+                "end_cost": 0.0,
+                "init_density": 0.0,
+                "end_density": 0.0
+            },
+            {
+                "id": 22,
+                "init_cost": 18.0,
                 "end_cost": 0.0,
                 "init_density": 0.0,
                 "end_density": 0.0
@@ -148,13 +127,6 @@
             {
                 "id": 17,
                 "init_cost": 15.0,
-                "end_cost": 0.0,
-                "init_density": 0.0,
-                "end_density": 0.0
-            },
-            {
-                "id": 25,
-                "init_cost": 40.0,
                 "end_cost": 0.0,
                 "init_density": 0.0,
                 "end_density": 0.0
@@ -165,8 +137,22 @@
     "path_cav_end": {
         "path": [
             {
-                "id": 5,
-                "init_cost": 23.0,
+                "id": 30,
+                "init_cost": 19.0,
+                "end_cost": 0.0,
+                "init_density": 0.0,
+                "end_density": 0.0
+            },
+            {
+                "id": 13,
+                "init_cost": 32.0,
+                "end_cost": 0.0,
+                "init_density": 0.0,
+                "end_density": 0.0
+            },
+            {
+                "id": 22,
+                "init_cost": 18.0,
                 "end_cost": 0.0,
                 "init_density": 0.0,
                 "end_density": 0.0
@@ -174,13 +160,6 @@
             {
                 "id": 17,
                 "init_cost": 15.0,
-                "end_cost": 0.0,
-                "init_density": 0.0,
-                "end_density": 0.0
-            },
-            {
-                "id": 25,
-                "init_cost": 40.0,
                 "end_cost": 0.0,
                 "init_density": 0.0,
                 "end_density": 0.0

@@ -483,7 +483,7 @@ public class Navigation : MonoBehaviour
                 if (pjs_END.path.Count > 0)
                 {
                     segment_track_js stjs_ = new segment_track_js(path[0], trafficSystem.segments[path[0]].cost, trafficSystem.segments[path[0]].carDensity);
-                    // Debug.LogError("Vehicle " + ID +  " cost: " +lastpathCost + " density: " + lastpathDensity);
+                    Debug.LogError("Vehicle " + ID + " path: " + path[0] + " cost: " + trafficSystem.segments[path[0]].cost + " density: " + trafficSystem.segments[path[0]].carDensity);
                     pjs_END.addEndSegments(stjs_, lastpathCost, lastpathDensity);
                 }
             }

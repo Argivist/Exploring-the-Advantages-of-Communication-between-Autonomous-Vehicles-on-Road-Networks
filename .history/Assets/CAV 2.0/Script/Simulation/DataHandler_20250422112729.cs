@@ -196,7 +196,7 @@ public class segment_track_js
 
     public void updateEndCost(float cost)
     {
-        end_cost = cost;
+        init_cost = cost;
     }
     public void updateEndDensity(float density)
     {

@@ -156,11 +156,8 @@ public class path_js
     public void addEndSegments(segment_track_js s, float cost, float density)
     {
         int last_index= path.Count - 1;
-        
         path[last_index].updateEndCost(cost);
-        
         path[last_index].updateEndDensity(density);
-    
         path.Add(s);
     }
     public void updateSegments(int id, float cost, float density)
@@ -196,7 +193,7 @@ public class segment_track_js
 
     public void updateEndCost(float cost)
     {
-        end_cost = cost;
+        init_cost = cost;
     }
     public void updateEndDensity(float density)
     {

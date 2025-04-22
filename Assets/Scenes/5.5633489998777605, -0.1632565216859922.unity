@@ -348,8 +348,9 @@ MonoBehaviour:
   - {fileID: 2023784792}
   - {fileID: 2127854906}
   - {fileID: 1745236986}
-  cost: 0
+  length: 0
   carDensity: 0
+  cost: 0
   dynamicCost: 0
   id: 0
   waypoints:
@@ -672,8 +673,9 @@ MonoBehaviour:
   - {fileID: 380945122}
   - {fileID: 229350168}
   - {fileID: 1662955072}
-  cost: 0
+  length: 0
   carDensity: 0
+  cost: 0
   dynamicCost: 0
   id: 22
   waypoints:
@@ -816,8 +818,9 @@ MonoBehaviour:
   - {fileID: 229278294}
   - {fileID: 1273368438}
   - {fileID: 1984626915}
-  cost: 0
+  length: 0
   carDensity: 0
+  cost: 0
   dynamicCost: 0
   id: 7
   waypoints:
@@ -875,8 +878,9 @@ MonoBehaviour:
   - {fileID: 1061978137}
   - {fileID: 1620307424}
   - {fileID: 972737004}
-  cost: 0
+  length: 0
   carDensity: 0
+  cost: 0
   dynamicCost: 0
   id: 13
   waypoints:
@@ -1066,8 +1070,9 @@ MonoBehaviour:
   - {fileID: 1173053852}
   - {fileID: 1063116795}
   - {fileID: 580097741}
-  cost: 0
+  length: 0
   carDensity: 0
+  cost: 0
   dynamicCost: 0
   id: 8
   waypoints:
@@ -1122,8 +1127,9 @@ MonoBehaviour:
   - {fileID: 1505083545}
   - {fileID: 121173769}
   - {fileID: 1426474331}
-  cost: 0
+  length: 0
   carDensity: 0
+  cost: 0
   dynamicCost: 0
   id: 21
   waypoints:
@@ -1246,8 +1252,9 @@ MonoBehaviour:
   - {fileID: 518699286}
   - {fileID: 1464468410}
   - {fileID: 1381648319}
-  cost: 0
+  length: 0
   carDensity: 0
+  cost: 0
   dynamicCost: 0
   id: 2
   waypoints:
@@ -1877,8 +1884,9 @@ MonoBehaviour:
   - {fileID: 1976701752}
   - {fileID: 936878082}
   - {fileID: 944027510}
-  cost: 0
+  length: 0
   carDensity: 0
+  cost: 0
   dynamicCost: 0
   id: 20
   waypoints:
@@ -2221,8 +2229,9 @@ MonoBehaviour:
   - {fileID: 1415591036}
   - {fileID: 831063792}
   - {fileID: 253193640}
-  cost: 0
+  length: 0
   carDensity: 0
+  cost: 0
   dynamicCost: 0
   id: 3
   waypoints:
@@ -2477,8 +2486,9 @@ MonoBehaviour:
   - {fileID: 518699286}
   - {fileID: 1381648319}
   - {fileID: 1464468410}
-  cost: 0
+  length: 0
   carDensity: 0
+  cost: 0
   dynamicCost: 0
   id: 6
   waypoints:
@@ -3259,8 +3269,9 @@ MonoBehaviour:
   - {fileID: 33139783}
   - {fileID: 1658344433}
   - {fileID: 1541901613}
-  cost: 0
+  length: 0
   carDensity: 0
+  cost: 0
   dynamicCost: 0
   id: 27
   waypoints:
@@ -3668,8 +3679,9 @@ MonoBehaviour:
   - {fileID: 380945122}
   - {fileID: 229350168}
   - {fileID: 1662955072}
-  cost: 0
+  length: 0
   carDensity: 0
+  cost: 0
   dynamicCost: 0
   id: 19
   waypoints:
@@ -3708,8 +3720,9 @@ MonoBehaviour:
   - {fileID: 1745236986}
   - {fileID: 2127854906}
   - {fileID: 2023784792}
-  cost: 0
+  length: 0
   carDensity: 0
+  cost: 0
   dynamicCost: 0
   id: 30
   waypoints:
@@ -3837,8 +3850,9 @@ MonoBehaviour:
   - {fileID: 1620307424}
   - {fileID: 1061978137}
   - {fileID: 972737004}
-  cost: 0
+  length: 0
   carDensity: 0
+  cost: 0
   dynamicCost: 0
   id: 26
   waypoints:
@@ -3936,7 +3950,7 @@ PrefabInstance:
     - target: {fileID: 916680778969701538, guid: eb79cb7194e2f53468438a9954e4b994,
         type: 3}
       propertyPath: SimGroups.Array.data[0]
-      value: 2
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 916680778969701538, guid: eb79cb7194e2f53468438a9954e4b994,
         type: 3}
@@ -4132,8 +4146,9 @@ MonoBehaviour:
   - {fileID: 1505083545}
   - {fileID: 121173769}
   - {fileID: 1426474331}
-  cost: 0
+  length: 0
   carDensity: 0
+  cost: 0
   dynamicCost: 0
   id: 25
   waypoints:
@@ -4188,8 +4203,9 @@ MonoBehaviour:
   - {fileID: 1541901613}
   - {fileID: 1658344433}
   - {fileID: 33139783}
-  cost: 0
+  length: 0
   carDensity: 0
+  cost: 0
   dynamicCost: 0
   id: 9
   waypoints:
@@ -4510,8 +4526,9 @@ MonoBehaviour:
   - {fileID: 1505083545}
   - {fileID: 121173769}
   - {fileID: 1426474331}
-  cost: 0
+  length: 0
   carDensity: 0
+  cost: 0
   dynamicCost: 0
   id: 11
   waypoints:
@@ -4712,8 +4729,9 @@ MonoBehaviour:
   - {fileID: 2023784792}
   - {fileID: 2127854906}
   - {fileID: 1745236986}
-  cost: 0
+  length: 0
   carDensity: 0
+  cost: 0
   dynamicCost: 0
   id: 16
   waypoints:
@@ -5146,8 +5164,9 @@ MonoBehaviour:
   - {fileID: 518699286}
   - {fileID: 1381648319}
   - {fileID: 1464468410}
-  cost: 0
+  length: 0
   carDensity: 0
+  cost: 0
   dynamicCost: 0
   id: 4
   waypoints:
@@ -5320,8 +5339,9 @@ MonoBehaviour:
   - {fileID: 1415591036}
   - {fileID: 253193640}
   - {fileID: 831063792}
-  cost: 0
+  length: 0
   carDensity: 0
+  cost: 0
   dynamicCost: 0
   id: 31
   waypoints:
@@ -5397,8 +5417,9 @@ MonoBehaviour:
   - {fileID: 1620307424}
   - {fileID: 1061978137}
   - {fileID: 972737004}
-  cost: 0
+  length: 0
   carDensity: 0
+  cost: 0
   dynamicCost: 0
   id: 24
   waypoints:
@@ -5498,8 +5519,9 @@ MonoBehaviour:
   - {fileID: 170927244}
   - {fileID: 1063116795}
   - {fileID: 1173053852}
-  cost: 0
+  length: 0
   carDensity: 0
+  cost: 0
   dynamicCost: 0
   id: 5
   waypoints:
@@ -5689,8 +5711,9 @@ MonoBehaviour:
   - {fileID: 580097741}
   - {fileID: 1063116795}
   - {fileID: 170927244}
-  cost: 0
+  length: 0
   carDensity: 0
+  cost: 0
   dynamicCost: 0
   id: 12
   waypoints:
@@ -5731,8 +5754,9 @@ MonoBehaviour:
   - {fileID: 1415591036}
   - {fileID: 253193640}
   - {fileID: 831063792}
-  cost: 0
+  length: 0
   carDensity: 0
+  cost: 0
   dynamicCost: 0
   id: 28
   waypoints:
@@ -5896,8 +5920,9 @@ MonoBehaviour:
   - {fileID: 1620307424}
   - {fileID: 1061978137}
   - {fileID: 972737004}
-  cost: 0
+  length: 0
   carDensity: 0
+  cost: 0
   dynamicCost: 0
   id: 14
   waypoints:
@@ -5955,8 +5980,9 @@ MonoBehaviour:
   - {fileID: 1063116795}
   - {fileID: 170927244}
   - {fileID: 580097741}
-  cost: 0
+  length: 0
   carDensity: 0
+  cost: 0
   dynamicCost: 0
   id: 10
   waypoints:
@@ -6059,8 +6085,9 @@ MonoBehaviour:
   - {fileID: 380945122}
   - {fileID: 229350168}
   - {fileID: 1662955072}
-  cost: 0
+  length: 0
   carDensity: 0
+  cost: 0
   dynamicCost: 0
   id: 23
   waypoints:
@@ -6385,8 +6412,9 @@ MonoBehaviour:
   - {fileID: 1976701752}
   - {fileID: 936878082}
   - {fileID: 944027510}
-  cost: 0
+  length: 0
   carDensity: 0
+  cost: 0
   dynamicCost: 0
   id: 29
   waypoints:
@@ -6860,8 +6888,9 @@ MonoBehaviour:
   - {fileID: 1984626915}
   - {fileID: 1273368438}
   - {fileID: 229278294}
-  cost: 0
+  length: 0
   carDensity: 0
+  cost: 0
   dynamicCost: 0
   id: 18
   waypoints:
@@ -6916,8 +6945,9 @@ MonoBehaviour:
   - {fileID: 1976701752}
   - {fileID: 936878082}
   - {fileID: 944027510}
-  cost: 0
+  length: 0
   carDensity: 0
+  cost: 0
   dynamicCost: 0
   id: 17
   waypoints:
@@ -7060,8 +7090,9 @@ MonoBehaviour:
   - {fileID: 1541901613}
   - {fileID: 33139783}
   - {fileID: 1658344433}
-  cost: 0
+  length: 0
   carDensity: 0
+  cost: 0
   dynamicCost: 0
   id: 1
   waypoints:
@@ -7293,8 +7324,9 @@ MonoBehaviour:
   - {fileID: 229278294}
   - {fileID: 1984626915}
   - {fileID: 1273368438}
-  cost: 0
+  length: 0
   carDensity: 0
+  cost: 0
   dynamicCost: 0
   id: 15
   waypoints:

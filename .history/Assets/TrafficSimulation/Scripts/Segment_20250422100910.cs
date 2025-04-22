@@ -12,7 +12,7 @@ namespace TrafficSimulation {
         public int length;
         // My personal inclusion
         public int carDensity=0;
-        public int cost;
+        public int cost
         public float dynamicCost;
 
 
@@ -35,7 +35,6 @@ namespace TrafficSimulation {
             if (ts == null)
                 Debug.LogError("TrafficSystem not found in parent.");
             dynamicCost=length + carDensity;
-            dynamicCost=cs.GetRoadObject(id).UpdateCost();
         }
 
         void calculateLength()
