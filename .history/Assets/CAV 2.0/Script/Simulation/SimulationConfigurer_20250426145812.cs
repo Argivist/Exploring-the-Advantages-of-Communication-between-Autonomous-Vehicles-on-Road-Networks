@@ -273,7 +273,6 @@ public class SimulationConfigurer : MonoBehaviour
             );
             v.startSeg = startWaypointObj.segment;
             vehicleList.Add(v);
-            vehicleDictionary.Add(v.vehicleId, v);
             Debug.Log($"Vehicle {i} added at {startPos} to {endPos}");
             dataHandler.AddVehicleData(v.vehicleId, v.startPos, v.endPos, v.vehicleType);
             if (i % 10 == 0)

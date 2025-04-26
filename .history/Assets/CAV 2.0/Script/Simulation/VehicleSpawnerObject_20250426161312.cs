@@ -32,46 +32,21 @@ public class VehicleSpawnerObject : MonoBehaviour
 
     void Start()
     {
+
         c = GetComponent<Collider>();
         c.isTrigger = true;
         direction();
 
-        StartCoroutine(WaitAndSpawn());
-    }
-
-    IEnumerator WaitAndSpawn()
-    {
-        // Wait until it's safe to spawn
-        while (!CanSpawn())
+        // Try to spawn a vehicle immediately
+        if (CanSpawn())
         {
-            yield return null; // wait one frame
+            SpawnVehicle();
         }
 
-        // Now it's safe
-        SpawnVehicle();
-
-        // Destroy the spawner
+        // Destroy the spawner immediately after attempting spawn
         Destroy(gameObject);
+
     }
-
-
-    // void Start()
-    // {
-
-    //     c = GetComponent<Collider>();
-    //     c.isTrigger = true;
-    //     direction();
-
-    //     // Try to spawn a vehicle immediately
-    //     if (CanSpawn())
-    //     {
-    //         SpawnVehicle();
-    //     }
-
-    //     // Destroy the spawner immediately after attempting spawn
-    //     Destroy(gameObject);
-
-    // }
 
     void direction()
     {

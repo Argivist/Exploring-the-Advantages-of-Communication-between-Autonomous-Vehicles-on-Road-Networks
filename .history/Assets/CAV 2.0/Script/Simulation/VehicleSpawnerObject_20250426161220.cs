@@ -36,141 +36,85 @@ public class VehicleSpawnerObject : MonoBehaviour
         c.isTrigger = true;
         direction();
 
-        StartCoroutine(WaitAndSpawn());
-    }
+        // Start coroutine for spawning vehicles
+        StartCoroutine(SpawnVehicles());
 
-    IEnumerator WaitAndSpawn()
+        c = GetComponent<Collider>();
+    c.isTrigger = true;
+    direction();
+
+    // Try to spawn a vehicle immediately
+    if (CanSpawn())
     {
-        // Wait until it's safe to spawn
-        while (!CanSpawn())
-        {
-            yield return null; // wait one frame
-        }
-
-        // Now it's safe
         SpawnVehicle();
-
-        // Destroy the spawner
-        Destroy(gameObject);
     }
 
-
-    // void Start()
-    // {
-
-    //     c = GetComponent<Collider>();
-    //     c.isTrigger = true;
-    //     direction();
-
-    //     // Try to spawn a vehicle immediately
-    //     if (CanSpawn())
-    //     {
-    //         SpawnVehicle();
-    //     }
-
-    //     // Destroy the spawner immediately after attempting spawn
-    //     Destroy(gameObject);
-
-    // }
+    // Destroy the spawner immediately after attempting spawn
+    Destroy(gameObject);
+        
+    }
 
     void direction()
     {
         if (WayDir == null)
-        {
-            Debug.LogWarning("Waypoint direction is null! Make sure WayDir is assigned.");
-            return;
-        }
-        Waypoint w = WayDir;
+    {
+        Debug.LogWarning("Waypoint direction is null! Make sure WayDir is assigned.");
+        return;
+    }
+        Waypoint w = WayDir;   
         float z = w.transform.position.z - transform.position.z;
         float x = w.transform.position.x - transform.position.x;
-        angle = Mathf.Atan2(x, z) * Mathf.Rad2Deg;
+        angle = Mathf.Atan2(x,z) * Mathf.Rad2Deg;
         startRotation = Quaternion.Euler(0, angle, 0);
         this.transform.rotation = startRotation;
 
     }
 
-
-    void SpawnVehicle()
+    IEnumerator SpawnVehicles()
     {
-        GameObject vClone = Instantiate(vehicleObject, transform.position, this.transform.rotation);
-        vClone.name = "Vehicle " + id;
-        vClone.transform.rotation = startRotation;
+        while (true) // Infinite loop to keep spawning
+        {
+            if (CanSpawn())
+            {
+                GameObject vClone = Instantiate(vehicleObject, transform.position, this.transform.rotation);
+                vClone.name = "Vehicle " + id;
+                vClone.transform.rotation = startRotation;
 
-        // Assign vehicle properties
-        Description d = vClone.GetComponent<Description>();
-        CommunicationAgent cm = vClone.GetComponent<CommunicationAgent>();
-        Navigation n = vClone.GetComponent<Navigation>();
+                // Assign vehicle properties
+                Description d = vClone.GetComponent<Description>();
+                CommunicationAgent cm = vClone.GetComponent<CommunicationAgent>();
+                Navigation n = vClone.GetComponent<Navigation>();
 
-        d.id = id;
-        n.ID = id;
-        n.vehicleType = type;
-        n.DestinationSegment = endSegment;
-        n.dest = dest;
-        n.DestinationSegment = destSegment;
-        n.segcycle = simNo;
-        cm.id = id;
-        n.CurrentSegment = startSegment;
-        n.dataHandler = dataHandler;
-        vClone.SetActive(true);
+                d.id = id;
+                n.ID = id;
+                n.vehicleType = type;
+                n.DestinationSegment = endSegment;
+                n.dest = dest;
+                n.DestinationSegment = destSegment;
+                n.segcycle = simNo;
+                cm.id = id;
+                n.CurrentSegment = startSegment;
+                n.dataHandler = dataHandler;
+                vClone.SetActive(true);
+            }
+            Destroy(gameObject);
+
+            yield return new WaitForSeconds(spawnTime); // Wait before next spawn
+        }
     }
 
     bool CanSpawn()
     {
-        Collider[] colliders = Physics.OverlapSphere(transform.position, 1f); // Check nearby
+        Collider[] colliders = Physics.OverlapSphere(transform.position, 1f); // Check for nearby objects
         foreach (Collider col in colliders)
         {
             if (col.gameObject.tag == "AutonomousVehicle")
             {
-                return false; // Cannot spawn
+                return false; // Don't spawn if another vehicle is in range
             }
         }
         return true;
     }
-    // IEnumerator SpawnVehicles()
-    // {
-    //     while (true) // Infinite loop to keep spawning
-    //     {
-    //         if (CanSpawn())
-    //         {
-    //             GameObject vClone = Instantiate(vehicleObject, transform.position, this.transform.rotation);
-    //             vClone.name = "Vehicle " + id;
-    //             vClone.transform.rotation = startRotation;
-
-    //             // Assign vehicle properties
-    //             Description d = vClone.GetComponent<Description>();
-    //             CommunicationAgent cm = vClone.GetComponent<CommunicationAgent>();
-    //             Navigation n = vClone.GetComponent<Navigation>();
-
-    //             d.id = id;
-    //             n.ID = id;
-    //             n.vehicleType = type;
-    //             n.DestinationSegment = endSegment;
-    //             n.dest = dest;
-    //             n.DestinationSegment = destSegment;
-    //             n.segcycle = simNo;
-    //             cm.id = id;
-    //             n.CurrentSegment = startSegment;
-    //             n.dataHandler = dataHandler;
-    //             vClone.SetActive(true);
-    //         }
-    //         Destroy(gameObject);
-
-    //         yield return new WaitForSeconds(spawnTime); // Wait before next spawn
-    //     }
-    // }
-
-    // bool CanSpawn()
-    // {
-    //     Collider[] colliders = Physics.OverlapSphere(transform.position, 1f); // Check for nearby objects
-    //     foreach (Collider col in colliders)
-    //     {
-    //         if (col.gameObject.tag == "AutonomousVehicle")
-    //         {
-    //             return false; // Don't spawn if another vehicle is in range
-    //         }
-    //     }
-    //     return true;
-    // }
 }
 
 
@@ -219,7 +163,7 @@ public class VehicleSpawnerObject : MonoBehaviour
 
 //         // Start coroutine for spawning vehicles
 //         StartCoroutine(SpawnVehicles());
-
+        
 //     }
 
 //     void direction()
@@ -403,7 +347,7 @@ public class VehicleSpawnerObject : MonoBehaviour
 // //     // Check segment orientation and adjust if necessary
 // //     Vector3 segmentDirection = (startSegment.waypoints[startSegment.waypoints.Count - 1].transform.position 
 // //                                - startSegment.waypoints[0].transform.position).normalized;
-
+    
 // //     // If the segment direction and spawner forward direction have a negative dot product, flip spawner forward
 // //     if (Vector3.Dot(spawnerForward, segmentDirection) < 0)
 // //     {
@@ -444,7 +388,7 @@ public class VehicleSpawnerObject : MonoBehaviour
 
 // //     // Determine the local segment direction near the spawner
 // //     Vector3 segmentDirection = Vector3.zero;
-
+    
 // //     for (int i = 0; i < startSegment.waypoints.Count - 1; i++)
 // //     {
 // //         Vector3 tempDirection = (startSegment.waypoints[i + 1].transform.position 
@@ -501,7 +445,7 @@ public class VehicleSpawnerObject : MonoBehaviour
 //     //use waydir to determine the direction of the vehicle
 //     // might be using the origin waypoint so change to next waypoint
 
-
+    
 //                 Waypoint w = WayDir;
 //                 float z = w.transform.position.z - transform.position.z;
 //                 float x = w.transform.position.x - transform.position.x;

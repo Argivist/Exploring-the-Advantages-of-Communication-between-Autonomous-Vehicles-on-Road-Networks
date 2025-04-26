@@ -371,7 +371,6 @@ private IEnumerator SpawnMixedVehiclesCoroutine()
             var vehicleData = tempList[key];
             InstantiateAndTrackVehicle(Vehicle, vehicleData);
             // tempList.Remove(key);
-            removedVehicles.Add(key);
 
             yield return null; // wait 1 frame after each spawn
         }

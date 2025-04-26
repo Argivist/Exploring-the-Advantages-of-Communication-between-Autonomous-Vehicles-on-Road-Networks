@@ -20,15 +20,15 @@ public class SimulationMaster_ : MonoBehaviour
     public bool CAVSimulationEnabled = true;
     public bool MixedSimulationEnabled = true;
 
-    public Dictionary<int, GameObject> SpawnedVehicles = new Dictionary<int, GameObject>();
+    public Dictionary<int,GameObject> SpawnedVehicles = new Dictionary<int,GameObject>();
 
 
     [Header("Data Handler")]
     public DataHandler dh;
 
     [Header("Vehicle Data List")]
-    private Dictionary<int, Vehicle> vehicleList;
-    private Dictionary<int, Vehicle> tempList;
+    private Dictionary<int,Vehicle> vehicleList;
+    private Dictionary<int,Vehicle> tempList;
     public GameObject Vehicle;
 
     [Header("Tracking Vehicles")]
@@ -39,8 +39,6 @@ public class SimulationMaster_ : MonoBehaviour
     [Header("Current Simulation Index")]
     public int currSim = 0;
     private bool isReady = false;
-    private bool spawningVehicles = false;
-    private bool changedSim;
 
     private void Start()
     {
@@ -96,12 +94,8 @@ public class SimulationMaster_ : MonoBehaviour
             yield break;
         }
 
-        // vehicleList = new List<Vehicle>(sc.vehicleList);
-        // vehicleList = new Dictionary<int,Vehicle>();
-        vehicleList = new Dictionary<int, Vehicle>(sc.vehicleDictionary);
-        // tempList = new List<Vehicle>(vehicleList);
-        tempList = new Dictionary<int, Vehicle>();
-        tempList = new Dictionary<int, Vehicle>(vehicleList);
+        vehicleList = new List<Vehicle>(sc.vehicleList);
+        tempList = new List<Vehicle>(vehicleList);
 
         Debug.Log("Vehicle list initialized with " + vehicleList.Count + " vehicles. TempList initialized with " + tempList.Count + " vehicles.");
 
@@ -159,20 +153,15 @@ public class SimulationMaster_ : MonoBehaviour
 
         NumSpawnedVehicles = 0;
         NumDestroyedVehicles = 0;
-
         sw.stopTimer();
         sw.resetTimer();
         sw.startTimer();
-        Debug.Log("Timer reset and started for simulation " + currSim);
-        Debug.Log("Generating TempList for simulation " + currSim);
         // sw.resetTimer();
         // sw.startTimer();
 
         // Reinitialize tempList for the current simulation
-        // tempList = new List<Vehicle>(sc.vehicleList);
-        tempList = new Dictionary<int, Vehicle>(sc.vehicleDictionary);
-        Debug.Log("TempList reinitialized with " + tempList.Count + " vehicles. in sim"+ currSim);
-        changedSim = true;
+        tempList = new List<Vehicle>(sc.vehicleList);
+
         nextSim = false;
     }
 
@@ -192,290 +181,119 @@ public class SimulationMaster_ : MonoBehaviour
 
     private void RunCurrentSimulation()
     {
-        // Original Spawn Logic
-        // switch (currSim)
-        // {
-        //     case 0: // Normal
-        //         if (NormalSimulationEnabled)
-        //         {
-        //             SpawnNormalVehicle();
-        //         }
-        //         else
-        //         {
-        //             nextSim = true; // Skip if not enabled
-        //         }
-        //         break;
 
-        //     case 1: // CAV
-        //         if (CAVSimulationEnabled)
-        //         {
-        //             SpawnCAVehicle();
-        //         }
-        //         else
-        //         {
-        //             nextSim = true; // Skip if not enabled
-        //         }
-        //         break;
-
-        //     case 2: // Mixed
-        //         if (MixedSimulationEnabled)
-        //         {
-        //             SpawnMixedVehicles();
-        //         }
-        //         else
-        //         {
-        //             // sw.resetTimer();
-        //             nextSim = true; // Skip if not enabled
-        //         }
-        //         break;
-
-        // }
-        if (spawningVehicles && !changedSim) {
-            Debug.Log("Spawning vehicles in progress. Skipping this frame.");
-            return; // Skip if vehicles are already being spawned
-        } 
-        spawningVehicles = true;
-        changedSim = false;
-        Debug.Log("Running simulation " + currSim);
         switch (currSim)
         {
             case 0: // Normal
                 if (NormalSimulationEnabled)
                 {
-                    StartCoroutine(SpawnNormalVehiclesCoroutine());
+                    SpawnNormalVehicle();
                 }
                 else
                 {
-                    nextSim = true;
+                    nextSim = true; // Skip if not enabled
                 }
                 break;
 
             case 1: // CAV
                 if (CAVSimulationEnabled)
                 {
-                    StartCoroutine(SpawnCAVehiclesCoroutine());
+                    SpawnCAVehicle();
                 }
                 else
                 {
-                    nextSim = true;
+                    nextSim = true; // Skip if not enabled
                 }
                 break;
 
             case 2: // Mixed
                 if (MixedSimulationEnabled)
                 {
-                    StartCoroutine(SpawnMixedVehiclesCoroutine());
+                    SpawnMixedVehicles();
                 }
                 else
                 {
-                    nextSim = true;
+                    // sw.resetTimer();
+                    nextSim = true; // Skip if not enabled
                 }
                 break;
-        
+
+        }
     }
 
-}
-
-// Courutine to spawn vehicles based on the current simulation
-private IEnumerator SpawnNormalVehiclesCoroutine()
-{
-    while (tempList.Count > 0)
+    private void SpawnNormalVehicle()
     {
-        var vehiclesToSpawn = new List<int>();
-        List<int> removedVehicles = new List<int>();
-
-        foreach (var kvp in tempList)
+        bool isSpawned = false;
+        for (int i = tempList.Count - 1; i >= 0; i--) // Fix: i >= 0 instead of i > 0
         {
-            if (kvp.Value.startTime <= sw.getTime())
+            if (tempList[i].startTime <= sw.getTime())
             {
-                vehiclesToSpawn.Add(kvp.Key);
+                GameObject vehiclePrefab = Vehicle;
+                tempList[i].vehicleType = Navigation.VehicleType.NonCAV;
+                InstantiateAndTrackVehicle(vehiclePrefab, tempList[i]);
+                tempList.RemoveAt(i);
+                isSpawned = true;
             }
         }
-
-        foreach (var key in vehiclesToSpawn)
-        {
-            var vehicleData = tempList[key];
-            vehicleData.vehicleType = Navigation.VehicleType.NonCAV;
-            InstantiateAndTrackVehicle(Vehicle, vehicleData);
-            removedVehicles.Add(key);
-            // tempList.Remove(key);
-            yield return null; // wait 1 frame after each spawn
-        }
-
-        foreach (var key in removedVehicles)
-        {
-            tempList.Remove(key);
-        }
-
-
-        spawningVehicles = false;
-
-        yield return null;
     }
-}
 
-private IEnumerator SpawnCAVehiclesCoroutine()
-{
-
-    List<int> removedVehicles = new List<int>();
-    while (tempList.Count > 0)
+    private void SpawnCAVehicle()
     {
-        var vehiclesToSpawn = new List<int>();
-
-        foreach (var kvp in tempList)
+        for (int i = tempList.Count - 1; i >= 0; i--) // Fix: i >= 0 instead of i > 0
         {
-            if (kvp.Value.startTime <= sw.getTime())
+            if (tempList[i].startTime <= sw.getTime())
             {
-                vehiclesToSpawn.Add(kvp.Key);
+                GameObject vehiclePrefab = Vehicle;
+                tempList[i].vehicleType = Navigation.VehicleType.CAV;
+                InstantiateAndTrackVehicle(vehiclePrefab, tempList[i]);
+                tempList.RemoveAt(i);
             }
         }
-
-        foreach (var key in vehiclesToSpawn)
-        {
-            var vehicleData = tempList[key];
-            vehicleData.vehicleType = Navigation.VehicleType.CAV;
-            InstantiateAndTrackVehicle(Vehicle, vehicleData);
-            // tempList.Remove(key);
-            removedVehicles.Add(key);
-            yield return null; // wait 1 frame after each spawn
-        }
-
-        foreach (var key in removedVehicles)
-        {
-            tempList.Remove(key);
-        }
-        spawningVehicles = false;
-
-        yield return null;
     }
-}
 
-private IEnumerator SpawnMixedVehiclesCoroutine()
-{
-
-    List<int> removedVehicles = new List<int>();
-    while (tempList.Count > 0)
+    private void SpawnMixedVehicles()
     {
-        var vehiclesToSpawn = new List<int>();
-
-        foreach (var kvp in tempList)
+        for (int i = tempList.Count - 1; i >= 0; i--) // Fix: i >= 0 instead of i > 0
         {
-            if (kvp.Value.startTime <= sw.getTime())
+            if (tempList[i].startTime <= sw.getTime())
             {
-                vehiclesToSpawn.Add(kvp.Key);
+                InstantiateAndTrackVehicle(Vehicle, tempList[i]);
+                tempList.RemoveAt(i);
             }
         }
+    }
 
-        foreach (var key in vehiclesToSpawn)
+
+    private void InstantiateAndTrackVehicle(GameObject prefab, Vehicle vehicleData)
+    {
+        GameObject vehicle = Instantiate(prefab, vehicleData.startPos, Quaternion.identity);
+        vehicle.name = vehicleData.vehicleName;
+        vehicle.GetComponent<VehicleSpawnerObject>().dest = vehicleData.endPos;
+        vehicle.SetActive(true);
+        vehicle.GetComponent<VehicleSpawnerObject>().WayDir = vehicleData.wdir;
+        vehicle.GetComponent<VehicleSpawnerObject>().dataHandler = dh;
+        // Debug.LogWarning("Vehicle spawned: " + vehicleData.vehicleName+"faceing "+vehicleData.wdir);
+        vehicle.GetComponent<VehicleSpawnerObject>().id = vehicleData.vehicleId;
+        vehicle.GetComponent<VehicleSpawnerObject>().simNo = currSim;
+        if (vehicleData.vehicleType == VehicleType.CAV)
         {
-            var vehicleData = tempList[key];
-            InstantiateAndTrackVehicle(Vehicle, vehicleData);
-            // tempList.Remove(key);
-            removedVehicles.Add(key);
-
-            yield return null; // wait 1 frame after each spawn
+            vehicle.GetComponent<VehicleSpawnerObject>().type = VehicleType.CAV;
         }
-
-        foreach (var key in removedVehicles)
+        else
         {
-            tempList.Remove(key);
+            vehicle.GetComponent<VehicleSpawnerObject>().type = VehicleType.NonCAV;
         }
-        spawningVehicles = false;
-
-        yield return null;
-    }
-}
-
-// // Original spawn code
-// private void SpawnNormalVehicle()
-// {
-//     bool isSpawned = false;
-//     // for (int i = tempList.Count - 1; i >= 0; i--) // Fix: i >= 0 instead of i > 0
-//     foreach (var i in tempList.Keys)
-//     {
-//         if (tempList[i].startTime <= sw.getTime())
-//         {
-//             GameObject vehiclePrefab = Vehicle;
-//             tempList[i].vehicleType = Navigation.VehicleType.NonCAV;
-//             InstantiateAndTrackVehicle(vehiclePrefab, tempList[i]);
-//             // tempList.RemoveAt(i);
-//             tempList.Remove(tempList[i].vehicleId);
-//             isSpawned = true;
-//         }
-//     }
-// }
-
-// private void SpawnCAVehicle()
-// {
-//     // for (int i = tempList.Count - 1; i >= 0; i--) // Fix: i >= 0 instead of i > 0
-//     foreach (var i in tempList.Keys)
-//     {
-//         if (tempList[i].startTime <= sw.getTime())
-//         {
-//             GameObject vehiclePrefab = Vehicle;
-//             tempList[i].vehicleType = Navigation.VehicleType.CAV;
-//             InstantiateAndTrackVehicle(vehiclePrefab, tempList[i]);
-//             // tempList.RemoveAt(i);
-//             tempList.Remove(tempList[i].vehicleId);
-//         }
-//     }
-
-// }
-
-// private void SpawnMixedVehicles()
-// {
-//     // for (int i = tempList.Count - 1; i >= 0; i--) // Fix: i >= 0 instead of i > 0
-//     foreach (var i in tempList.Keys)
-//     {
-//         if (tempList[i].startTime <= sw.getTime())
-//         {
-//             InstantiateAndTrackVehicle(Vehicle, tempList[i]);
-//             // tempList.RemoveAt(i);
-//             tempList.Remove(tempList[i].vehicleId);
-//         }
-//     }
-// }
-
-
-private void InstantiateAndTrackVehicle(GameObject prefab, Vehicle vehicleData)
-{
-    GameObject vehicle = Instantiate(prefab, vehicleData.startPos, Quaternion.identity);
-    vehicle.name = vehicleData.vehicleName;
-    vehicle.GetComponent<VehicleSpawnerObject>().dest = vehicleData.endPos;
-    vehicle.SetActive(true);
-    vehicle.GetComponent<VehicleSpawnerObject>().WayDir = vehicleData.wdir;
-    vehicle.GetComponent<VehicleSpawnerObject>().dataHandler = dh;
-    // Debug.LogWarning("Vehicle spawned: " + vehicleData.vehicleName+"faceing "+vehicleData.wdir);
-    vehicle.GetComponent<VehicleSpawnerObject>().id = vehicleData.vehicleId;
-    vehicle.GetComponent<VehicleSpawnerObject>().simNo = currSim;
-    if (vehicleData.vehicleType == VehicleType.CAV)
-    {
-        vehicle.GetComponent<VehicleSpawnerObject>().type = VehicleType.CAV;
-    }
-    else
-    {
-        vehicle.GetComponent<VehicleSpawnerObject>().type = VehicleType.NonCAV;
-    }
-    vehicle.GetComponent<VehicleSpawnerObject>().destSegment = vehicleData.destSegment;
-    // Uncomment and implement as needed:
-    // vehicle.GetComponent<Vehicle>().SetVehicle(vehicleData.Speed, vehicleData.EndPos, vehicleData.StartTime, vehicleData.EndTime);
-    // SpawnedVehicles.Add(vehicle);
-    if (vehicle != null)
-    {
-        NumSpawnedVehicles++;
-    }
-    // SpawnedVehicles.Add(vehicle);
-    // Check if the vehicle ID already exists in the dictionary
-    if (!SpawnedVehicles.ContainsKey(vehicleData.vehicleId))
-    {
+        vehicle.GetComponent<VehicleSpawnerObject>().destSegment = vehicleData.destSegment;
+        // Uncomment and implement as needed:
+        // vehicle.GetComponent<Vehicle>().SetVehicle(vehicleData.Speed, vehicleData.EndPos, vehicleData.StartTime, vehicleData.EndTime);
+        // SpawnedVehicles.Add(vehicle);
+        if (vehicle != null)
+        {
+            NumSpawnedVehicles++;
+        }
+        // SpawnedVehicles.Add(vehicle);
         SpawnedVehicles.Add(vehicleData.vehicleId, vehicle);
     }
-    else
-    {
-        Debug.LogWarning($"Vehicle with ID {vehicleData.vehicleId} already exists in SpawnedVehicles. Skipping adding again.");
-    }
-    // SpawnedVehicles.Add(vehicleData.vehicleId, vehicle);
-}
 }
 
 

@@ -31,28 +31,28 @@ public class VehicleSpawnerObject : MonoBehaviour
     public int simNo;
 
     void Start()
-    {
-        c = GetComponent<Collider>();
-        c.isTrigger = true;
-        direction();
+{
+    c = GetComponent<Collider>();
+    c.isTrigger = true;
+    direction();
 
-        StartCoroutine(WaitAndSpawn());
+    StartCoroutine(WaitAndSpawn());
+}
+
+IEnumerator WaitAndSpawn()
+{
+    // Wait until it's safe to spawn
+    while (!CanSpawn())
+    {
+        yield return null; // wait one frame
     }
 
-    IEnumerator WaitAndSpawn()
-    {
-        // Wait until it's safe to spawn
-        while (!CanSpawn())
-        {
-            yield return null; // wait one frame
-        }
+    // Now it's safe
+    SpawnVehicle();
 
-        // Now it's safe
-        SpawnVehicle();
-
-        // Destroy the spawner
-        Destroy(gameObject);
-    }
+    // Destroy the spawner
+    Destroy(gameObject);
+}
 
 
     // void Start()

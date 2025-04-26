@@ -1983,7 +1983,7 @@ PrefabInstance:
     - target: {fileID: 916680778969701538, guid: eb79cb7194e2f53468438a9954e4b994,
         type: 3}
       propertyPath: Location
-      value: Dome Kwabenya
+      value: Custom_1
       objectReference: {fileID: 0}
     - target: {fileID: 916680778969701538, guid: eb79cb7194e2f53468438a9954e4b994,
         type: 3}
@@ -2013,7 +2013,7 @@ PrefabInstance:
     - target: {fileID: 916680778969701538, guid: eb79cb7194e2f53468438a9954e4b994,
         type: 3}
       propertyPath: SimGroups.Array.data[0]
-      value: 50
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 916680778969701538, guid: eb79cb7194e2f53468438a9954e4b994,
         type: 3}

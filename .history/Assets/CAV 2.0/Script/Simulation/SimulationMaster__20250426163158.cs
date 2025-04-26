@@ -40,7 +40,6 @@ public class SimulationMaster_ : MonoBehaviour
     public int currSim = 0;
     private bool isReady = false;
     private bool spawningVehicles = false;
-    private bool changedSim;
 
     private void Start()
     {
@@ -163,8 +162,6 @@ public class SimulationMaster_ : MonoBehaviour
         sw.stopTimer();
         sw.resetTimer();
         sw.startTimer();
-        Debug.Log("Timer reset and started for simulation " + currSim);
-        Debug.Log("Generating TempList for simulation " + currSim);
         // sw.resetTimer();
         // sw.startTimer();
 
@@ -172,7 +169,8 @@ public class SimulationMaster_ : MonoBehaviour
         // tempList = new List<Vehicle>(sc.vehicleList);
         tempList = new Dictionary<int, Vehicle>(sc.vehicleDictionary);
         Debug.Log("TempList reinitialized with " + tempList.Count + " vehicles. in sim"+ currSim);
-        changedSim = true;
+
+
         nextSim = false;
     }
 
@@ -230,13 +228,9 @@ public class SimulationMaster_ : MonoBehaviour
         //         break;
 
         // }
-        if (spawningVehicles && !changedSim) {
-            Debug.Log("Spawning vehicles in progress. Skipping this frame.");
-            return; // Skip if vehicles are already being spawned
-        } 
+        if (spawningVehicles) return; 
         spawningVehicles = true;
-        changedSim = false;
-        Debug.Log("Running simulation " + currSim);
+    
         switch (currSim)
         {
             case 0: // Normal
@@ -371,7 +365,6 @@ private IEnumerator SpawnMixedVehiclesCoroutine()
             var vehicleData = tempList[key];
             InstantiateAndTrackVehicle(Vehicle, vehicleData);
             // tempList.Remove(key);
-            removedVehicles.Add(key);
 
             yield return null; // wait 1 frame after each spawn
         }
@@ -386,55 +379,55 @@ private IEnumerator SpawnMixedVehiclesCoroutine()
     }
 }
 
-// // Original spawn code
-// private void SpawnNormalVehicle()
-// {
-//     bool isSpawned = false;
-//     // for (int i = tempList.Count - 1; i >= 0; i--) // Fix: i >= 0 instead of i > 0
-//     foreach (var i in tempList.Keys)
-//     {
-//         if (tempList[i].startTime <= sw.getTime())
-//         {
-//             GameObject vehiclePrefab = Vehicle;
-//             tempList[i].vehicleType = Navigation.VehicleType.NonCAV;
-//             InstantiateAndTrackVehicle(vehiclePrefab, tempList[i]);
-//             // tempList.RemoveAt(i);
-//             tempList.Remove(tempList[i].vehicleId);
-//             isSpawned = true;
-//         }
-//     }
-// }
+// Original spawn code
+private void SpawnNormalVehicle()
+{
+    bool isSpawned = false;
+    // for (int i = tempList.Count - 1; i >= 0; i--) // Fix: i >= 0 instead of i > 0
+    foreach (var i in tempList.Keys)
+    {
+        if (tempList[i].startTime <= sw.getTime())
+        {
+            GameObject vehiclePrefab = Vehicle;
+            tempList[i].vehicleType = Navigation.VehicleType.NonCAV;
+            InstantiateAndTrackVehicle(vehiclePrefab, tempList[i]);
+            // tempList.RemoveAt(i);
+            tempList.Remove(tempList[i].vehicleId);
+            isSpawned = true;
+        }
+    }
+}
 
-// private void SpawnCAVehicle()
-// {
-//     // for (int i = tempList.Count - 1; i >= 0; i--) // Fix: i >= 0 instead of i > 0
-//     foreach (var i in tempList.Keys)
-//     {
-//         if (tempList[i].startTime <= sw.getTime())
-//         {
-//             GameObject vehiclePrefab = Vehicle;
-//             tempList[i].vehicleType = Navigation.VehicleType.CAV;
-//             InstantiateAndTrackVehicle(vehiclePrefab, tempList[i]);
-//             // tempList.RemoveAt(i);
-//             tempList.Remove(tempList[i].vehicleId);
-//         }
-//     }
+private void SpawnCAVehicle()
+{
+    // for (int i = tempList.Count - 1; i >= 0; i--) // Fix: i >= 0 instead of i > 0
+    foreach (var i in tempList.Keys)
+    {
+        if (tempList[i].startTime <= sw.getTime())
+        {
+            GameObject vehiclePrefab = Vehicle;
+            tempList[i].vehicleType = Navigation.VehicleType.CAV;
+            InstantiateAndTrackVehicle(vehiclePrefab, tempList[i]);
+            // tempList.RemoveAt(i);
+            tempList.Remove(tempList[i].vehicleId);
+        }
+    }
 
-// }
+}
 
-// private void SpawnMixedVehicles()
-// {
-//     // for (int i = tempList.Count - 1; i >= 0; i--) // Fix: i >= 0 instead of i > 0
-//     foreach (var i in tempList.Keys)
-//     {
-//         if (tempList[i].startTime <= sw.getTime())
-//         {
-//             InstantiateAndTrackVehicle(Vehicle, tempList[i]);
-//             // tempList.RemoveAt(i);
-//             tempList.Remove(tempList[i].vehicleId);
-//         }
-//     }
-// }
+private void SpawnMixedVehicles()
+{
+    // for (int i = tempList.Count - 1; i >= 0; i--) // Fix: i >= 0 instead of i > 0
+    foreach (var i in tempList.Keys)
+    {
+        if (tempList[i].startTime <= sw.getTime())
+        {
+            InstantiateAndTrackVehicle(Vehicle, tempList[i]);
+            // tempList.RemoveAt(i);
+            tempList.Remove(tempList[i].vehicleId);
+        }
+    }
+}
 
 
 private void InstantiateAndTrackVehicle(GameObject prefab, Vehicle vehicleData)

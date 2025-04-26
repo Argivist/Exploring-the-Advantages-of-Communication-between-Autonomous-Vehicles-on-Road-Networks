@@ -26,7 +26,9 @@ public class VehicleSpawnerObject : MonoBehaviour
 
     [Header("Other")]
     Collider c;
+    public DataHandler dataHandler;
     public float spawnTime = 2f; // Time delay between spawns
+    public int simNo;
 
     void Start()
     {
@@ -76,11 +78,13 @@ public class VehicleSpawnerObject : MonoBehaviour
                 n.DestinationSegment = endSegment;
                 n.dest = dest;
                 n.DestinationSegment = destSegment;
+                n.segcycle = simNo;
                 cm.id = id;
                 n.CurrentSegment = startSegment;
+                n.dataHandler = dataHandler;
                 vClone.SetActive(true);
             }
-            // Destroy(gameObject);
+            Destroy(gameObject);
 
             yield return new WaitForSeconds(spawnTime); // Wait before next spawn
         }
@@ -99,6 +103,118 @@ public class VehicleSpawnerObject : MonoBehaviour
         return true;
     }
 }
+
+
+
+
+
+
+
+//using System.Collections;
+// using System.Collections.Generic;
+// using TrafficSimulation;
+// using UnityEngine;
+// using UnityEngine.U2D;
+// using static Navigation;
+
+// public class VehicleSpawnerObject : MonoBehaviour
+// {
+//     [Header("Vehicle Object")]
+//     public GameObject vehicleObject;
+//     public Vector3 dest;
+//     public Segment destSegment;
+
+//     [Header("SpawnInfo")]
+//     public Timer t;
+//     public int id;
+//     public VehicleType type;
+
+//     public Segment startSegment;
+//     public Segment endSegment;
+
+//     public Waypoint WayDir;
+//     Quaternion startRotation;
+//     float angle;
+
+//     [Header("Other")]
+//     Collider c;
+//     public DataHandler dataHandler;
+//     public float spawnTime = 2f; // Time delay between spawns
+//     public int simNo;
+
+//     void Start()
+//     {
+//         c = GetComponent<Collider>();
+//         c.isTrigger = true;
+//         direction();
+
+//         // Start coroutine for spawning vehicles
+//         StartCoroutine(SpawnVehicles());
+        
+//     }
+
+//     void direction()
+//     {
+//         if (WayDir == null)
+//     {
+//         Debug.LogWarning("Waypoint direction is null! Make sure WayDir is assigned.");
+//         return;
+//     }
+//         Waypoint w = WayDir;   
+//         float z = w.transform.position.z - transform.position.z;
+//         float x = w.transform.position.x - transform.position.x;
+//         angle = Mathf.Atan2(x,z) * Mathf.Rad2Deg;
+//         startRotation = Quaternion.Euler(0, angle, 0);
+//         this.transform.rotation = startRotation;
+
+//     }
+
+//     IEnumerator SpawnVehicles()
+//     {
+//         while (true) // Infinite loop to keep spawning
+//         {
+//             if (CanSpawn())
+//             {
+//                 GameObject vClone = Instantiate(vehicleObject, transform.position, this.transform.rotation);
+//                 vClone.name = "Vehicle " + id;
+//                 vClone.transform.rotation = startRotation;
+
+//                 // Assign vehicle properties
+//                 Description d = vClone.GetComponent<Description>();
+//                 CommunicationAgent cm = vClone.GetComponent<CommunicationAgent>();
+//                 Navigation n = vClone.GetComponent<Navigation>();
+
+//                 d.id = id;
+//                 n.ID = id;
+//                 n.vehicleType = type;
+//                 n.DestinationSegment = endSegment;
+//                 n.dest = dest;
+//                 n.DestinationSegment = destSegment;
+//                 n.segcycle = simNo;
+//                 cm.id = id;
+//                 n.CurrentSegment = startSegment;
+//                 n.dataHandler = dataHandler;
+//                 vClone.SetActive(true);
+//             }
+//             Destroy(gameObject);
+
+//             yield return new WaitForSeconds(spawnTime); // Wait before next spawn
+//         }
+//     }
+
+//     bool CanSpawn()
+//     {
+//         Collider[] colliders = Physics.OverlapSphere(transform.position, 1f); // Check for nearby objects
+//         foreach (Collider col in colliders)
+//         {
+//             if (col.gameObject.tag == "AutonomousVehicle")
+//             {
+//                 return false; // Don't spawn if another vehicle is in range
+//             }
+//         }
+//         return true;
+//     }
+// }
 
 
 

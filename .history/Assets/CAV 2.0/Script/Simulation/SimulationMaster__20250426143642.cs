@@ -55,7 +55,7 @@ public class SimulationMaster_ : MonoBehaviour
             // Debug.Log("SimulationConfigurer is missing. Trying to find it in the scene...");
             // sc = FindObjectOfType<SimulationConfigurer>();
             // return false;
-            sc=FindObjectOfType<SimulationConfigurer>();
+            sc = FindObjectOfType<SimulationConfigurer>();
         }
         // gameObject.AddComponent<StopWatch>();
         sw = GetComponent<StopWatch>();
@@ -69,7 +69,7 @@ public class SimulationMaster_ : MonoBehaviour
     }
     private IEnumerator CheckConfigComplete()
     {
-        Debug.Log("Checking if config is ready...");    
+        Debug.Log("Checking if config is ready...");
         float timeout = 10f; // Maximum wait time in seconds
         float elapsedTime = 0f;
 
@@ -97,7 +97,7 @@ public class SimulationMaster_ : MonoBehaviour
         vehicleList = new List<Vehicle>(sc.vehicleList);
         tempList = new List<Vehicle>(vehicleList);
 
-        Debug.Log("Vehicle list initialized with " + vehicleList.Count + " vehicles.");
+        Debug.Log("Vehicle list initialized with " + vehicleList.Count + " vehicles. TempList initialized with " + tempList.Count + " vehicles.");
 
         // Start timer and mark readiness
         sw.startTimer();
@@ -134,7 +134,7 @@ public class SimulationMaster_ : MonoBehaviour
             nextSim = false;
             Debug.Log("End of all simulations.");
             sga.EndOfSimulation();
-            
+
 
         }
         else
@@ -166,7 +166,7 @@ public class SimulationMaster_ : MonoBehaviour
     }
 
 
-    public void VehicleDestroyed( int id, int time)
+    public void VehicleDestroyed(int id, float time)
     {
         NumDestroyedVehicles++;
         dh.recordTime(id, time, currSim);
@@ -174,6 +174,7 @@ public class SimulationMaster_ : MonoBehaviour
 
         if (NumDestroyedVehicles == sc.vehicleList.Count)
         {
+
             Debug.Log("All vehicles destroyed. Experiment complete.");
         }
     }
@@ -216,61 +217,64 @@ public class SimulationMaster_ : MonoBehaviour
                     nextSim = true; // Skip if not enabled
                 }
                 break;
-        
+
         }
     }
 
-        private void SpawnNormalVehicle()
-{
-    for (int i = tempList.Count - 1; i >= 0; i--) // Fix: i >= 0 instead of i > 0
+    private void SpawnNormalVehicle()
     {
-        if (tempList[i].startTime <= sw.getTime())
+        bool isSpawned = false;
+        for (int i = tempList.Count - 1; i >= 0; i--) // Fix: i >= 0 instead of i > 0
         {
-            GameObject vehiclePrefab = Vehicle;
-            tempList[i].vehicleType = Navigation.VehicleType.NonCAV;
-            InstantiateAndTrackVehicle(vehiclePrefab, tempList[i]);
-            tempList.RemoveAt(i);
+            if (tempList[i].startTime <= sw.getTime())
+            {
+                GameObject vehiclePrefab = Vehicle;
+                tempList[i].vehicleType = Navigation.VehicleType.NonCAV;
+                InstantiateAndTrackVehicle(vehiclePrefab, tempList[i]);
+                tempList.RemoveAt(i);
+            }
         }
     }
-}
 
-private void SpawnCAVehicle()
-{
-    for (int i = tempList.Count - 1; i >= 0; i--) // Fix: i >= 0 instead of i > 0
+    private void SpawnCAVehicle()
     {
-        if (tempList[i].startTime <= sw.getTime())
+        for (int i = tempList.Count - 1; i >= 0; i--) // Fix: i >= 0 instead of i > 0
         {
-            GameObject vehiclePrefab = Vehicle;
-            tempList[i].vehicleType = Navigation.VehicleType.CAV;
-            InstantiateAndTrackVehicle(vehiclePrefab, tempList[i]);
-            tempList.RemoveAt(i);
+            if (tempList[i].startTime <= sw.getTime())
+            {
+                GameObject vehiclePrefab = Vehicle;
+                tempList[i].vehicleType = Navigation.VehicleType.CAV;
+                InstantiateAndTrackVehicle(vehiclePrefab, tempList[i]);
+                tempList.RemoveAt(i);
+            }
         }
     }
-}
 
-private void SpawnMixedVehicles()
-{
-    for (int i = tempList.Count - 1; i >= 0; i--) // Fix: i >= 0 instead of i > 0
+    private void SpawnMixedVehicles()
     {
-        if (tempList[i].startTime <= sw.getTime())
+        for (int i = tempList.Count - 1; i >= 0; i--) // Fix: i >= 0 instead of i > 0
         {
-            InstantiateAndTrackVehicle(Vehicle, tempList[i]);
-            tempList.RemoveAt(i);
+            if (tempList[i].startTime <= sw.getTime())
+            {
+                InstantiateAndTrackVehicle(Vehicle, tempList[i]);
+                tempList.RemoveAt(i);
+            }
         }
     }
-}
 
 
     private void InstantiateAndTrackVehicle(GameObject prefab, Vehicle vehicleData)
     {
         GameObject vehicle = Instantiate(prefab, vehicleData.startPos, Quaternion.identity);
-        vehicle.name=vehicleData.vehicleName;
-        vehicle.GetComponent<VehicleSpawnerObject>().dest=vehicleData.endPos;
+        vehicle.name = vehicleData.vehicleName;
+        vehicle.GetComponent<VehicleSpawnerObject>().dest = vehicleData.endPos;
         vehicle.SetActive(true);
         vehicle.GetComponent<VehicleSpawnerObject>().WayDir = vehicleData.wdir;
+        vehicle.GetComponent<VehicleSpawnerObject>().dataHandler = dh;
         // Debug.LogWarning("Vehicle spawned: " + vehicleData.vehicleName+"faceing "+vehicleData.wdir);
         vehicle.GetComponent<VehicleSpawnerObject>().id = vehicleData.vehicleId;
-        if(vehicleData.vehicleType == VehicleType.CAV)
+        vehicle.GetComponent<VehicleSpawnerObject>().simNo = currSim;
+        if (vehicleData.vehicleType == VehicleType.CAV)
         {
             vehicle.GetComponent<VehicleSpawnerObject>().type = VehicleType.CAV;
         }
@@ -282,30 +286,10 @@ private void SpawnMixedVehicles()
         // Uncomment and implement as needed:
         // vehicle.GetComponent<Vehicle>().SetVehicle(vehicleData.Speed, vehicleData.EndPos, vehicleData.StartTime, vehicleData.EndTime);
         // SpawnedVehicles.Add(vehicle);
-        if(vehicle!=null){
-        NumSpawnedVehicles++;
+        if (vehicle != null)
+        {
+            NumSpawnedVehicles++;
         }
+        SpawnedVehicles.Add(vehicle);
     }
-    // Start is called before the first frame update
-    // void Start()
-    // {
-    //     gameObject.AddComponent<StopWatch>();
-    //     sw = gameObject.GetComponent<StopWatch>();
-    //     sw.startTimer();
-    // }
-
-    // // Update is called once per frame
-    // void Update()
-    // {
-    //     dh.recordTime(Random.Range(0,4),sw.getTime(), Random.Range(0,100));
-    //     if(sw.getTime()>limit){
-    //         sw.stopTimer();
-    //         dh.ProcessData();
-    //         // wait for data to be processed
-    //         if(sga.dh.isDataProcessed){
-    //             sga.EndOfSimulation();
-    //         }
-
-    //     }
-    // }
 }

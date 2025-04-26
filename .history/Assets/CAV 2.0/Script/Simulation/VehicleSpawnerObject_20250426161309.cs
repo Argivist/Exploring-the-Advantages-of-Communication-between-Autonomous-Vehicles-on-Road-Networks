@@ -32,46 +32,21 @@ public class VehicleSpawnerObject : MonoBehaviour
 
     void Start()
     {
+
         c = GetComponent<Collider>();
         c.isTrigger = true;
         direction();
 
-        StartCoroutine(WaitAndSpawn());
-    }
-
-    IEnumerator WaitAndSpawn()
-    {
-        // Wait until it's safe to spawn
-        while (!CanSpawn())
+        // Try to spawn a vehicle immediately
+        if (CanSpawn())
         {
-            yield return null; // wait one frame
+            SpawnVehicle();
         }
 
-        // Now it's safe
-        SpawnVehicle();
-
-        // Destroy the spawner
+        // Destroy the spawner immediately after attempting spawn
         Destroy(gameObject);
+
     }
-
-
-    // void Start()
-    // {
-
-    //     c = GetComponent<Collider>();
-    //     c.isTrigger = true;
-    //     direction();
-
-    //     // Try to spawn a vehicle immediately
-    //     if (CanSpawn())
-    //     {
-    //         SpawnVehicle();
-    //     }
-
-    //     // Destroy the spawner immediately after attempting spawn
-    //     Destroy(gameObject);
-
-    // }
 
     void direction()
     {
@@ -91,41 +66,41 @@ public class VehicleSpawnerObject : MonoBehaviour
 
 
     void SpawnVehicle()
+{
+    GameObject vClone = Instantiate(vehicleObject, transform.position, this.transform.rotation);
+    vClone.name = "Vehicle " + id;
+    vClone.transform.rotation = startRotation;
+
+    // Assign vehicle properties
+    Description d = vClone.GetComponent<Description>();
+    CommunicationAgent cm = vClone.GetComponent<CommunicationAgent>();
+    Navigation n = vClone.GetComponent<Navigation>();
+
+    d.id = id;
+    n.ID = id;
+    n.vehicleType = type;
+    n.DestinationSegment = endSegment;
+    n.dest = dest;
+    n.DestinationSegment = destSegment;
+    n.segcycle = simNo;
+    cm.id = id;
+    n.CurrentSegment = startSegment;
+    n.dataHandler = dataHandler;
+    vClone.SetActive(true);
+}
+
+bool CanSpawn()
+{
+    Collider[] colliders = Physics.OverlapSphere(transform.position, 1f); // Check nearby
+    foreach (Collider col in colliders)
     {
-        GameObject vClone = Instantiate(vehicleObject, transform.position, this.transform.rotation);
-        vClone.name = "Vehicle " + id;
-        vClone.transform.rotation = startRotation;
-
-        // Assign vehicle properties
-        Description d = vClone.GetComponent<Description>();
-        CommunicationAgent cm = vClone.GetComponent<CommunicationAgent>();
-        Navigation n = vClone.GetComponent<Navigation>();
-
-        d.id = id;
-        n.ID = id;
-        n.vehicleType = type;
-        n.DestinationSegment = endSegment;
-        n.dest = dest;
-        n.DestinationSegment = destSegment;
-        n.segcycle = simNo;
-        cm.id = id;
-        n.CurrentSegment = startSegment;
-        n.dataHandler = dataHandler;
-        vClone.SetActive(true);
-    }
-
-    bool CanSpawn()
-    {
-        Collider[] colliders = Physics.OverlapSphere(transform.position, 1f); // Check nearby
-        foreach (Collider col in colliders)
+        if (col.gameObject.tag == "AutonomousVehicle")
         {
-            if (col.gameObject.tag == "AutonomousVehicle")
-            {
-                return false; // Cannot spawn
-            }
+            return false; // Cannot spawn
         }
-        return true;
     }
+    return true;
+}
     // IEnumerator SpawnVehicles()
     // {
     //     while (true) // Infinite loop to keep spawning
