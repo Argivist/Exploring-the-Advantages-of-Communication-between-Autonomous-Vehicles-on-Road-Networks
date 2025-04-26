@@ -36,9 +36,6 @@ public class SimulationMaster_ : MonoBehaviour
     public int NumDestroyedVehicles;
     public bool nextSim = false;
 
-    [Header("Manual Simulation Control")]
-    public bool manual = false; // Set this to true to enable manual simulation control
-
     [Header("Current Simulation Index")]
     public int currSim = 0;
     private bool isReady = false;
