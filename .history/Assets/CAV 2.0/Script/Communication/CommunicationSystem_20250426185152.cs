@@ -99,22 +99,11 @@ public class CommunicationSystem : MonoBehaviour
 
     private void Update()
     {
-        
         foreach (RoadSegment road in roadSegments)
         {
-            // road.RefreshDynamicCost();
-            road.UpdateDataEmpty();
+            road.RefreshDynamicCost();
         }
     }
-
-
-public void ResetSystem()
-{
-    foreach (RoadSegment road in roadSegments)
-    {
-        road.ResetData();
-    }
-}
 
     // public Segment GetCurrentSegment(Vector3 position)
     // {
@@ -180,37 +169,12 @@ public void ResetSystem()
             Debug.Log($"Vehicle {vehicleId} already on road {roadId}, density: {trafficDensity}");
         }
 
-        public void ResetData()
-        {
-            vehicles.Clear();
-            vehicleData.Clear();
-            trafficDensity = 0;
-            avgSpeed = 0;
-            avgTime = 0;
-            dynamicCost = length / 100; // Reset to initial cost based on length
-        }
-
-
         public void RemoveVehicle(int vehicleId)
         {
             if (vehicles.Remove(vehicleId))
             {
                 vehicleData.RemoveAll(v => v.vehicleId == vehicleId);
                 trafficDensity--;
-            }
-        }
-
-        public void UpdateDataEmpty(){
-            UpdateAverages();
-            if (totalLength > 0)
-            {
-                float expectedTime = length / maxSpeed;
-                if (avgTime < expectedTime)
-                {
-                    avgTime = expectedTime;
-                }
-                // dynamicCost = (length / totalLength) * (1-(1-(avgTime / (length / maxSpeed))));
-                dynamicCost = (length / totalLength) * (avgTime / (length / maxSpeed));
             }
         }
 
@@ -299,11 +263,10 @@ public void ResetSystem()
 
         private void UpdateAverages()
         {
-            avgTime = 0;
-            avgSpeed = 0;
             if (vehicleData.Count == 0) return;
 
-            
+            avgTime = 0;
+            avgSpeed = 0;
             foreach (VehicleData data in vehicleData)
             {
                 avgTime += data.time;

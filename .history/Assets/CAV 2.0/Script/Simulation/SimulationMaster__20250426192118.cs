@@ -62,15 +62,6 @@ public class SimulationMaster_ : MonoBehaviour
             // return false;
             sc = FindObjectOfType<SimulationConfigurer>();
         }
-        if (communicationSystem == null)
-        {
-            communicationSystem = FindObjectOfType<CommunicationSystem>();
-            if (communicationSystem == null)
-            {
-                Debug.LogError("CommunicationSystem is missing. Please add it to the scene.");
-                return false;
-            }
-        }
         // gameObject.AddComponent<StopWatch>();
         sw = GetComponent<StopWatch>();
         if (sw == null)

@@ -97,24 +97,6 @@ public class CommunicationSystem : MonoBehaviour
         return trafficSystem.segments[0]; // Default behavior
     }
 
-    private void Update()
-    {
-        
-        foreach (RoadSegment road in roadSegments)
-        {
-            // road.RefreshDynamicCost();
-            road.UpdateDataEmpty();
-        }
-    }
-
-
-public void ResetSystem()
-{
-    foreach (RoadSegment road in roadSegments)
-    {
-        road.ResetData();
-    }
-}
 
     // public Segment GetCurrentSegment(Vector3 position)
     // {
@@ -150,7 +132,7 @@ public void ResetSystem()
         public List<VehicleData> vehicleData;
         public float avgSpeed, avgTime;
         public float dynamicCost;
-        private const float maxSpeed = 12.00f;
+        private const float maxSpeed = 0.04f;
 
         public RoadSegment(int roadId, Vector3 start, Vector3 end, float length)
         {
@@ -158,7 +140,6 @@ public void ResetSystem()
             this.start = start;
             this.end = end;
             this.length = length;
-            dynamicCost = length / 100;
             trafficDensity = 0;
             vehicles = new List<int>();
             vehicleData = new List<VehicleData>();
@@ -180,37 +161,12 @@ public void ResetSystem()
             Debug.Log($"Vehicle {vehicleId} already on road {roadId}, density: {trafficDensity}");
         }
 
-        public void ResetData()
-        {
-            vehicles.Clear();
-            vehicleData.Clear();
-            trafficDensity = 0;
-            avgSpeed = 0;
-            avgTime = 0;
-            dynamicCost = length / 100; // Reset to initial cost based on length
-        }
-
-
         public void RemoveVehicle(int vehicleId)
         {
             if (vehicles.Remove(vehicleId))
             {
                 vehicleData.RemoveAll(v => v.vehicleId == vehicleId);
                 trafficDensity--;
-            }
-        }
-
-        public void UpdateDataEmpty(){
-            UpdateAverages();
-            if (totalLength > 0)
-            {
-                float expectedTime = length / maxSpeed;
-                if (avgTime < expectedTime)
-                {
-                    avgTime = expectedTime;
-                }
-                // dynamicCost = (length / totalLength) * (1-(1-(avgTime / (length / maxSpeed))));
-                dynamicCost = (length / totalLength) * (avgTime / (length / maxSpeed));
             }
         }
 
@@ -241,29 +197,6 @@ public void ResetSystem()
                 dynamicCost = (length / totalLength) * (avgTime / (length / maxSpeed));
             }
         }
-
-
-
-        // Refresing dynamic cost
-        public void RefreshDynamicCost()
-        {
-            if (totalLength > 0)
-            {
-                float expectedTime = length / maxSpeed;
-
-                if (avgTime == 0) avgTime = expectedTime; // If no data, assume expected time.
-
-                if (avgTime < expectedTime)
-                {
-                    avgTime = expectedTime;
-                }
-
-                dynamicCost = (length / totalLength) * (avgTime / (length / maxSpeed));
-            }
-        }
-
-
-
 
         // public void UpdateData(int vehicleId, float speed, int time)
         // {
@@ -299,11 +232,10 @@ public void ResetSystem()
 
         private void UpdateAverages()
         {
-            avgTime = 0;
-            avgSpeed = 0;
             if (vehicleData.Count == 0) return;
 
-            
+            avgTime = 0;
+            avgSpeed = 0;
             foreach (VehicleData data in vehicleData)
             {
                 avgTime += data.time;

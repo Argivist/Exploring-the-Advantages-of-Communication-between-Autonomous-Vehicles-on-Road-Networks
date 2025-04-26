@@ -35,12 +35,7 @@ namespace TrafficSimulation {
             if (ts == null)
                 Debug.LogError("TrafficSystem not found in parent.");
             dynamicCost=length + carDensity;
-            try{
-                dynamicCost=cs.GetRoadObject(id).UpdateCost();}
-            catch (Exception e)
-            {
-                Debug.LogError("Error in dynamicCost calculation: " + e.Message);
-            }
+            dynamicCost=cs.GetRoadObject(id).UpdateCost();
         }
 
         void calculateLength()

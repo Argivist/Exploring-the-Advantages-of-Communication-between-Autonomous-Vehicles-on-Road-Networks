@@ -103,7 +103,6 @@ public class Navigation : MonoBehaviour
         prevTime = currentTime;
         currentTime = sw.getTime();
         speed = getSpeed();
-        CurrentSegment=trafficSystem.segments[Vehicle_AI.getCurrentTarget().segment];
         communicationAgent.SendMessageToUpdateRoad(ID, CurrentSegment.id, speed, segmentsw.getTime());
         if (path == null)
         {

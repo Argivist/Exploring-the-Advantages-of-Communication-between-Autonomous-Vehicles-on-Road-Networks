@@ -102,7 +102,7 @@ public class CommunicationSystem : MonoBehaviour
         
         foreach (RoadSegment road in roadSegments)
         {
-            // road.RefreshDynamicCost();
+            road.RefreshDynamicCost();
             road.UpdateDataEmpty();
         }
     }

@@ -42,9 +42,6 @@ public class SimulationMaster_ : MonoBehaviour
     private bool spawningVehicles = false;
     private bool changedSim;
 
-    [Header("Communication System")]
-    private CommunicationSystem communicationSystem;
-
     private void Start()
     {
         if (!ValidateComponents()) return;
@@ -61,15 +58,6 @@ public class SimulationMaster_ : MonoBehaviour
             // sc = FindObjectOfType<SimulationConfigurer>();
             // return false;
             sc = FindObjectOfType<SimulationConfigurer>();
-        }
-        if (communicationSystem == null)
-        {
-            communicationSystem = FindObjectOfType<CommunicationSystem>();
-            if (communicationSystem == null)
-            {
-                Debug.LogError("CommunicationSystem is missing. Please add it to the scene.");
-                return false;
-            }
         }
         // gameObject.AddComponent<StopWatch>();
         sw = GetComponent<StopWatch>();

@@ -82,10 +82,6 @@ namespace TrafficSimulation
         [Header("DataGathering")]
         public StopWatch StopWatch;
 
-        [Header("Debug")]
-        bool changedSegment;
-        int prevSegment = -1;
-
         void Start()
         {
             // NavigationComponent.UpdateCurrentSegment();
@@ -99,8 +95,6 @@ namespace TrafficSimulation
 
             initMaxSpeed = wheelDrive.maxSpeed;
             SetWaypointVehicleIsOn();
-            prevSegment = currentTarget.segment;
-            changedSegment = false;
         }
 
         void Update()
@@ -109,21 +103,10 @@ namespace TrafficSimulation
             {
                 return;
             }
-
-            
             currentSegment = currentTarget.segment;
             currentWaypoint = currentTarget.waypoint;
             futureSegment = futureTarget.segment;
             futureWaypoint = futureTarget.waypoint;
-            if(prevSegment != currentSegment)
-            {
-                NavigationComponent.EnterSegment();// indicate entry for comsys
-                Debug.Log("Changed segment: " + currentSegment + " Vehicle: " + this.gameObject.name);
-                prevSegment = currentTarget.segment;
-            }
-            
-
-            
 
             if (trafficSystem == null)
                 return;
@@ -232,7 +215,7 @@ namespace TrafficSimulation
             }
             NavigationComponent.CurSegSet();
             NavigationComponent.EnterSegment();// indicate entry for comsys
-            //                                    // NavigationComponent.ExitEnterSegment();// indicate entry and exit for comsys
+                                               // NavigationComponent.ExitEnterSegment();// indicate entry and exit for comsys
 
             //Get future target
             futureTarget.waypoint = currentTarget.waypoint + 1;
@@ -290,7 +273,7 @@ namespace TrafficSimulation
                     pastTargetSegment = currentTarget.segment;
                     currentTarget.segment = futureTarget.segment;//NavigationComponent.GetNextSegmentId();
                     currentTarget.waypoint = 0;
-                    // NavigationComponent.EnterSegment();// indicate entry for comsys
+                    NavigationComponent.EnterSegment();// indicate entry for comsys
                 }
 
                 // Get future target

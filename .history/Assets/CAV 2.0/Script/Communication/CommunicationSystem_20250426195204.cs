@@ -99,11 +99,10 @@ public class CommunicationSystem : MonoBehaviour
 
     private void Update()
     {
-        
+        UpdateDataEmpty();
         foreach (RoadSegment road in roadSegments)
         {
-            // road.RefreshDynamicCost();
-            road.UpdateDataEmpty();
+            road.RefreshDynamicCost();
         }
     }
 

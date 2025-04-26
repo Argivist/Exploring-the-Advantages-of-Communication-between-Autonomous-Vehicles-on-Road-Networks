@@ -35,12 +35,7 @@ namespace TrafficSimulation {
             if (ts == null)
                 Debug.LogError("TrafficSystem not found in parent.");
             dynamicCost=length + carDensity;
-            try{
-                dynamicCost=cs.GetRoadObject(id).UpdateCost();}
-            catch (Exception e)
-            {
-                Debug.LogError("Error in dynamicCost calculation: " + e.Message);
-            }
+            dynamicCost=cs.GetRoadObject(id).UpdateCost();
         }
 
         void calculateLength()
@@ -55,8 +50,8 @@ namespace TrafficSimulation {
         public void Update(){
             Debug.Log("Updating cost and density for segment: " + id);
 
-            dynamicCost=cs.GetRoadObject(id).UpdateCost();
-            carDensity=cs.GetRoadObject(id).getTrafficDensity();
+            // dynamicCost=cs.GetRoadObject(id).UpdateCost();
+            // carDensity=cs.GetRoadObject(id).getTrafficDensity();
         }
         public bool IsOnSegment(Vector3 _p)
         {

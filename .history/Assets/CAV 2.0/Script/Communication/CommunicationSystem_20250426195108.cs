@@ -99,11 +99,10 @@ public class CommunicationSystem : MonoBehaviour
 
     private void Update()
     {
-        
+        UpdateDataEmpty();
         foreach (RoadSegment road in roadSegments)
         {
-            // road.RefreshDynamicCost();
-            road.UpdateDataEmpty();
+            road.RefreshDynamicCost();
         }
     }
 
@@ -200,7 +199,7 @@ public void ResetSystem()
             }
         }
 
-        public void UpdateDataEmpty(){
+        void UpdateDataEmpty(){
             UpdateAverages();
             if (totalLength > 0)
             {
