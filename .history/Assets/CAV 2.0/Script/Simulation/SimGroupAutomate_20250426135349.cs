@@ -21,9 +21,8 @@ public class SimGroupAutomate : MonoBehaviour
     [Header("Config Type")]
     public bool ManualStartDestinationSetup=false;
 
-    public Segment StartPosition;
-    public Segment EndPosition;
-    public int endWaypoint;
+    public Waypoint StartPosition;
+    public Waypoint EndPosition;
 
 
     GameObject SimObject;//Object for handling simulation
@@ -50,7 +49,6 @@ public class SimGroupAutomate : MonoBehaviour
             sc.ManualStartDestinationSetup=true;
             sc.StartPosition=StartPosition;
             sc.EndPosition=EndPosition;
-            sc.endWaypoint=endWaypoint;
         }
         sc.VehicleDensity=SimGroups[density];
         sc.trafficSystem=FindObjectOfType<TrafficSystem>();

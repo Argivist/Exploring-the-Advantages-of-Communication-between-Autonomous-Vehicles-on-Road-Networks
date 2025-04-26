@@ -21,9 +21,8 @@ public class SimGroupAutomate : MonoBehaviour
     [Header("Config Type")]
     public bool ManualStartDestinationSetup=false;
 
-    public Segment StartPosition;
-    public Segment EndPosition;
-    public int endWaypoint;
+    public Waypoint StartPosition;
+    public Waypoint EndPosition;
 
 
     GameObject SimObject;//Object for handling simulation
@@ -45,13 +44,12 @@ public class SimGroupAutomate : MonoBehaviour
         SimObject=new GameObject("Simulation");
         //add the script to the gameobject
         sw=SimObject.AddComponent<StopWatch>();
-        sc=SimObject.AddComponent<SimulationConfigurer>();
         if(ManualStartDestinationSetup){
-            sc.ManualStartDestinationSetup=true;
-            sc.StartPosition=StartPosition;
-            sc.EndPosition=EndPosition;
-            sc.endWaypoint=endWaypoint;
+            sc=SimObject.AddComponent<SimulationConfigurerManual>();
+        }else{
+            sc=SimObject.AddComponent<SimulationConfigurer>();
         }
+        // sc=SimObject.AddComponent<SimulationConfigurer>();
         sc.VehicleDensity=SimGroups[density];
         sc.trafficSystem=FindObjectOfType<TrafficSystem>();
         sm=SimObject.AddComponent<SimulationMaster_>();

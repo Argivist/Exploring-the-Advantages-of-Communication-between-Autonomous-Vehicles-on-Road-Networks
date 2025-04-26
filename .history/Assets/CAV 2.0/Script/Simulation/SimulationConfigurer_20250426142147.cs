@@ -199,7 +199,7 @@ public class SimulationConfigurer : MonoBehaviour
         }
 
 
-        // Save the segment network to a JSON file
+
         string json = JsonUtility.ToJson(network, true);
         string safeFileName = "network.json";
         if (safeFileName.IndexOfAny(Path.GetInvalidFileNameChars()) >= 0)

@@ -50,7 +50,6 @@ public class SimGroupAutomate : MonoBehaviour
             sc.ManualStartDestinationSetup=true;
             sc.StartPosition=StartPosition;
             sc.EndPosition=EndPosition;
-            sc.endWaypoint=endWaypoint;
         }
         sc.VehicleDensity=SimGroups[density];
         sc.trafficSystem=FindObjectOfType<TrafficSystem>();

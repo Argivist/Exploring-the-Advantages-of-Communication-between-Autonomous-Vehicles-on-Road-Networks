@@ -175,6 +175,9 @@ public class SimulationConfigurer : MonoBehaviour
             Vector3 endPos = endWaypoint.transform.position;
 
 
+            // Waypoint endWaypoint = endSegment.waypoints[Random.Range(0, endSegment.waypoints.Count)];
+
+            // Vector3 endPos = endWaypoint.transform.position;
 
             // Create and add the vehicle
             Vehicle v = new Vehicle(
@@ -199,7 +202,7 @@ public class SimulationConfigurer : MonoBehaviour
         }
 
 
-        // Save the segment network to a JSON file
+
         string json = JsonUtility.ToJson(network, true);
         string safeFileName = "network.json";
         if (safeFileName.IndexOfAny(Path.GetInvalidFileNameChars()) >= 0)
@@ -218,8 +221,7 @@ public class SimulationConfigurer : MonoBehaviour
         yield return null;
     }
 
-    IEnumerator VConfManual()
-    {
+    IEnumerator VConfManual(){
         // Segment Network
         SegmentNetwork_js network = new SegmentNetwork_js();
 
@@ -237,71 +239,38 @@ public class SimulationConfigurer : MonoBehaviour
                 segment_js.waypoints.Add(waypoint_js);
             }
             // Adding the segment json object to the network
-            network.segments.Add(segment_js);
+            network.segments.Add(segment_js);        
         }
         ////////////////////
 
         // Vehicle info creator
-        for (int i = 0; i < VehicleDensity; i++)
-        {
+        for(int i=0; i<VehicleDensity;i++){
             // Defining the start and end positions
 
             // Start position
             WaypointObject startWaypointObj = new WaypointObject(StartPosition, StartPosition.waypoints[0], StartPosition.waypoints[1], null, StartPosition.waypoints[0].transform.position);
             Waypoint startWaypoint = startWaypointObj.currentWaypoint;
             // Waypoint dirPoint = startWaypointObj.HasNext() ? startWaypointObj.nextWaypoint : startWaypointObj.previousWaypoint;
-            Waypoint dorPoint = startWaypointObj.nextWaypoint;
+            Waypoint dorPoint=startWaypointObj.nextWaypoint;
             Vector3 startPos = Vector3.Lerp(startWaypoint.transform.position, dorPoint.transform.position, Random.Range(0.25f, 0.75f));
 
 
             //Destination
-            Waypoint endWaypoint_ = EndPosition.waypoints[endWaypoint];
-            Vector3 endPos = endWaypoint_.transform.position;
+            WayPoint endw
 
-            // Vehicle creation
-            Vehicle v = new Vehicle(
-                i,
-                "car" + i,
-                (VehicleType)Random.Range(0, System.Enum.GetValues(typeof(VehicleType)).Length),
-                0,
-                startPos,
-                endPos,
-                dorPoint,
-                EndPosition
-            );
-            v.startSeg = startWaypointObj.segment;
-            vehicleList.Add(v);
-            Debug.Log($"Vehicle {i} added at {startPos} to {endPos}");
-            dataHandler.AddVehicleData(v.vehicleId, v.startPos, v.endPos, v.vehicleType);
-            if (i % 10 == 0)
-                yield return null;
+
         }
 
-        // Saving the network data to a JSON file
-        string json = JsonUtility.ToJson(network, true);
-        string safeFileName = "network.json";
-        if (safeFileName.IndexOfAny(Path.GetInvalidFileNameChars()) >= 0)
-        {
-            Debug.LogError("Invalid filename detected.");
-            yield break;
-        }
-        string directory = Path.Combine(Application.persistentDataPath, "JSON");
-        if (!Directory.Exists(directory))
-        {
-            Directory.CreateDirectory(directory);
-        }
-        File.WriteAllText(Path.Combine(directory, safeFileName), json);
-        Debug.Log($"Network data saved to {Path.Combine(directory, safeFileName)}");
-        ready = true;
+
+
+
+
         yield return null;
     }
 
     void Start()
     {
-        if (ManualStartDestinationSetup)
-            StartCoroutine(VConfManual());
-        else
-            StartCoroutine(VConf());
+        StartCoroutine(VConf());
     }
 }
 
