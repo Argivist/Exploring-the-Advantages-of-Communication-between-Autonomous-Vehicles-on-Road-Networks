@@ -6,7 +6,7 @@ public class IncidentManager : MonoBehaviour
 {
     // SECTION: Variables
     public GameObject incidentPrefab;
-    public StopWatch stopwatch;
+    StopWatch stopwatch;
 
     [Header("Incident Variables")]
     public int incidentDuration = 5;
@@ -19,7 +19,7 @@ public class IncidentManager : MonoBehaviour
     // SECTION: Start Method
     void Start()
     {
-        stopwatch = gameObject.AddComponent<StopWatch>();
+        stopwatch = new StopWatch();
         incidentPrefab.SetActive(false);
         stopwatch.startTimer();
 

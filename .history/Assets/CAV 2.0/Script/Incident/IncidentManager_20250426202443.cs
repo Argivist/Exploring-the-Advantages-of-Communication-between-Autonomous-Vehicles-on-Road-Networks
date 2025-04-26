@@ -19,7 +19,7 @@ public class IncidentManager : MonoBehaviour
     // SECTION: Start Method
     void Start()
     {
-        stopwatch = gameObject.AddComponent<StopWatch>();
+        stopwatch = new StopWatch();
         incidentPrefab.SetActive(false);
         stopwatch.startTimer();
 
