@@ -175,12 +175,7 @@ public class Navigation : MonoBehaviour
         segmentsw.startTimer();
     }
     
-    public void AcccidentOccured(){
-        communicationAgent.SendMessageToRoad("crash", ID, CurrentSegment.id);
-    }
-    public void AcccidentEnd(){
-        communicationAgent.SendMessageToRoad("noCrash", ID, CurrentSegment.id);
-    }
+    public void Cr
 
     public void CurSegSet()
 {

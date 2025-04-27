@@ -104,9 +104,7 @@ public class CommunicationSystem : MonoBehaviour
         {
             // road.RefreshDynamicCost();
             road.UpdateDataEmpty();
-            if(road.crash){
-                road.dynamicCost=100;
-            }
+            if(r)
         }
     }
 
@@ -185,10 +183,7 @@ public void ResetSystem()
         }
 
         public void HasCrash(){
-            crash=true;
-        }
-        public void NoCrash(){
-            crash=false;
+            dynamicCost = 100;
         }
 
 
@@ -343,13 +338,6 @@ public void ResetSystem()
                 {
                     Debug.LogWarning($"Attempted to remove vehicle {senderId}, but it was not on road {roadId}");
                 }
-            }else if (message == "crash")
-            {
-                HasCrash();
-            }
-            else if (message == "noCrash")
-            {
-                NoCrash();
             }
         }
 

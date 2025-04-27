@@ -128,9 +128,6 @@ public class Navigation : MonoBehaviour
         {
             Vehicle_AI.DestroyVehicle_();
         }
-
-        GameObject Obstacle = Vehicle_AI.GetDetectedObstacles();
-        Debug.Log("Obstacle: " + Obstacle);
     }
 
     // CrashDetection
@@ -175,13 +172,6 @@ public class Navigation : MonoBehaviour
         segmentsw.startTimer();
     }
     
-    public void AcccidentOccured(){
-        communicationAgent.SendMessageToRoad("crash", ID, CurrentSegment.id);
-    }
-    public void AcccidentEnd(){
-        communicationAgent.SendMessageToRoad("noCrash", ID, CurrentSegment.id);
-    }
-
     public void CurSegSet()
 {
     try

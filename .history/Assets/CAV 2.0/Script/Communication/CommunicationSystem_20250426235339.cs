@@ -343,13 +343,6 @@ public void ResetSystem()
                 {
                     Debug.LogWarning($"Attempted to remove vehicle {senderId}, but it was not on road {roadId}");
                 }
-            }else if (message == "crash")
-            {
-                HasCrash();
-            }
-            else if (message == "noCrash")
-            {
-                NoCrash();
             }
         }
 

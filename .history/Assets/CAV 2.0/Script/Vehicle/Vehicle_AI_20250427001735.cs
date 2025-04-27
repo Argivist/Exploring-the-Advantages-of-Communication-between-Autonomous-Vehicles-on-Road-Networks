@@ -554,16 +554,16 @@ namespace TrafficSimulation
 
         private void OnCollisionEnter(Collision collision)
         {
-            NavigationComponent.AcccidentOccured();
-            }
-        // private void OnCollisionStay(Collision collision)
-        // {
-        //     Debug.Log("Collision ongoing with: " + collision.gameObject.name);
-        // }
+            Debug.Log("Collision detected with: " + collision.gameObject.name);
+        }
+        private void OnCollisionStay(Collision collision)
+        {
+            Debug.Log("Collision ongoing with: " + collision.gameObject.name);
+        }
 
         private void OnCollisionExit(Collision collision)
         {
-            NavigationComponent.AcccidentEnd();
+            Debug.Log("Exited collision with " + collision.gameObject.name);
         }
 
         private void OnTriggerEnter(Collider other)

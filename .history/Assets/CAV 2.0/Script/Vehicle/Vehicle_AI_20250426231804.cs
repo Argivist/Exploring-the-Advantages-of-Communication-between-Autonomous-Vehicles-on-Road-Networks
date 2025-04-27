@@ -86,6 +86,8 @@ namespace TrafficSimulation
         bool changedSegment;
         int prevSegment = -1;
 
+        [Header("Crash")]
+        public bool CrashDetection = false;
 
         void Start()
         {
@@ -111,20 +113,20 @@ namespace TrafficSimulation
                 return;
             }
 
-
+            
             currentSegment = currentTarget.segment;
             currentWaypoint = currentTarget.waypoint;
             futureSegment = futureTarget.segment;
             futureWaypoint = futureTarget.waypoint;
-            if (prevSegment != currentSegment)
+            if(prevSegment != currentSegment)
             {
                 NavigationComponent.EnterSegment();// indicate entry for comsys
                 Debug.Log("Changed segment: " + currentSegment + " Vehicle: " + this.gameObject.name);
                 prevSegment = currentTarget.segment;
             }
+            
 
-
-
+            
 
             if (trafficSystem == null)
                 return;
@@ -138,8 +140,6 @@ namespace TrafficSimulation
             }
 
         }
-
-
         public void DestroyVehicle()
         {
             float time = StopWatch.getTime();
@@ -252,7 +252,7 @@ namespace TrafficSimulation
         }
         void WaypointChecker()
         {
-
+            
             // Validate segment index
             if (currentTarget.segment < 0 || currentTarget.segment >= trafficSystem.segments.Count)
             {
@@ -279,9 +279,9 @@ namespace TrafficSimulation
 
                 // if at the end of the segment waypoint reached set next segment
                 if (currentTarget.segment == -1)
-                {
-                    DestroyVehicle_();
-                }
+                    {
+                        DestroyVehicle_();
+                    }
                 // if the vehicle is at the last waypoint of the segment
                 if (currentTarget.waypoint >= trafficSystem.segments[currentTarget.segment].waypoints.Count)
                 {
@@ -305,7 +305,7 @@ namespace TrafficSimulation
                     // try{
                     futureTarget.segment = NavigationComponent.GetNextSegmentId();
                     // }catch{
-                    // Debug.LogError("line 287");
+                        // Debug.LogError("line 287");
                     // }
                 }
             }
@@ -349,15 +349,12 @@ namespace TrafficSimulation
 
             //Calculate if there is a planned turn
             Transform targetTransform = trafficSystem.segments[currentTarget.segment].waypoints[currentTarget.waypoint].transform;
-            Transform futureTargetTransform = null;
-            if (futureTarget.segment >= 0 && futureTarget.segment < trafficSystem.segments.Count && futureTarget.waypoint >= 0 && futureTarget.waypoint < trafficSystem.segments[futureTarget.segment].waypoints.Count)
-            {
-                futureTargetTransform = trafficSystem.segments[futureTarget.segment].waypoints[futureTarget.waypoint].transform;
-            }
-            else
-            {
+            Transform futureTargetTransform= null;
+            if(futureTarget.segment>=0 && futureTarget.segment < trafficSystem.segments.Count && futureTarget.waypoint >= 0 && futureTarget.waypoint < trafficSystem.segments[futureTarget.segment].waypoints.Count){
+            futureTargetTransform = trafficSystem.segments[futureTarget.segment].waypoints[futureTarget.waypoint].transform;
+            }else{
                 // DestroyVehicle_();//TODO - temp
-                futureTargetTransform = trafficSystem.segments[currentTarget.segment].nextSegments[0].waypoints[0].transform;
+                futureTargetTransform=trafficSystem.segments[currentTarget.segment].nextSegments[0].waypoints[0].transform;
                 Debug.LogWarning("Future segment or waypoint is invalid at turn");
             }
             Vector3 futureVel = futureTargetTransform.position - targetTransform.position;
@@ -464,7 +461,7 @@ namespace TrafficSimulation
                             brake = 0f;
                         }
 
-
+                        
                     }
                 }
 
@@ -481,11 +478,6 @@ namespace TrafficSimulation
             wheelDrive.Move(acc, steering, brake);
         }
 
-        public GameObject GetDetectedObstacles()
-        {
-            float hitDist;
-            return GetDetectedObstacles(out hitDist);
-        }
 
         GameObject GetDetectedObstacles(out float _hitDist)
         {
@@ -509,7 +501,6 @@ namespace TrafficSimulation
             }
 
             _hitDist = hitDist;
-
             return detectedObstacle;
         }
 
@@ -552,24 +543,6 @@ namespace TrafficSimulation
         }
 
 
-        private void OnCollisionEnter(Collision collision)
-        {
-            NavigationComponent.AcccidentOccured();
-            }
-        // private void OnCollisionStay(Collision collision)
-        // {
-        //     Debug.Log("Collision ongoing with: " + collision.gameObject.name);
-        // }
-
-        private void OnCollisionExit(Collision collision)
-        {
-            NavigationComponent.AcccidentEnd();
-        }
-
-        private void OnTriggerEnter(Collider other)
-        {
-            Debug.Log("Trigger entered with: " + other.gameObject.name);
-        }
 
         // public int GetSegmentVehicleIsIn()
         // {
@@ -609,7 +582,7 @@ namespace TrafficSimulation
         {
             return futureTarget;
         }
-        public bool VIsOnSegment(Vector3 pos, int segment)
+        public bool VIsOnSegment(Vector3 pos,int segment)	
         {
             if (trafficSystem.segments[segment].IsOnSegment(pos))
             {

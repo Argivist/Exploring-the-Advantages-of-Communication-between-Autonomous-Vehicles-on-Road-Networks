@@ -139,7 +139,7 @@ namespace TrafficSimulation
 
         }
 
-
+    
         public void DestroyVehicle()
         {
             float time = StopWatch.getTime();
@@ -499,6 +499,7 @@ namespace TrafficSimulation
                 CastRay(raycastAnchor.transform.position, a, this.transform.forward, raycastLength, out detectedObstacle, out hitDist);
 
                 if (detectedObstacle == null) continue;
+                Debug.Log("Detected obstacle: " + detectedObstacle.name);
 
                 float dist = Vector3.Distance(this.transform.position, detectedObstacle.transform.position);
                 if (dist < minDist)
@@ -509,7 +510,7 @@ namespace TrafficSimulation
             }
 
             _hitDist = hitDist;
-
+            
             return detectedObstacle;
         }
 
@@ -552,24 +553,6 @@ namespace TrafficSimulation
         }
 
 
-        private void OnCollisionEnter(Collision collision)
-        {
-            NavigationComponent.AcccidentOccured();
-            }
-        // private void OnCollisionStay(Collision collision)
-        // {
-        //     Debug.Log("Collision ongoing with: " + collision.gameObject.name);
-        // }
-
-        private void OnCollisionExit(Collision collision)
-        {
-            NavigationComponent.AcccidentEnd();
-        }
-
-        private void OnTriggerEnter(Collider other)
-        {
-            Debug.Log("Trigger entered with: " + other.gameObject.name);
-        }
 
         // public int GetSegmentVehicleIsIn()
         // {

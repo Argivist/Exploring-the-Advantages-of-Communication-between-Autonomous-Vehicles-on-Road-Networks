@@ -554,7 +554,7 @@ namespace TrafficSimulation
 
         private void OnCollisionEnter(Collision collision)
         {
-            NavigationComponent.AcccidentOccured();
+            NavigationComponent.AcccidentOccure();
             }
         // private void OnCollisionStay(Collision collision)
         // {

@@ -128,13 +128,34 @@ public class Navigation : MonoBehaviour
         {
             Vehicle_AI.DestroyVehicle_();
         }
-
-        GameObject Obstacle = Vehicle_AI.GetDetectedObstacles();
-        Debug.Log("Obstacle: " + Obstacle);
     }
 
     // CrashDetection
-        
+        void CheckCrashAhead()
+        {
+            CrashDetection = false; // reset before checking
+
+            for (int i = 0; i < raysNumber; i++)
+            {
+                // Calculate the offset for each ray
+                Vector3 rayOrigin = raycastAnchor.position + raycastAnchor.right * ((i - raysNumber / 2) * raySpacing);
+
+                // Cast a ray forward
+                Ray ray = new Ray(rayOrigin, raycastAnchor.forward);
+                RaycastHit hit;
+
+                if (Physics.Raycast(ray, out hit, raycastLength))
+                {
+                    // You can add a tag or layer check if you only want to detect vehicles or obstacles
+                    if (hit.collider.CompareTag("Crash"))
+                    {
+                        CrashDetection = true;
+                        Debug.Log("Crash detected with " + hit.collider.name +"on road " + CurrentSegment.id);
+                        break; // no need to check more rays
+                    }
+                }
+            }
+        }
 
     public void ExitSegment()
     {
@@ -175,13 +196,6 @@ public class Navigation : MonoBehaviour
         segmentsw.startTimer();
     }
     
-    public void AcccidentOccured(){
-        communicationAgent.SendMessageToRoad("crash", ID, CurrentSegment.id);
-    }
-    public void AcccidentEnd(){
-        communicationAgent.SendMessageToRoad("noCrash", ID, CurrentSegment.id);
-    }
-
     public void CurSegSet()
 {
     try

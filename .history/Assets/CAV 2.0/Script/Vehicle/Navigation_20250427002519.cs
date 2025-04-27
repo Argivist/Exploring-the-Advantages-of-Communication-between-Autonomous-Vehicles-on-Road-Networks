@@ -179,7 +179,7 @@ public class Navigation : MonoBehaviour
         communicationAgent.SendMessageToRoad("crash", ID, CurrentSegment.id);
     }
     public void AcccidentEnd(){
-        communicationAgent.SendMessageToRoad("noCrash", ID, CurrentSegment.id);
+        communicationAgent.SendMessageToRoad("crashEnd", ID, CurrentSegment.id);
     }
 
     public void CurSegSet()

@@ -86,6 +86,8 @@ namespace TrafficSimulation
         bool changedSegment;
         int prevSegment = -1;
 
+        [Header("Crash")]
+        public bool CrashDetection = false;
 
         void Start()
         {
@@ -139,7 +141,30 @@ namespace TrafficSimulation
 
         }
 
+        void CheckCrashAhead()
+        {
+            CrashDetection = false; // reset before checking
 
+            for (int i = 0; i < raysNumber; i++)
+            {
+                // Calculate the offset for each ray
+                Vector3 rayOrigin = raycastAnchor.position + raycastAnchor.right * ((i - raysNumber / 2) * raySpacing);
+
+                // Cast a ray forward
+                Ray ray = new Ray(rayOrigin, raycastAnchor.forward);
+                RaycastHit hit;
+
+                if (Physics.Raycast(ray, out hit, raycastLength))
+                {
+                    // You can add a tag or layer check if you only want to detect vehicles or obstacles
+                    if (hit.collider.CompareTag("Obstacle") || hit.collider.CompareTag("Vehicle"))
+                    {
+                        CrashDetection = true;
+                        break; // no need to check more rays
+                    }
+                }
+            }
+        }
         public void DestroyVehicle()
         {
             float time = StopWatch.getTime();
@@ -481,11 +506,6 @@ namespace TrafficSimulation
             wheelDrive.Move(acc, steering, brake);
         }
 
-        public GameObject GetDetectedObstacles()
-        {
-            float hitDist;
-            return GetDetectedObstacles(out hitDist);
-        }
 
         GameObject GetDetectedObstacles(out float _hitDist)
         {
@@ -509,7 +529,6 @@ namespace TrafficSimulation
             }
 
             _hitDist = hitDist;
-
             return detectedObstacle;
         }
 
@@ -552,24 +571,6 @@ namespace TrafficSimulation
         }
 
 
-        private void OnCollisionEnter(Collision collision)
-        {
-            NavigationComponent.AcccidentOccured();
-            }
-        // private void OnCollisionStay(Collision collision)
-        // {
-        //     Debug.Log("Collision ongoing with: " + collision.gameObject.name);
-        // }
-
-        private void OnCollisionExit(Collision collision)
-        {
-            NavigationComponent.AcccidentEnd();
-        }
-
-        private void OnTriggerEnter(Collider other)
-        {
-            Debug.Log("Trigger entered with: " + other.gameObject.name);
-        }
 
         // public int GetSegmentVehicleIsIn()
         // {
