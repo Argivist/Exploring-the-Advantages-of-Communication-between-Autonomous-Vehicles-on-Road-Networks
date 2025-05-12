@@ -554,13 +554,8 @@ namespace TrafficSimulation
 
         private void OnCollisionEnter(Collision collision)
         {
-            // NavigationComponent.AcccidentOccured();
-            if (collision.gameObject.CompareTag("Crash"))
-            {
-                Debug.Log("Collision with: " + collision.gameObject.name);
-                NavigationComponent.AcccidentOccured();
-                // Debug.Log("Collision with: " + collision.gameObject.name);
-            }}
+            NavigationComponent.AcccidentOccured();
+            }
         // private void OnCollisionStay(Collision collision)
         // {
         //     Debug.Log("Collision ongoing with: " + collision.gameObject.name);
@@ -568,24 +563,17 @@ namespace TrafficSimulation
 
         private void OnCollisionExit(Collision collision)
         {
-            if (collision.gameObject.CompareTag("Crash"))
-            {
-                Debug.Log("Collision ended with: " + collision.gameObject.name);
-                NavigationComponent.AcccidentEnd();
-            }
-            // NavigationComponent.AcccidentEnd();
+            NavigationComponent.AcccidentEnd();
         }
 
         private void OnTriggerEnter(Collider other)
         {
             // Debug.Log("Trigger entered with: " + other.gameObject.name);
-            if (other.gameObject.CompareTag("NoCrash"))
+            if (other.gameObject.CompareTag("
             {
-                Debug.Log("Trigger entered with: " + other.gameObject.name);
-                NavigationComponent.AcccidentEnd();
+    
+                }
             }
-            
-            
         }
 
         // public int GetSegmentVehicleIsIn()

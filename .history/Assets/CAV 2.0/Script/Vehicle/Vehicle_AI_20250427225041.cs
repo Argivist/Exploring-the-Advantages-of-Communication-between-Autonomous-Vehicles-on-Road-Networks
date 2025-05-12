@@ -579,7 +579,7 @@ namespace TrafficSimulation
         private void OnTriggerEnter(Collider other)
         {
             // Debug.Log("Trigger entered with: " + other.gameObject.name);
-            if (other.gameObject.CompareTag("NoCrash"))
+            if (other.gameObject.CompareTag("NocCrash"))
             {
                 Debug.Log("Trigger entered with: " + other.gameObject.name);
                 NavigationComponent.AcccidentEnd();

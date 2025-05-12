@@ -555,9 +555,8 @@ namespace TrafficSimulation
         private void OnCollisionEnter(Collision collision)
         {
             // NavigationComponent.AcccidentOccured();
-            if (collision.gameObject.CompareTag("Crash"))
+            if (collision.gameObject.CompareTag("crash"))
             {
-                Debug.Log("Collision with: " + collision.gameObject.name);
                 NavigationComponent.AcccidentOccured();
                 // Debug.Log("Collision with: " + collision.gameObject.name);
             }}
@@ -568,9 +567,8 @@ namespace TrafficSimulation
 
         private void OnCollisionExit(Collision collision)
         {
-            if (collision.gameObject.CompareTag("Crash"))
+            if (collision.gameObject.CompareTag("crash"))
             {
-                Debug.Log("Collision ended with: " + collision.gameObject.name);
                 NavigationComponent.AcccidentEnd();
             }
             // NavigationComponent.AcccidentEnd();
@@ -579,9 +577,8 @@ namespace TrafficSimulation
         private void OnTriggerEnter(Collider other)
         {
             // Debug.Log("Trigger entered with: " + other.gameObject.name);
-            if (other.gameObject.CompareTag("NoCrash"))
+            if (other.gameObject.CompareTag("nocrash"))
             {
-                Debug.Log("Trigger entered with: " + other.gameObject.name);
                 NavigationComponent.AcccidentEnd();
             }
             
