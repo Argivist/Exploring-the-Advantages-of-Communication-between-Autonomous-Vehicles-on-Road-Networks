@@ -11,7 +11,7 @@
 
 The urge for shorter travel times has led people to find better, real-time routes to minimize travel time [4], which has also become another motivator for the implementation of autonomous vehicles for their efficiency. Gathering and exchanging data could enable vehicles to expand their environmental awareness for improved journey-related decisions.
 
-**How does communication among autonomous vehicles impact travel time and safety?** This study aims to investigate inter-vehicle communication's effects on journey time and overall traffic flow. This study uses a simulation of vehicles with and without the ability to exchange information while navigating road network environments based on real-world locations. The journey time of the vehicles is recorded and analyzed for assessment.
+**How does communication among autonomous vehicles impact travel time and safety?** This study aims to investigate the effects of inter-vehicle communication on journey time and overall traffic flow. This study uses a simulation of vehicles with and without the ability to exchange information while navigating road network environments based on real-world locations. The journey time of the vehicles is recorded and analyzed for assessment.
 
 Findings and conclusions will be discussed in the completed report.
 
@@ -23,7 +23,7 @@ With the rise of autonomous and varying forms of AI-assisted driving, how does c
 
 ### Aim  
 
-The research aims to investigate the advantages autonomous and semi-autonomous vehicles capable of communicating with each other have over autonomous vehicles not capable of communicating with each other in areas such as journey length. The primary factors to be observed are how vehicles avoid collisions and reduce the impact, coordinate on highways and intersects, and how long it takes to move from start to destination.
+The research aims to investigate the advantages that autonomous and semi-autonomous vehicles capable of communicating with each other have over autonomous vehicles not capable of communicating with each other in areas such as journey length. The primary factors to be observed are how vehicles avoid collisions and reduce the impact, coordinate on highways and intersects, and how long it takes to move from start to destination.
 
 ### Objectives  
 
@@ -40,30 +40,30 @@ Enabling vehicles to share environmental data can enhance safety through improve
 
 - Unity engine Version 2020.3.19f1
 
-
+--
 ### Setup 
-- Download and install the unity hub from the official website: https://unity3d.com/get-unity/download
-- Open the unity hub required to install the recommended version
+- Download and install the Unity Hub from the official website: https://unity3d.com/get-unity/download
+- Open the Unity Hub required to install the recommended version
 - Go to the install tab on the left
-- Click on install editor and Search for the specific version for this project
+- Click on install editor and search for the specific version for this project
 - Install the specified version
-
+--
 ### Project Setup 
-- Clone the repository to your local machine, Avoid cloning to a OneDrive directory as it may cause issues with the file paths
+- Clone the repository to your local machine. Avoid cloning to a OneDrive directory as it may cause issues with the file paths
 - Open the Unity Hub
 - Click on the add project button 
-- Click on add project fromm disk
+- Click on Add project from disk
 - Navigate to the cloned repository and select the project folder
-- click on add project
-- The project should be visible in your unity hub
-
+- Click on Add Project
+- The project should be visible in your Unity Hub
+--
 ### Running the Project 
-This project is a simulation adn therefore runs and stores data for analysis
+This project is a simulation and therefore runs and stores data for analysis
 
-- Open the project by double click ing it
+- Open the project by double-clicking it
 - Once the Unity editor opens, you can select between various environments made for the simulation.
     - Go to the `Scenes` or `locations` folder in the assets tab and double click any of the scenes you wish to simulate on
-- Once open, click on the play button in the top middle section of the unity editor
+- Once open, click on the play button in the top middle section of the Unity editor
 - Wait until none of the vehicles are spawned and the tab on the right shows no vehicle in the pane.
 - Click on the play button to end the simulation.
 - The data is saved in the `SimulationData` folder in the navigation pane
@@ -71,7 +71,6 @@ This project is a simulation adn therefore runs and stores data for analysis
 
 
 ---
-
-**Credit
+## Credit
 - [Mattheieu Chirbani, Unity Traffic Ssystem](https://github.com/mchrbn)  
 - Dr. Ayorkor Korsah
